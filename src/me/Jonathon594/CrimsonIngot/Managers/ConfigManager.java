@@ -5,31 +5,31 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ConfigManager {
 	ConfigAccessor	knowledgeConfig;
 	ConfigAccessor	timeConfig;
-	ConfigAccessor	skillConfig;
-	ConfigAccessor	geneticConfig;
+	ConfigAccessor	classConfig;
+	ConfigAccessor	creedConfig;
 
 	public ConfigManager(final JavaPlugin plugin) {
 		knowledgeConfig = new ConfigAccessor(plugin, "knowledge.yml");
 		timeConfig = new ConfigAccessor(plugin, "time.yml");
-		skillConfig = new ConfigAccessor(plugin, "skills.yml");
-		geneticConfig = new ConfigAccessor(plugin, "genetics.yml");
+		classConfig = new ConfigAccessor(plugin, "classs.yml");
+		creedConfig = new ConfigAccessor(plugin, "creed.yml");
 
 		knowledgeConfig.saveDefaultConfig();
 		timeConfig.saveDefaultConfig();
-		skillConfig.saveDefaultConfig();
-		geneticConfig.saveDefaultConfig();
+		classConfig.saveDefaultConfig();
+		creedConfig.saveDefaultConfig();
 	}
 
-	public ConfigAccessor getGeneticConfig() {
-		return geneticConfig;
+	public ConfigAccessor getCreedConfig() {
+		return creedConfig;
 	}
 
 	public ConfigAccessor getKnowledgeConfig() {
 		return knowledgeConfig;
 	}
 
-	public ConfigAccessor getSkillConfig() {
-		return skillConfig;
+	public ConfigAccessor getClassConfig() {
+		return classConfig;
 	}
 
 	public ConfigAccessor getTimeConfig() {
