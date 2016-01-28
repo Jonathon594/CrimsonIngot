@@ -1,0 +1,261 @@
+Perks:
+  Forestry:
+    Cost: 5
+    Craftable:
+    - WOOD
+    Trade: Lumber
+    Description: The art of turning a forest into usable wood.
+  Craftsmanship:
+    Cost: 10
+    Craftable:
+    - BOWL
+    - ITEM_FRAME
+    - JUKEBOX
+    - LADDER
+    - PAINTING
+    - PAPER
+    Trade: Lumber
+    Description: Somebody has to make all the little things in life.
+  Taning:
+    Cost: 10
+    Craftable:
+    - LEATHER_BOOTS
+    - LEATHER_CHESTPLATE
+    - LEATHER_HELMET
+    - LEATHER_LEGGINGS
+    Trade: Lumber
+    Description: Animal hides are useful now.
+  Carpentry:
+    Cost: 10
+    Craftable:
+    - BIRCH_WOOD_STAIRS
+    - DARK_OAK_STAIRS
+    - JUNGLE_WOOD_STAIRS
+    - SPRUCE_WOOD_STAIRS
+    - BOAT
+    Trade: Lumber
+    Description: Buildin' stuff.
+    RequiredPerk: Forestry
+  Furniture:
+    Cost: 20
+    Craftable:
+    - ACACIA_DOOR_ITEM
+    - ACACIA_FENCE_GATE
+    - ARMOR_STAND
+    - BANNER
+    - BED
+    - BIRCH_DOOR_ITEM
+    - BIRCH_FENCE_GATE
+    - BOOKSHAzekian
+    - DARK_OAK_DOOR_ITEM
+    - DARK_OAK_FENCE_GATE
+    - SIGN
+    - SPRUCE_DOOR_ITEM
+    - SPRUCE_FENCE_GATE
+    - JUNGLE_DOOR_ITEM
+    - JUNGLE_FENCE_GATE
+    - DARK_OAK_DOOR_ITEM
+    - DARK_OAK_FENCE_GATE
+    - JUNGLE_DOOR_ITEM
+    - JUNGLE_FENCE_GATE
+    - SPRUCE_DOOR_ITEM
+    - SPRUCE_FENCE_GATE
+    Trade: Lumber
+    Description: Crafting furniture is useful right?
+    RequiredPerk: Forestry
+  Fletching:
+    Cost: 15
+    Craftable:
+    - ARROW
+    - BOW
+    Trade: Lumber
+    Description: Maybe now I'll be able to catch supper.
+    RequiredPerk: Forestry
+  Masonry:
+    Cost: 10
+    Craftable:
+    - SMOOTH_BRICK
+    - SMOOTH_STAIRS
+    - BRICK
+    - BRICK_STAIRS
+    - NETHER_BRICK_ITEM
+    - NETHER_BRICK_STAIRS
+    - NETHER_FENCE
+    - QUARTZ_BLOCK
+    - QUARTZ_STAIRS
+    Trade: Industrial
+    Description: Brick making at its finest
+  Excavation:
+    Cost: 10
+    Trade: Industrial
+    Skills:
+    - Excavation
+    Description: Everyone's gotta dig right?
+  Pottery:
+    Cost: 10
+    Trade: Industrial
+    Craftable:
+    - FLOWER_POT_ITEM
+    - CLAY_BRICK
+    - HARD_CLAY
+    - STAINED_CLAY
+  Forging:
+    Cost: 25
+    Trade: Industrial
+    Skills:
+    - Repair
+    - Smelting
+    Craftable:
+    - ANVIL
+    - BUCKET
+    - CAULDRON_ITEM
+    - CLAY_BRICK
+    - COAL_BLOCK
+    - GLASS
+    - GOLD_BLOCK
+    - HOPPER
+    - IRON_BLOCK
+    - IRON_DOOR
+    - IRON_FENCE
+    - IRON_TRAPDOOR
+    - IRON_PLATE
+    - LAPIS_BLOCK
+    - REDSTONE_BLOCK
+    Description: I hope I don't burn mysAzekian.
+  Glasswork:
+    Cost: 10
+    Trade: Industrial
+    Craftable:
+    - GLASS_BOTTLE
+    - STAINED_GLASS
+    - STAINED_GLASS_PANE
+    Description: I wonder what I can make with this stuff.
+    RequiredPerk: Forging
+  Pyrotechnic:
+    Cost: 30
+    Trade: Industrial
+    Skills:
+    - Blastmining
+    Craftable:
+    - FIREWORK
+    - FIREWORK_CHARGE
+    - FLINT_AND_STEEL
+    - TNT
+  Armorsmith:
+    Cost: 30
+    Trade: Industrial
+    Craftable:
+    - CHAINMAIL_BOOTS
+    - CHAINMAIL_CHESTPLATE
+    - CHAINMAIL_HELMET
+    - CHAINMAIL_LEGGING
+    - GOLD_BOOTS
+    - GOLD_CHESTPLATE
+    - GOLD_HELMET
+    - GOLD_LEGGINGS
+    - IRON_BOOTS
+    - IRON_CHESTPLATE
+    - IRON_HELMET
+    - IRON_LEGGINGS
+    Description: Remember to wear protection.
+    RequiredPerk: Forging
+  Diamondsmith:
+    Cost: 40
+    Trade: Industrial
+    Craftable:
+    - DIAMOND_AXE
+    - DIAMOND_BARDING
+    - DIAMOND_BLOCK
+    - DIAMOND_BOOTS
+    - DIAMOND_CHESTPLATE
+    - DIAMOND_HELMET
+    - DIAMOND_HOE
+    - DIAMOND_LEGGINGS
+    - DIAMOND_ORE
+    - DIAMOND_PICKAXE
+    - DIAMOND_SPADE
+    - DIAMOND_SWORD
+    Description: Shiny!
+    RequiredPerk: Forging
+  Engineering:
+    Cost: 30
+    Trade: Industrial
+    Craftable:
+    - ACTIVATOR_RAIL
+    - DETECTOR_RAIL
+    - COMPASS
+    - DAYLIGHT_DETECTOR
+    - DAYLIGHT_DETECTOR_INVERTED
+    - DIODE
+    - DISPENSER
+    - DROPPER
+    - EXPLOSIVE_MINECART
+    - HOPPER_MINECART
+    - LEVER
+    - NOTE_BLOCK
+    - PISTON_BASE
+    - PISTON_STICKY_BASE
+    - POWERED_MINECART
+    - POWERED_RAIL
+    - MINECART
+    - WATCH
+    - TRIPWIRE_HOOK
+    - TRAPPED_CHEST
+    - STORAGE_MINECART
+    - REDSTONE_COMPARATOR
+    - RAILS
+    Description: This looks really complicated.
+    RequiredPerk: Forging
+  Fishing:
+    Cost: 5
+    Trade: Agriculture
+    Craftable:
+    - FISHING_ROD
+    Skills:
+    - Fishing
+    Description: Fish!
+  Yardwork:
+    Cost: 10
+    Trade: Agriculture
+    Craftable:
+    - HAY_BLOCK
+    - MELON_SEEDS
+    - PUMPKIN_SEEDS
+    Description: Finally something to do with all that wheat.
+  Taming:
+    Cost: 20
+    Trade: Agriculture
+    Skills:
+    - Taming
+    Craftable:
+    - LEASH
+    Description: Wolves anyone?
+    RequiredPerk: Yardwork
+  Alchemy:
+    Cost: 10
+    Trade: Arcane
+    Craftable:
+    - BLAZE_POWDER
+    - BREWING_STAND_ITEM
+  Arcanery:
+    Cost: 15
+    Trade: Arcane
+    Craftable:
+    - BEACON
+    - EYE_OF_ENDER
+    - EXP_BOTTLE
+    - GLOWSTONE_DUST
+    - GOLDEN_APPLE
+    - GOLDEN_CARROT
+    - MAGMA_CREAM
+    - SPECKLED_MELON
+    Description: Construction with magical artifacts.
+  Enchanting:
+    Cost: 15
+    Trade: Arcane
+    Description: The myterious ability of Enchanting.
+    Flags:
+    - Enchanting
+    Craftable:
+    - ENCHANTMENT_TABLE
+    RequiredPerk: Arcanery

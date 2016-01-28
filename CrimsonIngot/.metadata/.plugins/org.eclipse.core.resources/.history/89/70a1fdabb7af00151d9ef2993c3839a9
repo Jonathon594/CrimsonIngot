@@ -1,0 +1,156 @@
+package me.Jonathon594.Mythria.Commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.DataTypes.IconMenu;
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+import me.Jonathon594.Mythria.DataTypes.TradePerk;
+import me.Jonathon594.Mythria.Util.MessageSender;
+import me.Jonathon594.Mythria.Util.MythriaConstants;
+import me.Jonathon594.Mythria.Util.MythriaUtil;
+import net.milkbowl.vault.permission.Permission;
+
+public class PerkCommandExecutor implements CommandExecutor {
+	private final Main			plugin;
+	private final Permission	permission;
+
+	private final ChatColor		mainColor	= ChatColor.DARK_PURPLE;
+	private final ChatColor		contColor	= ChatColor.AQUA;
+	
+	IconMenu perkIconMenu;
+
+	public PerkCommandExecutor(final Main plugin, final Permission permission) {
+		this.plugin = plugin;
+		this.permission = permission;
+	}
+	
+	private void InitPerkMenu(){
+		perkIconMenu = new IconMenu("Perk List", MythriaUtil.RountToMultiple(plugin.getMythriaTradePerks().size(), 9), new IconMenu.OptionClickEventHandler() {
+            @Override
+            public void onOptionClick(IconMenu.OptionClickEvent event) {
+                String chosenName = ChatColor.stripColor(event.getName());
+                TradePerk tp = plugin.GetTradePerk(chosenName);
+                if(tp ==null)
+                	return;
+                
+                LearnPerk(tp, event.getPlayer());
+                event.setWillClose(true);
+                event.setWillDestroy(true);
+            }
+        }, plugin);
+	}
+
+	private void LearnPerk(TradePerk tp, Player player) {
+		if (tp == null)
+			return;
+		
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID((player).getUniqueId());
+		if (mp == null)
+			return;
+		
+		if (mp.getPlayerPerks().contains(tp)) {
+			player.sendMessage(mainColor + MythriaConstants.alreadyPerk); return; }
+		
+		final List<String> perkNames = new ArrayList<String>();
+		for (final TradePerk perk : mp.getPlayerPerks())
+			perkNames.add(perk.getName());
+		
+		if (tp.getRequiredPerk() != null && !perkNames.contains(tp.getRequiredPerk())) {
+			player.sendMessage(mainColor + MythriaConstants.noReqPerk); return; }
+		
+		final int pl = player.getLevel();
+		final int cost = tp.getCost();
+		
+		if (player.getLevel() < cost) {
+			player.sendMessage(mainColor + MythriaConstants.noLevels); return; }
+		
+		player.setLevel(pl - cost);
+		mp.addPerk(tp);
+		mp.ApplyAllEffects(permission);
+		player.sendMessage(mainColor + "You have learned a new perk! (" + contColor + tp.getName() + mainColor + ")");
+	}
+
+	// /deity
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
+		switch (args.length) {
+			case 0:
+				SendDefaultInfo(sender);
+				return true;
+			case 1:
+				if (args[0].equalsIgnoreCase("list")) {
+					if(sender instanceof Player){
+						ShowPerkMenu((Player) sender);
+					}
+					return true;
+				}
+				if (args[0].equalsIgnoreCase("crafting")) {
+					SendCraftList(sender, args);
+					return true;
+				}
+				SendDefaultInfo(sender);
+				break;
+		}
+		return false;
+	}
+	
+	private void ShowPerkMenu(Player player){
+		MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(player.getUniqueId());
+		if(mp==null)
+			return;
+		
+		InitPerkMenu();
+		
+		for(int i = 0; i<plugin.getMythriaTradePerks().size(); i++){
+			TradePerk tp = plugin.getMythriaTradePerks().get(i);
+			TradePerk rp = plugin.GetTradePerk(tp.getRequiredPerk());
+			
+			ChatColor itemColor = ChatColor.WHITE;
+			if(mp.getPlayerPerks().contains(tp))
+				itemColor = ChatColor.GREEN;
+			else if (rp==null || mp.getPlayerPerks().contains(rp))
+				itemColor = ChatColor.BLUE;
+			else
+				itemColor = ChatColor.RED;
+			
+			perkIconMenu.setOption(i, new ItemStack(Material.DIAMOND_SWORD), itemColor+tp.getName(), 
+					MythriaConstants.mainColor + tp.getDescription(),
+					MythriaConstants.mainColor + "Cost: " + MythriaConstants.contColor + tp.getCost());
+		}
+		
+		perkIconMenu.open(player);
+	}
+
+	private void SendCraftList(final CommandSender sender, final String[] args) {
+		final List<String> materialList = new ArrayList<String>();
+		for (final Material m : plugin.getMythriaPerkMaterials())
+			if (m != null)
+				materialList.add(contColor + m.name());
+		if (materialList.size() > 0)
+			MessageSender.SendList((Player) sender, materialList);
+	}
+
+	private void SendDefaultInfo(final CommandSender sender) {
+		//------[]Perk Menu[]------
+		///perk list - List all availible perks.
+		///perk info [perk] - List information on [perk]
+		///perk learn [perk] - Learn [perk]
+		final List<String> Lines = new ArrayList<String>();
+		Lines.add(mainColor + "------[]" + contColor + "Perk Menu" + mainColor + "[]------");
+		Lines.add(contColor + "/perk list" + mainColor + " - List all availible perks");
+		Lines.add(contColor + "/perk info [perk]" + mainColor + " - List information on [perk]");
+		Lines.add(contColor + "/perk learn [perk]" + mainColor + " - Learn [perk]");
+		Lines.add(contColor + "/perk crafting " + mainColor + "- List all items that require a perk to craft.");
+		MessageSender.Send((Player) sender, Lines);
+	}
+}

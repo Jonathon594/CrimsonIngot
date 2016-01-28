@@ -1,0 +1,245 @@
+package me.Jonathon594.Mythria;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
+
+import org.bukkit.Material;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import me.Jonathon594.Mythria.Commands.ClassCommandExecutor;
+import me.Jonathon594.Mythria.Commands.DeityCommandExecutor;
+import me.Jonathon594.Mythria.Commands.PerkCommandExecutor;
+import me.Jonathon594.Mythria.Commands.ProfileCommandExecutor;
+import me.Jonathon594.Mythria.Commands.RaceCommandExecutor;
+import me.Jonathon594.Mythria.DataTypes.Blessing;
+import me.Jonathon594.Mythria.DataTypes.Class;
+import me.Jonathon594.Mythria.DataTypes.Race;
+import me.Jonathon594.Mythria.DataTypes.RoleplayProfile;
+import me.Jonathon594.Mythria.DataTypes.TradePerk;
+import me.Jonathon594.Mythria.Listeners.PlayerListener;
+import me.Jonathon594.Mythria.Listeners.TimeListener;
+import me.Jonathon594.Mythria.Managers.ConfigManager;
+import me.Jonathon594.Mythria.Managers.MythriaPlayerManager;
+import me.Jonathon594.Mythria.Managers.TimeManager;
+import net.milkbowl.vault.permission.Permission;
+
+public class Main extends JavaPlugin implements Listener {
+
+	//Create Permissions Link
+	public static Permission permission = null;
+
+	//Return Permissions Link
+	public static Permission getPermission() {
+		return permission;
+	}
+	
+
+	private final Logger				log					= Logger.getLogger("Minecraft");
+
+	private ArrayList<Race>				mythriaRaces;
+	private ArrayList<Class>			mythriaClasses;
+	private ArrayList<TradePerk>		mythriaTradePerks;
+	private ArrayList<Blessing>			mythriaBlessings;
+
+	private ArrayList<Material>			mythriaPerkMaterials;
+	private ArrayList<Material>			mythriaBreakablePerkMaterials;
+	private ArrayList<Material>			mythriaPlaceablePerkMaterials;
+
+	private ArrayList<String>			deityNames;
+
+	private MythriaPlayerManager		mythriaPlayerManager;
+
+	private final List<String>			blockedPermissions	= new ArrayList<String>();
+	private final List<RoleplayProfile>	profileList			= new ArrayList<RoleplayProfile>();
+
+	ConfigManager						configManager;
+
+	private TimeManager					timeManager;
+
+	private TimeListener				timeListener;
+
+	public void addBlockedPermissions(final String str) {
+		blockedPermissions.add(str);
+	}
+
+	public Blessing GetBlessing(final String name) {
+		for (final Blessing b : mythriaBlessings)
+			if (b.getName().equalsIgnoreCase(name))
+				return b;
+		return null;
+	}
+
+	public List<String> getBlockedPermissions() {
+		return blockedPermissions;
+	}
+
+	public Class GetClass(final String name) {
+		for (final Class c : mythriaClasses)
+			if (c.getName().equalsIgnoreCase(name))
+				return c;
+		return null;
+	}
+
+	public ConfigManager getConfigManager() {
+		return configManager;
+	}
+
+	public ArrayList<String> getDeityNames() {
+		return deityNames;
+	}
+
+	public ArrayList<Blessing> getMythriaBlessings() {
+		return mythriaBlessings;
+	}
+
+	public ArrayList<Material> getMythriaBreakablePerkMaterials() {
+		return mythriaBreakablePerkMaterials;
+	}
+
+	public ArrayList<Class> getMythriaClasses() {
+		return mythriaClasses;
+	}
+
+	public ArrayList<Material> getMythriaPerkMaterials() {
+		return mythriaPerkMaterials;
+	}
+
+	public ArrayList<Material> getMythriaPlaceablePerkMaterials() {
+		return mythriaPlaceablePerkMaterials;
+	}
+
+	public MythriaPlayerManager getMythriaPlayerManager() {
+		return mythriaPlayerManager;
+	}
+
+	public ArrayList<Race> getMythriaRaces() {
+		return mythriaRaces;
+	}
+
+	public ArrayList<TradePerk> getMythriaTradePerks() {
+		return mythriaTradePerks;
+	}
+
+	public List<RoleplayProfile> getProfileList() {
+		return profileList;
+	}
+
+	public Race GetRace(final String name) {
+		for (final Race r : mythriaRaces)
+			if (r.getName().equalsIgnoreCase(name))
+				return r;
+		return null;
+	}
+
+	public TimeManager getTimeManager() {
+		return timeManager;
+	}
+
+	public TradePerk GetTradePerk(final String name) {
+		for (final TradePerk tp : mythriaTradePerks)
+			if (tp.getName().equalsIgnoreCase(name))
+				return tp;
+		return null;
+	}
+
+	public void Initialize() {
+		
+		configManager = new ConfigManager(this);
+
+		mythriaRaces = new ArrayList<Race>();
+		mythriaClasses = new ArrayList<Class>();
+		mythriaTradePerks = new ArrayList<TradePerk>();
+		mythriaPerkMaterials = new ArrayList<Material>();
+		mythriaBreakablePerkMaterials = new ArrayList<Material>();
+		mythriaPlaceablePerkMaterials = new ArrayList<Material>();
+		mythriaBlessings = new ArrayList<Blessing>();
+
+		timeManager = new TimeManager(this, configManager.getTimeConfig());
+		timeManager.LoadData();
+		timeListener = new TimeListener();
+		timeListener.run(this, timeManager);
+
+		mythriaPlayerManager = new MythriaPlayerManager(log, configManager.getPlayerConfig());
+
+		final Set<String> rks = configManager.getRaceConfig().getConfig().getConfigurationSection("Races").getKeys(false);
+		for (final String k : rks) {
+			final Race nr = new Race(k);
+			mythriaRaces.add(nr);
+			nr.loadRace(this, configManager.getRaceConfig());
+		}
+
+		final Set<String> cks = configManager.getClassConfig().getConfig().getConfigurationSection("Classes").getKeys(false);
+		for (final String c : cks) {
+			final Class nc = new Class(c);
+			mythriaClasses.add(nc);
+			nc.loadClass(this, configManager.getClassConfig());
+		}
+
+		final Set<String> tpks = configManager.getPerkConfig().getConfig().getConfigurationSection("Perks").getKeys(false);
+		for (final String tp : tpks) {
+			final TradePerk ntp = new TradePerk(tp);
+			mythriaTradePerks.add(ntp);
+			ntp.loadPerk(this, configManager.getPerkConfig());
+		}
+
+		final Set<String> bks = getConfig().getConfigurationSection("Blessings").getKeys(false);
+		for (final String b : bks) {
+			final Blessing nb = new Blessing(b);
+			mythriaBlessings.add(nb);
+			nb.LoadBlessing(this, configManager.getBlessingConfig());
+		}
+
+		deityNames = (ArrayList<String>) getConfig().getStringList("Deities");
+
+		mythriaPlayerManager.LoadPlayers(this);
+	}
+
+	@Override
+	public void onDisable() {
+		final PluginDescriptionFile pdfFile = getDescription();
+		log.info(pdfFile.getName() + " Version: " + pdfFile.getVersion() + " is now disabled!");
+		mythriaPlayerManager.SavePlayers(this);
+	}
+
+	@Override
+	public void onEnable() {
+		final PluginDescriptionFile pdfFile = getDescription();
+		log.info(pdfFile.getName() + " Version: " + pdfFile.getVersion() + " is now enabled!");
+
+		saveDefaultConfig();
+		reloadConfig();
+
+		Initialize();
+
+		setupPermissions();
+
+		getServer().getPluginManager().registerEvents(new PlayerListener(this, permission), this);
+
+		getCommand("deity").setExecutor(new DeityCommandExecutor(this, permission));
+		getCommand("race").setExecutor(new RaceCommandExecutor(this, permission));
+		getCommand("class").setExecutor(new ClassCommandExecutor(this, permission));
+		getCommand("perk").setExecutor(new PerkCommandExecutor(this, permission));
+		getCommand("profile").setExecutor(new ProfileCommandExecutor(this, permission));
+	}
+
+	public void onReload() {
+		onDisable();
+		onEnable();
+	}
+
+	public void setMythriaPlaceablePerkMaterials(final ArrayList<Material> mythriaPlaceablePerkMaterials) {
+		this.mythriaPlaceablePerkMaterials = mythriaPlaceablePerkMaterials;
+	}
+
+	private boolean setupPermissions() {
+		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+		if (permissionProvider != null)
+			permission = permissionProvider.getProvider();
+		return permission != null;
+	}
+}

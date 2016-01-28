@@ -1,0 +1,22 @@
+Players:
+  746de006-0e8a-44b6-9671-f34626dbbd1a:
+    Race:
+      Name: []
+    Class:
+      Name: []
+    Trade:
+      Name: []
+      Perks: []
+    Element:
+      Name: []
+    Spells: []
+    Deity:
+      Blessings: []
+      Standings:
+      - 0
+      - 0
+    Profile:
+      FirstName: None
+      MiddleName: None
+      LastName: None
+      Birthday: 0

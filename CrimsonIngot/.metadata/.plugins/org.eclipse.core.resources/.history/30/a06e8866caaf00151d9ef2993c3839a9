@@ -1,0 +1,36 @@
+Races:
+  Human:
+    Health: 20
+    MenuIcon: BRICK
+    PotionEffects:
+    - None
+    Description: Humans are not the strongest of Races, but they are very versitile and quick learners.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(swords|mining|excavation|unarmed)
+    - mcmmo.perks.xp.10percentboost
+  Elf:
+    Health: 24
+    MenuIcon: GHAST_TEAR
+    PotionEffects:
+    - Regeneration 1
+    Description: Elves are an immortal race, meaning they never die of old age, as well as having exceptional healing abilities.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(herbalism|alchemy)
+  Fae:
+    Health: 28
+    MenuIcon: FEATHER
+    PotionEffects:
+    - Strength 0
+    - Speed 1
+    Description: Fae are spirits of nature, they thrive in the elements and are very adept with magic.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(herbalism|alchemy|taming)
+  Skaeren:
+    Health: 10
+    MenuIcon: GLASS
+    PotionEffects:
+    - Invisibility 0
+    - Speed 2
+    Description: Skaeren are invisible creatures, they tend to spend most of their time underground as well.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(acrobatics|repair)

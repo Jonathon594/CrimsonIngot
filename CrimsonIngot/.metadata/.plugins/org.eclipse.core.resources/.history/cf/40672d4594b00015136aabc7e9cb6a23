@@ -1,0 +1,144 @@
+package me.Jonathon594.Mythria.Commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.DataTypes.IconMenu;
+import me.Jonathon594.Mythria.DataTypes.Knowledge;
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+import me.Jonathon594.Mythria.Util.MythriaConstants;
+import me.Jonathon594.Mythria.Util.MythriaUtil;
+import net.milkbowl.vault.permission.Permission;
+
+public class SkillCommandExecutor implements CommandExecutor {
+	private final Main			plugin;
+	private final Permission	permission;
+
+	private final ChatColor		mainColor	= ChatColor.DARK_PURPLE;
+	private final ChatColor		contColor	= ChatColor.AQUA;
+	
+	private IconMenu perkIconMenu;
+
+	public SkillCommandExecutor(final Main plugin, final Permission permission) {
+		this.plugin = plugin;
+		this.permission = permission;
+	}
+	
+	private void InitSkillMenu(){
+		perkIconMenu = new IconMenu("Skill List", MythriaUtil.RountToMultiple(plugin.getMythriaTradeSkills().size(), 9), new IconMenu.OptionClickEventHandler() {
+            @Override
+            public void onOptionClick(IconMenu.OptionClickEvent event) {
+                String chosenName = ChatColor.stripColor(event.getName());
+                Knowledge tp = plugin.getKnowledge(chosenName);
+                if(tp ==null)
+                	return;
+                
+                LearnSkill(tp, event.getPlayer());
+                event.setWillClose(true);
+                event.setWillDestroy(true);
+            }
+        }, plugin);
+	}
+
+	private void LearnSkill(Knowledge tp, Player player) {
+		if (tp == null)
+			return;
+		
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID((player).getUniqueId());
+		if (mp == null)
+			return;
+		
+		if (mp.getPlayerSkills().contains(tp)) {
+			player.sendMessage(mainColor + MythriaConstants.alreadySkill); return; }
+		
+		final List<String> perkNames = new ArrayList<String>();
+		for (final Knowledge perk : mp.getPlayerSkills())
+			perkNames.add(perk.getName());
+		
+		if (tp.getRequiredKnowledge() != null && !perkNames.contains(tp.getRequiredKnowledge())) {
+			player.sendMessage(mainColor + MythriaConstants.noReqSkill); return; }
+		
+		final int pl = player.getLevel();
+		final int cost = tp.getCost();
+		
+		if (player.getLevel() < cost) {
+			player.sendMessage(mainColor + MythriaConstants.noLevels); return; }
+		
+		player.setLevel(pl - cost);
+		mp.addKnowledge(tp);
+		mp.ApplyAllEffects(permission);
+		player.sendMessage(mainColor + "You have learned a new perk! (" + contColor + tp.getName() + mainColor + ")");
+	}
+
+	// /deity
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
+		if(sender instanceof Player){
+			ShowSkillMenu((Player) sender);
+			return true;
+		}
+		return false;
+	}
+	
+	private void ShowSkillMenu(Player player){
+		MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(player.getUniqueId());
+		if(mp==null)
+			return;
+		
+		InitSkillMenu();
+		
+		for(int i = 0; i<plugin.getMythriaTradeSkills().size(); i++){
+			Knowledge tp = plugin.getMythriaTradeSkills().get(i);
+			Knowledge rp = plugin.getKnowledge(tp.getRequiredKnowledge());
+			
+			ChatColor itemColor = ChatColor.WHITE;
+			if(mp.getPlayerSkills().contains(tp))
+				itemColor = ChatColor.GREEN;
+			else if (rp==null || mp.getPlayerSkills().contains(rp))
+				itemColor = ChatColor.BLUE;
+			else
+				itemColor = ChatColor.RED;
+			
+			ItemStack menuIcon = new ItemStack(tp.getMenuIcon());
+			String requiredSkill = "None";
+			if(tp.getRequiredKnowledge()!=null)
+				requiredSkill = tp.getRequiredKnowledge();
+			
+			ArrayList<String> lore = new ArrayList<String>();
+			lore.add(mainColor + tp.getDescription());
+			lore.add(mainColor + "Cost: " + contColor + tp.getCost());
+			lore.add(mainColor + "Requires: " + contColor + requiredSkill);
+			if(tp.getCraftable().size()>0){
+				lore.add(mainColor + "Craftable: ");
+				for(Material m : tp.getCraftable()){					
+					lore.add(contColor + m.name());
+				}
+			}
+			if(tp.getPlaceable().size()>0){
+				lore.add(mainColor + "Placeable: ");
+				for(Material m : tp.getPlaceable()){
+					lore.add(contColor + m.name());
+				}
+			}
+			if(tp.getMinable().size()>0){
+				lore.add(mainColor + "Breakable: ");
+				for(Material m : tp.getMinable()){
+					lore.add(contColor + m.name());
+				}
+			}
+			
+			perkIconMenu.setOption(i, menuIcon, itemColor+tp.getName(), lore);
+		}
+		
+		perkIconMenu.open(player);
+	}
+}

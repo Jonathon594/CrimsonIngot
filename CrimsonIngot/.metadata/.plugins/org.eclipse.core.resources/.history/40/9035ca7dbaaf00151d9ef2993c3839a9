@@ -1,0 +1,336 @@
+Perks:
+  Forestry:
+    Cost: 5
+    MenuIcon: WOOD
+    Craftable:
+    - WOOD
+    Description: The art of turning a forest into usable wood.
+  Craftsmanship:
+    Cost: 10
+    MenuIcon: LADDER
+    Craftable:
+    - BOWL
+    - ITEM_FRAME
+    - JUKEBOX
+    - LADDER
+    - PAINTING
+    - PAPER
+    Description: Somebody has to make all the little things in life.
+  Taning:
+    Cost: 10
+    MenuIcon: LEATHER
+    Craftable:
+    - LEATHER_BOOTS
+    - LEATHER_CHESTPLATE
+    - LEATHER_HELMET
+    - LEATHER_LEGGINGS
+    Description: Animal hides are useful now.
+  Carpentry:
+    Cost: 10
+    MenuIcon: BIRCH_WOOD_STAIRS
+    Craftable:
+    - BIRCH_WOOD_STAIRS
+    - DARK_OAK_STAIRS
+    - JUNGLE_WOOD_STAIRS
+    - SPRUCE_WOOD_STAIRS
+    - BOAT
+    Description: Buildin' stuff.
+    RequiredPerk: Forestry
+  Furniture:
+    Cost: 20
+    MenuIcon: BED
+    Craftable:
+    - ACACIA_DOOR_ITEM
+    - ACACIA_FENCE_GATE
+    - ARMOR_STAND
+    - BANNER
+    - BED
+    - BIRCH_DOOR_ITEM
+    - BIRCH_FENCE_GATE
+    - BOOKSHAzekian
+    - DARK_OAK_DOOR_ITEM
+    - DARK_OAK_FENCE_GATE
+    - SIGN
+    - SPRUCE_DOOR_ITEM
+    - SPRUCE_FENCE_GATE
+    - JUNGLE_DOOR_ITEM
+    - JUNGLE_FENCE_GATE
+    - DARK_OAK_DOOR_ITEM
+    - DARK_OAK_FENCE_GATE
+    - JUNGLE_DOOR_ITEM
+    - JUNGLE_FENCE_GATE
+    - SPRUCE_DOOR_ITEM
+    - SPRUCE_FENCE_GATE
+    Description: Crafting furniture is useful right?
+    RequiredPerk: Forestry
+  Fletching:
+    Cost: 15
+    MenuIcon: ARROW
+    Craftable:
+    - ARROW
+    - BOW
+    Description: Maybe now I'll be able to catch supper.
+    RequiredPerk: Forestry
+  Masonry:
+    Cost: 10
+    MenuIcon: SMOOTH_BRICK
+    Craftable:
+    - SMOOTH_BRICK
+    - SMOOTH_STAIRS
+    - BRICK
+    - BRICK_STAIRS
+    - NETHER_BRICK_ITEM
+    - NETHER_BRICK_STAIRS
+    - NETHER_FENCE
+    - QUARTZ_BLOCK
+    - QUARTZ_STAIRS
+    Placeable:
+    - SMOOTH_BRICK
+    - SMOOTH_STAIRS
+    - BRICK
+    - BRICK_STAIRS
+    - NETHER_BRICK_ITEM
+    - NETHER_BRICK_STAIRS
+    - NETHER_FENCE
+    Description: Brick making at its finest
+  Excavation:
+    Cost: 10
+    MenuIcon: IRON_SPADE
+    Skills:
+    - Excavation
+    Description: Everyone's gotta dig right?
+  Pottery:
+    Cost: 10
+    MenuIcon: CLAY_BRICK
+    Craftable:
+    - FLOWER_POT_ITEM
+    - CLAY_BRICK
+    - HARD_CLAY
+    - STAINED_CLAY
+  IronMiner:
+    Cost: 12
+    MenuIcon: IRON_ORE
+    Breakable:
+    - IRON_ORE
+    Description: Iron sharpens iron.
+  GoldMiner:
+    Cost: 20
+    MenuIcon: GOLD_ORE
+    Breakable:
+    - GOLD_ORE
+    Description: GOLD!
+    RequiredPerk: IronMiner
+  RedstoneMiner:
+    Cost: 20
+    MenuIcon: REDSTONE_ORE
+    Breakable:
+    - REDSTONE_ORE
+    - GLOWING_REDSTONE_ORE
+    Description: What am I supposed to use this for?
+    RequiredPerk: IronMiner
+  DiamondMiner:
+    Cost: 35
+    MenuIcon: DIAMOND_ORE
+    Breakable:
+    - DIAMOND_ORE
+    Description: The gem of the Gods...
+    RequiredPerk: GoldMiner
+  Forging:
+    Cost: 25
+    MenuIcon: ANVIL
+    Skills:
+    - Repair
+    - Smelting
+    Craftable:
+    - ANVIL
+    - BUCKET
+    - CAULDRON_ITEM
+    - CLAY_BRICK
+    - COAL_BLOCK
+    - GLASS
+    - GOLD_BLOCK
+    - HOPPER
+    - IRON_BLOCK
+    - IRON_DOOR
+    - IRON_FENCE
+    - IRON_TRAPDOOR
+    - IRON_PLATE
+    - LAPIS_BLOCK
+    - REDSTONE_BLOCK
+    Placeable:
+    - ANVIL
+    - IRON_BLOCK
+    - GOLD_BLOCK
+    - DIAMOND_BLOCK
+    Description: I hope I don't burn mysAzekian.
+  Glasswork:
+    Cost: 10
+    MenuIcon: GLASS_BOTTLE
+    Craftable:
+    - GLASS_BOTTLE
+    - STAINED_GLASS
+    - STAINED_GLASS_PANE
+    Description: I wonder what I can make with this stuff.
+    RequiredPerk: Forging
+  Pyrotechnic:
+    Cost: 30
+    MenuIcon: TNT
+    Skills:
+    - Blastmining
+    Craftable:
+    - FIREWORK
+    - FIREWORK_CHARGE
+    - FLINT_AND_STEEL
+    - TNT
+    Description: Making things go boom!
+    Placeable:
+    - TNT
+  Armorsmith:
+    Cost: 30
+    MenuIcon: IRON_CHESTPLATE
+    Craftable:
+    - CHAINMAIL_BOOTS
+    - CHAINMAIL_CHESTPLATE
+    - CHAINMAIL_HELMET
+    - CHAINMAIL_LEGGING
+    - GOLD_BOOTS
+    - GOLD_CHESTPLATE
+    - GOLD_HELMET
+    - GOLD_LEGGINGS
+    - IRON_BOOTS
+    - IRON_CHESTPLATE
+    - IRON_HELMET
+    - IRON_LEGGINGS
+    Description: Remember to wear protection.
+    RequiredPerk: Forging
+  Diamondsmith:
+    Cost: 40
+    MenuIcon: DIAMOND_CHESTPLATE
+    Craftable:
+    - DIAMOND_AXE
+    - DIAMOND_BARDING
+    - DIAMOND_BLOCK
+    - DIAMOND_BOOTS
+    - DIAMOND_CHESTPLATE
+    - DIAMOND_HELMET
+    - DIAMOND_HOE
+    - DIAMOND_LEGGINGS
+    - DIAMOND_ORE
+    - DIAMOND_PICKAXE
+    - DIAMOND_SPADE
+    - DIAMOND_SWORD
+    Description: Shiny!
+    RequiredPerk: Forging
+  Engineering:
+    Cost: 30
+    MenuIcon: DIODE
+    Craftable:
+    - ACTIVATOR_RAIL
+    - DETECTOR_RAIL
+    - COMPASS
+    - DAYLIGHT_DETECTOR
+    - DAYLIGHT_DETECTOR_INVERTED
+    - DIODE
+    - DISPENSER
+    - DROPPER
+    - EXPLOSIVE_MINECART
+    - HOPPER_MINECART
+    - LEVER
+    - NOTE_BLOCK
+    - PISTON_BASE
+    - PISTON_STICKY_BASE
+    - POWERED_MINECART
+    - POWERED_RAIL
+    - MINECART
+    - WATCH
+    - TRIPWIRE_HOOK
+    - TRAPPED_CHEST
+    - STORAGE_MINECART
+    - REDSTONE_COMPARATOR
+    - RAILS
+    Placeable:
+    - ACTIVATOR_RAIL
+    - DETECTOR_RAIL
+    - COMPASS
+    - DAYLIGHT_DETECTOR
+    - DAYLIGHT_DETECTOR_INVERTED
+    - DIODE
+    - DISPENSER
+    - DROPPER
+    - EXPLOSIVE_MINECART
+    - HOPPER_MINECART
+    - LEVER
+    - NOTE_BLOCK
+    - PISTON_BASE
+    - PISTON_STICKY_BASE
+    - POWERED_MINECART
+    - POWERED_RAIL
+    - MINECART
+    - WATCH
+    - TRIPWIRE_HOOK
+    - TRAPPED_CHEST
+    - STORAGE_MINECART
+    - REDSTONE_COMPARATOR
+    - RAILS
+    Description: This looks really complicated.
+    RequiredPerk: Forging
+  Fishing:
+    Cost: 5
+    MenuIcon: FISHING_ROD
+    Craftable:
+    - FISHING_ROD
+    Skills:
+    - Fishing
+    Description: Fish!
+  Yardwork:
+    Cost: 10
+    MenuIcon: HAY_BLOCK
+    Craftable:
+    - HAY_BLOCK
+    - MELON_SEEDS
+    - PUMPKIN_SEEDS
+    Placeable:
+    - HAY_BLOCK
+    Description: Finally something to do with all that wheat.
+  Taming:
+    Cost: 20
+    MenuIcon: LEASH
+    Skills:
+    - Taming
+    Craftable:
+    - LEASH
+    Description: Wolves anyone?
+    RequiredPerk: Yardwork
+  Alchemy:
+    Cost: 10
+    MenuIcon: BREWING_STAND
+    Craftable:
+    - BLAZE_POWDER
+    - BREWING_STAND_ITEM
+    Description: Mixin' it up.
+    Placeable:
+    - BREWING_STAND
+  Arcanery:
+    Cost: 15
+    MenuIcon: EXP_BOTTLE
+    Craftable:
+    - BEACON
+    - EYE_OF_ENDER
+    - EXP_BOTTLE
+    - GLOWSTONE_DUST
+    - GOLDEN_APPLE
+    - GOLDEN_CARROT
+    - MAGMA_CREAM
+    - SPECKLED_MELON
+    Description: Construction with magical artifacts.
+  Enchanting:
+    Cost: 15
+    MenuIcon: ENCHANTMENT_TABLE
+    Description: The myterious ability of Enchanting.
+    Flags:
+    - Enchanting
+    Craftable:
+    - ENCHANTMENT_TABLE
+    Placeable:
+    - ENCHANTMENT_TABLE
+    RequiredPerk: Arcanery

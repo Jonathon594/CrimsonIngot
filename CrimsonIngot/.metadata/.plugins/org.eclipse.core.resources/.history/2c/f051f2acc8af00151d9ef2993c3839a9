@@ -1,0 +1,104 @@
+package me.Jonathon594.Mythria.DataTypes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Material;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.Managers.ConfigAccessor;
+
+public class PlayerAttribute {
+	private final String				name;
+	private final List<PotionEffect>	effects		= new ArrayList<PotionEffect>();
+	private final List<String>			abilityList	= new ArrayList<String>();
+	private String						description;
+	private final List<String>			permissions	= new ArrayList<String>();
+	private Material menuIcon = Material.AIR;
+
+	private boolean						hidden		= false;
+
+	public PlayerAttribute(final String n) {
+		name = n;
+		description = "";
+	}
+
+	public List<String> getAbilityList() {
+		return abilityList;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public List<PotionEffect> getEffects() {
+		return effects;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<String> getPermissions() {
+		return permissions;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	protected void loadData(final Main plugin, final String key, final ConfigAccessor config) {
+		final List<String> effs = config.getConfig().getStringList(key + "." + name + ".PotionEffects");
+		for (final Object e : effs) {
+			final String effect = (String) e;
+			if (!effect.equalsIgnoreCase("None")) {
+				final String[] Parts = effect.split(" ");
+				if (Parts.length == 2) {
+					final PotionEffectType pe = PotionEffectType.getByName(Parts[0]);
+					if (pe != null) {
+						final int level = Integer.parseInt(Parts[1]);
+						effects.add(new PotionEffect(pe, Integer.MAX_VALUE, level));
+					}
+				}
+			}
+		}
+		
+		String iconName = config.getConfig().getString(key + "." + name + ".MenuIcon");
+		Material mi = Material.getMaterial(iconName);
+		if(mi!=null)
+			setMenuIcon(mi);
+
+		final List<String> skills = plugin.getConfig().getStringList(key + "." + name + ".Skills");
+		if (skills != null)
+			for (final String s : skills) {
+				final String skill = s;
+				abilityList.add(skill);
+
+				plugin.addBlockedPermissions("mcmmo.ability." + skill + ".*");
+				plugin.addBlockedPermissions("mcmmo.perks.lucky." + skill);
+			}
+
+		final List<String> perms = plugin.getConfig().getStringList(key + "." + name + ".Permissions");
+		if (perms != null)
+			for (final String p : perms) {
+				final String perm = p;
+				permissions.add(perm);
+
+				plugin.addBlockedPermissions(perm);
+			}
+
+		description = plugin.getConfig().getString(key + "." + name + ".Description");
+
+		hidden = plugin.getConfig().getBoolean(key + "." + name + ".Hidden");
+	}
+
+	public void setHidden(final boolean hidden) {
+		this.hidden = hidden;
+	}
+
+	public Material getMenuIcon() {
+		return menuIcon;
+	}
+}

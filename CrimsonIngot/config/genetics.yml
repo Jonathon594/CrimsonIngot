@@ -1,0 +1,280 @@
+Genetics:
+  #Primary
+  Human:
+    Health: 20
+    LifeExpectancy: 74
+    Menu:
+      Icon: IRON_INGOT
+      X: 1
+      Y: 1
+    Permissions:
+    - mcmmo.perks.xp.50percentboost
+    Description: +50% Experience in all skills.
+    Type: Primary
+  Elf:
+    Health: 24
+    LifeExpectancy: 0
+    Menu:
+      Icon: GHAST_TEAR
+      X: 2
+      Y: 1
+    PotionEffects:
+    - Regeneration 0
+    Description: Elves are a noble race, and tend to think highly of themselves.
+    Type: Primary
+  Skaeren:
+    Health: 10
+    LifeExpectancy: 92
+    Menu:
+      Icon: GLASS_BOTTLE
+      X: 3
+      Y: 1
+    PotionEffects:
+    - Invisibility 0
+    Description: Skaeren are invisible creatures, but are quite fragile.
+    Type: Primary
+  Fae:
+    Health: 28
+    LifeExpectancy: 285
+    Menu:
+      Icon: LEAVES
+      X: 4
+      Y: 1
+    PotionEffects:
+    - Speed 1
+    Description: Fae are spirits of nature. They are fairly durable, and quite quick.
+    Type: Primary
+  Orc:
+    Health: 40
+    LifeExpectancy: 35
+    Menu:
+      Icon: OBSIDIAN
+      X: 5
+      Y: 1
+    PotionEffects:
+    - Damage_Resistance 0
+    Description: Orcs are very tough, but live shorter lives.
+    Type: Primary
+  Dwarf:
+    Health: 16
+    LifeExpectancy: 120
+    Menu:
+      Icon: IRON_PICKAXE
+      X: 6
+      Y: 1
+    PotionEffects:
+    - Fast_Digging 0
+    Description: Dwarfs are short humanoid creatures who tend to live underground.
+    Type: Primary
+  Morgath:
+    Health: 80
+    LifeExpectancy: 25
+    Menu:
+      Icon: BONE
+      X: 7
+      Y: 1
+    PotionEffects:
+    - Blindness 0
+    - Damage_Increase 2
+    Description: Morgath are extremely powerful entities, but suffer from near blindness.
+    Type: Primary
+  #Secondary
+  #X1
+  ThickSkin:
+    BonusHealth: 2
+    Cost: 5000
+    Menu:
+      Icon: DIRT
+      X: 1
+      Y: 2
+    Description: Your skin is tougher than others.
+    Type: Secondary
+  StoneSkin:
+    BonusHealth: 4
+    Cost: 20000
+    Menu:
+      Icon: STONE
+      X: 1
+      Y: 3
+    Description: Your skin is much tougher than others.
+    Type: Secondary
+    Requires: ThickSkin
+  IronSkin:
+    BonusHealth: 6
+    Cost: 100000
+    Menu:
+      Icon: IRON_BLOCK
+      X: 1
+      Y: 4
+    Description: Your skin is much tougher than others.
+    Type: Secondary
+    Requires: StoneSkin
+  DiamondSkin:
+    BonusHealth: 8
+    Cost: 1000000
+    Menu:
+      Icon: IRON_CHESTPLATE
+      X: 1
+      Y: 5
+    Description: Your skin is much tougher than others.
+    Type: Secondary
+    Requires: IronSkin
+    #X2
+  Speed:
+    Cost: 5000
+    Menu:
+      Icon: LEATHER_BOOTS
+      X: 2
+      Y: 2
+    PotionEffects:
+    - Speed 0
+    Description: You are quicker than others.
+    Type: Secondary
+  Agility:
+    Cost: 20000
+    Menu:
+      Icon: IRON_BOOTS
+      X: 2
+      Y: 3
+    PotionEffects:
+    - Speed 1
+    Description: You are much quicker than others.
+    Type: Secondary  
+  EnchancedAgility:
+    Cost: 100000
+    Menu:
+      Icon: GOLD_BOOTS
+      X: 2
+      Y: 4
+    PotionEffects:
+    - Speed 2
+    Description: You are very much quicker than others.
+    Type: Secondary   
+  InsaneAgility:
+    Cost: 1000000
+    Menu:
+      Icon: DIAMOND_BOOTS
+      X: 2
+      Y: 5
+    PotionEffects:
+    - Speed 3
+    Description: You are insanely quicker than others.
+    Type: Secondary 
+  Acrobatics:
+    Cost: 5000
+    Menu:
+      Icon: LEATHER_LEGGINGS
+      X: 3
+      Y: 2
+    PotionEffects:
+    - Jump 0
+    Description: You are quicker than others.
+    Type: Secondary    
+  ImprovedAcrobatics:
+    Cost: 20000
+    Menu:
+      Icon: IRON_LEGGINGS
+      X: 3
+      Y: 3
+    PotionEffects:
+    - Jump 1
+    Description: You are much quicker than others.
+    Type: Secondary  
+  AdvancedAcrobatics:
+    Cost: 100000
+    Menu:
+      Icon: GOLD_LEGGINGS
+      X: 3
+      Y: 4
+    PotionEffects:
+    - Jump 2
+    Description: You are very much quicker than others.
+    Type: Secondary   
+  InsaneAcrobatics:
+    Cost: 1000000
+    Menu:
+      Icon: DIAMOND_LEGGINGS
+      X: 3
+      Y: 5
+    PotionEffects:
+    - Jump 3
+    Description: You are insanely quicker than others.
+    Type: Secondary     
+  #Tertiary
+  #X1
+  AugmentedMuscles:
+    Cost: 100000
+    Menu:
+      Icon: STICK
+      X: 1
+      Y: 6
+    PotionEffects:
+    - Damage_Increase 0
+    Description: Your muscles have become more powerful.
+    Type: Tertiary
+    Requires: Human
+  AscendedHealing:
+    Cost: 100000
+    Menu:
+      Icon: GHAST_TEAR
+      X: 2
+      Y: 6
+    PotionEffects:
+    - Regeneration 1
+    Description: You heal alot faster now.
+    Type: Tertiary
+    Requires: Elf
+  ImprovedConstitution:
+    Cost: 100000
+    Menu:
+      Icon: GLASS
+      X: 3
+      Y: 6
+    BonusHealth: 10
+    Description: You have increased your constitution.
+    Type: Tertiary
+    Requires: Skaeren
+  AstralPrescence:
+    Cost: 100000
+    Menu:
+      Icon: POTION
+      X: 4
+      Y: 6
+    PotionEffects:
+    - Speed 4
+    Description: Your speed is increased by shifting between planes.
+    Type: Tertiary
+    Requires: Human
+  PainTolerance:
+    Cost: 100000
+    Menu:
+      Icon: STONE_SWORD
+      X: 5
+      Y: 6
+    PotionEffects:
+    - Damage_Resistance 1
+    Description: You can tolerate more pain than others.
+    Type: Tertiary
+    Requires: Orc
+  DrawvanSupremacy:
+    Cost: 100000
+    Menu:
+      Icon: DIAMOND_PICKAXE
+      X: 6
+      Y: 6
+    PotionEffects:
+    - Fast_Digging 4
+    Description: You can now dig extremely fast.
+    Type: Tertiary
+    Requires: Dwarf
+  ImprovedEquilibrium:
+    Cost: 100000
+    Menu:
+      Icon: ENDER_PEARL
+      X: 7
+      Y: 6
+    PotionEffects:
+    - Night_Vision 0
+    Description: You can now see better in the dark.
+    Type: Tertiary
+    Requires: Morgath

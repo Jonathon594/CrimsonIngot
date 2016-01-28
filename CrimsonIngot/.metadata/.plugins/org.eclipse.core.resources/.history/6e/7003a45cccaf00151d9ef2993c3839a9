@@ -1,0 +1,36 @@
+Races:
+  Human:
+    Health: 20
+    MenuIcon: BRICK
+    PotionEffects:
+    - None
+    Description: Simple, Yet capable.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(swords|mining|excavation|unarmed)
+    - mcmmo.perks.xp.10percentboost
+  Elf:
+    Health: 24
+    MenuIcon: GHAST_TEAR
+    PotionEffects:
+    - Regeneration 1
+    Description: Immortal, and Wise.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(herbalism|alchemy)
+  Fae:
+    Health: 28
+    MenuIcon: FEATHER
+    PotionEffects:
+    - Strength 0
+    - Speed 1
+    Description: Spirits of Nature.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(herbalism|alchemy|taming)
+  Skaeren:
+    Health: 10
+    MenuIcon: GLASS
+    PotionEffects:
+    - Invisibility 0
+    - Speed 2
+    Description: Move like the shadows, they do.
+    Permissions:
+    - mcmmo.perks.xp.customboost.(acrobatics|repair)

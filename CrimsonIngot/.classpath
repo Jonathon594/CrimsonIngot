@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="me/Jonathon594/Mythria/Commands/CommandHandlerDeity.java|me/Jonathon594/Mythria/Util/Controller.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="config"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/jonat/Dropbox/workspace/Mythria/plugins/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jonat/Dropbox/workspace/Mythria/plugins/spigot_1.8.7_b3c0272-7723b90.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

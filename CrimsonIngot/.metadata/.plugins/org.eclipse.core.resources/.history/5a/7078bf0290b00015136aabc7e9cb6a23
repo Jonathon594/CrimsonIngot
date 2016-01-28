@@ -1,0 +1,159 @@
+package me.Jonathon594.Mythria.Listeners;
+
+import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+import me.Jonathon594.Mythria.DataTypes.TradePerk;
+import me.Jonathon594.Mythria.Util.MythriaConstants;
+import net.milkbowl.vault.permission.Permission;
+
+public class PlayerListener implements Listener {
+	Main		plugin;
+	Permission	permission;
+
+	public PlayerListener(final Main p, final Permission perm) {
+		plugin = p;
+		permission = perm;
+	}
+
+	private void HandlePerkBreaking(final BlockBreakEvent event) {
+		final Material blockType = event.getBlock().getType();
+		if (!plugin.getMythriaBreakablePerkMaterials().contains(blockType))
+			return;
+		final Player p = event.getPlayer();
+		if (p == null)
+			return;
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		if (mp == null)
+			return;
+		for (final TradePerk tp : mp.getPlayerPerks())
+			if (tp.getMinable().contains(blockType))
+				return;
+		event.setCancelled(true);
+		p.sendMessage(MythriaConstants.mainColor + MythriaConstants.cantBreak);
+	}
+
+	public void HandlePerkCrafting(final CraftItemEvent event) {
+		final Material itemType = event.getRecipe().getResult().getType();
+		if (!plugin.getMythriaPerkMaterials().contains(itemType))
+			return;
+		for (final HumanEntity he : event.getViewers()) {
+			if (he instanceof Player == false)
+				return;
+			final Player p = (Player) he;
+			final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+			if (mp == null)
+				return;
+			for (final TradePerk tp : mp.getPlayerPerks())
+				if (tp.getCraftable().contains(itemType))
+					return;
+			event.setCancelled(true);
+			p.sendMessage(MythriaConstants.mainColor + MythriaConstants.cantCraft);
+		}
+	}
+
+	public void HandlePerkPlacing(final BlockPlaceEvent event) {
+		final Material blockType = event.getBlockPlaced().getType();
+		if (!plugin.getMythriaPlaceablePerkMaterials().contains(blockType))
+			return;
+		final Player p = event.getPlayer();
+		if (p == null)
+			return;
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		if (mp == null)
+			return;
+		for (final TradePerk tp : mp.getPlayerPerks())
+			if (tp.getPlaceable().contains(blockType))
+				return;
+		event.setCancelled(true);
+		p.sendMessage(MythriaConstants.mainColor + MythriaConstants.cantPlace);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onBlockBreak(final BlockBreakEvent event) {
+		HandlePerkBreaking(event);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onBlockPlace(final BlockPlaceEvent event) {
+		HandlePerkPlacing(event);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onCraft(final CraftItemEvent event) {
+		HandlePerkCrafting(event);
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onDisconnect(final PlayerQuitEvent event) {
+		final Player p = event.getPlayer();
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		if (mp != null) {
+			mp.RemovePermissions(permission);
+			//mp.SaveData(plugin.getSql());
+		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onEnchant(final EnchantItemEvent event) {
+		for (final HumanEntity he : event.getViewers())
+			if (he instanceof Player) {
+				final Player p = (Player) he;
+				final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+				if (mp != null) {
+					for (final TradePerk tp : mp.getPlayerPerks())
+						if (tp.getFlags().contains("Enchanting"))
+							return;
+					event.setCancelled(true);
+					p.sendMessage(MythriaConstants.mainColor + MythriaConstants.cantEnchant);
+				}
+			}
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onJoin(final PlayerJoinEvent event) {
+		final Player p = event.getPlayer();
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		if (mp != null)
+			mp.ApplyAllEffects(permission);
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onLogin(final PlayerLoginEvent event) {
+		final Player p = event.getPlayer();
+		if (plugin.getConfigManager().getPlayerConfig().getConfig().contains("Players." + p.getUniqueId())) {
+			final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+			if (mp != null){
+				mp.LoadData();
+			}
+		} else {
+			final MythriaPlayer mp = plugin.getMythriaPlayerManager().addPlayer(plugin, p.getUniqueId());
+			mp.SaveData();
+			mp.LoadData();
+		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onPlayerConsume(final PlayerItemConsumeEvent event) {
+		if (event.getItem().getType() == Material.MILK_BUCKET)
+			event.setCancelled(true);
+
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(event.getPlayer().getUniqueId());
+		if (mp != null){}
+			mp.ApplyAllEffects(permission);
+	}
+}

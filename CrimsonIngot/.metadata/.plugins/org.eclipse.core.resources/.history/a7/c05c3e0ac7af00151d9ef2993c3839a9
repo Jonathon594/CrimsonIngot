@@ -1,0 +1,74 @@
+package me.Jonathon594.Mythria.Commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.DataTypes.IconMenu;
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+import me.Jonathon594.Mythria.DataTypes.Race;
+import me.Jonathon594.Mythria.Util.MessageSender;
+import me.Jonathon594.Mythria.Util.MythriaConstants;
+import net.milkbowl.vault.permission.Permission;
+
+public class RaceCommandExecutor implements CommandExecutor {
+	private final Main			plugin;
+	private final Permission	permission;
+
+	private final ChatColor		mainColor	= ChatColor.DARK_PURPLE;
+	private final ChatColor		contColor	= ChatColor.AQUA;
+	
+	private IconMenu perkIconMenu;
+
+	public RaceCommandExecutor(final Main plugin, final Permission permission) {
+		this.plugin = plugin;
+		this.permission = permission;
+	}
+
+	private void ChoosePlayerRace(final CommandSender sender, final String[] args) {
+		if (sender instanceof Player) {
+			final Race Race = plugin.GetRace(args[1]);
+			if (Race != null)
+				if (!Race.isHidden()) {
+					final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(((Player) sender).getUniqueId());
+					if (mp != null)
+						if (mp.getPlayerRace().size() == 0) {
+							mp.setPlayerRace(Race, permission);
+							sender.sendMessage(mainColor + "You have chosen the race, " + contColor + Race.getName());
+						} else sender.sendMessage(mainColor + MythriaConstants.alreadyRace);
+				}
+		}
+	}
+
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
+		return false;
+	}
+
+	private void sendInfo(final CommandSender sender, final List<Race> list) {
+		final List<String> Lines = new ArrayList<String>();
+		Lines.add(mainColor + "------[]" + contColor + "Race Info" + mainColor + "[]------");
+		if (list.size() > 0)
+			for (final Race l : list) {
+				Lines.add(mainColor + "Race Name: " + contColor + l.getName());
+				Lines.add(mainColor + "Race Health: " + contColor + l.getRaceHealth());
+				if (l.getEffects().size() > 0) {
+					Lines.add(mainColor + "Race Effects:");
+					for (final PotionEffect pe : l.getEffects())
+						Lines.add(contColor + pe.getType().getName());
+				} else Lines.add(mainColor + "Race Effects: " + contColor + "None");
+				Lines.add(mainColor + "Description:");
+				Lines.add(contColor + l.getDescription());
+			}
+		else Lines.add(mainColor + MythriaConstants.noRace);
+		MessageSender.Send((Player) sender, Lines);
+	}
+}

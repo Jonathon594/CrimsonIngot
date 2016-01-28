@@ -1,0 +1,21 @@
+package me.Jonathon594.Mythria.DataTypes;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.Managers.ConfigAccessor;
+
+public class Skill extends PlayerAttribute{
+
+	private int							cost;
+	
+	public Skill(String n) {
+		super(n);
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void loadSkill(Main main, ConfigAccessor skillConfig) {
+		loadData(main, skillConfig);
+	}
+}

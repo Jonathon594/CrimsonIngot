@@ -1,0 +1,184 @@
+package me.Jonathon594.Mythria.DataTypes;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.Managers.ConfigAccessor;
+import net.milkbowl.vault.permission.Permission;
+
+public class MythriaPlayer {
+	private final Main		plugin;
+
+	private final UUID		uuid;
+	private List<Race>		playerRace		= new ArrayList<Race>();
+	private List<Knowledge>	playerKnowledge		= new ArrayList<Knowledge>();
+
+	private ConfigAccessor	playerConfig;
+
+	private RoleplayProfile	profile;
+
+	public MythriaPlayer(final Main plugin, final UUID uuid, final ConfigAccessor pc) {
+		this.uuid = uuid;
+
+		this.plugin = plugin;
+
+		playerConfig = pc;
+	}
+
+	public void addKnowledge(final Knowledge p) {
+		if (!playerKnowledge.contains(p))
+			playerKnowledge.add(p);
+	}
+
+	public void AddPlayerRace(final Race playerRace, final Permission perm) {
+		if (!this.playerRace.contains(playerRace)) {
+			this.playerRace.add(playerRace);
+			ApplyAllEffects(perm);
+		}
+	}
+
+	public void ApplyAllEffects(final Permission perm) {
+		RemovePermissions(perm);
+		final Player player = Bukkit.getPlayer(uuid);
+		for (final PotionEffect effect : player.getActivePotionEffects())
+			player.removePotionEffect(effect.getType());
+
+		ApplyRaceEffects(perm);
+	}
+
+	public void ApplyRaceEffects(final Permission perm) {
+		final Player player = Bukkit.getPlayer(uuid);
+		if (player != null)
+			if (playerRace != null)
+				for (final Race race : playerRace) {
+					player.setMaxHealth(race.getRaceHealth());
+					for (final PotionEffect pe : race.getEffects()) {
+						player.removePotionEffect(pe.getType());
+						player.addPotionEffect(pe);
+					}
+					for (final String sk : race.getAbilityList()) {
+						perm.playerAdd(null, player, "mcmmo.ability." + sk + ".*");
+						perm.playerAdd(null, player, "mcmmo.perks.lucky." + sk);
+					}
+					for (final String pm : race.getPermissions())
+						perm.playerAdd(null, player, pm);
+				}
+	}
+
+	public Player getPlayer() {
+		final Player player = Bukkit.getPlayer(uuid);
+		return player;
+	}
+
+	public List<Knowledge> getPlayerPerks() {
+		return playerKnowledge;
+	}
+
+	public List<Race> getPlayerRace() {
+		return playerRace;
+	}
+
+	public RoleplayProfile getProfile() {
+		return profile;
+	}
+
+	public void LoadData() {
+		final List<String> raceName = playerConfig.getConfig().getStringList("Players." + uuid + ".Race.Name");
+		final List<String> perkNames = playerConfig.getConfig().getStringList("Players." + uuid + ".Trade.Perks");
+		final List<String> blessingNames = playerConfig.getConfig().getStringList("Players." + uuid + ".Deity.Blessings");
+
+		for (final String s : raceName) {
+			final Race r = plugin.GetRace(s);
+			if (!playerRace.contains(r))
+				playerRace.add(r);
+		}
+
+		UpdateLists(perkNames, blessingNames);
+
+		final String fName = playerConfig.getConfig().getString("Players." + uuid + ".Profile.FirstName");
+		final String mName = playerConfig.getConfig().getString("Players." + uuid + ".Profile.MiddleName");
+		final String lName = playerConfig.getConfig().getString("Players." + uuid + ".Profile.LastName");
+		final Date birthDay = new Date(plugin.getTimeManager());
+		birthDay.setMGD(playerConfig.getConfig().getInt("Players." + uuid + ".Profile.Birthday"));
+
+		profile = new RoleplayProfile(fName, mName, lName, birthDay);
+	}
+
+	public void RemovePermissions(final Permission perm) {
+		final Player player = Bukkit.getPlayer(uuid);
+		if (player != null)
+			for (final String s : plugin.getBlockedPermissions())
+				perm.playerRemove(null, getPlayer(), s);
+	}
+
+	public void SaveData() {		
+		final List<String> perkNames = new ArrayList<String>();
+		for (final Knowledge tp : playerKnowledge)
+			perkNames.add(tp.getName());
+
+		final List<String> raceName = new ArrayList<String>();
+		final List<String> className = new ArrayList<String>();
+		final List<String> tradeName = new ArrayList<String>();
+
+		final List<String> elementName = new ArrayList<String>();
+		final List<String> spellName = new ArrayList<String>();
+
+		if (playerRace != null)
+			for (final Race a : playerRace)
+				raceName.add(a.getName());
+
+		playerConfig.getConfig().set("Players." + uuid + ".Race.Name", raceName);
+		playerConfig.getConfig().set("Players." + uuid + ".Class.Name", className);
+		playerConfig.getConfig().set("Players." + uuid + ".Trade.Name", tradeName);
+		playerConfig.getConfig().set("Players." + uuid + ".Trade.Perks", perkNames);
+
+		playerConfig.getConfig().set("Players." + uuid + ".Element.Name", elementName);
+		playerConfig.getConfig().set("Players." + uuid + ".Spells", spellName);
+
+		String fName = "None";
+		String mName = "None";
+		String lName = "None";
+		Date birthDay = new Date(plugin.getTimeManager());
+
+		if (profile != null) {
+			fName = profile.getFirstName();
+			mName = profile.getMiddleName();
+			lName = profile.getLastName();
+			birthDay = profile.getBirthDay();
+		}
+
+		playerConfig.getConfig().set("Players." + uuid + ".Profile.FirstName", fName);
+		playerConfig.getConfig().set("Players." + uuid + ".Profile.MiddleName", mName);
+		playerConfig.getConfig().set("Players." + uuid + ".Profile.LastName", lName);
+		playerConfig.getConfig().set("Players." + uuid + ".Profile.Birthday", birthDay.getMGD());
+
+		playerConfig.saveConfig();
+	}
+
+	public void setPlayerPerks(final List<Knowledge> playerPerks) {
+		this.playerKnowledge = playerPerks;
+	}
+
+	public void setPlayerRace(final Race playerRace, final Permission perm) {
+		this.playerRace = new ArrayList<Race>();
+		this.playerRace.add(playerRace);
+		ApplyAllEffects(perm);
+	}
+
+	private void UpdateLists(final List<String> perkNames, final List<String> blessingNames) {
+		playerKnowledge = new ArrayList<Knowledge>();
+		if (perkNames != null)
+			for (final Object tp : perkNames) {
+				final Knowledge perk = plugin.GetTradePerk((String) tp);
+				if (perk != null)
+					if (!playerKnowledge.contains(perk))
+						playerKnowledge.add(perk);
+			}
+	}
+}

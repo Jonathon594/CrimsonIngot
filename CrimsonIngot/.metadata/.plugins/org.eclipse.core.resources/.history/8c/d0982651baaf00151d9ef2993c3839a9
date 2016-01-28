@@ -1,0 +1,15 @@
+Trades:
+  Lumber:
+    Skills:
+    - Woodcutting
+    Description: The Lumber trade is all about working with woods of various types.
+  Industrial:
+    Skills:
+    - Mining
+    Description: The Industrial trade is about working with ores and metals and turning them into something more.
+  Agriculture:
+    Skills:
+    - Herbalism
+    Description: The Agriculture trade is about tending to the farms and livestock of the land.
+  Arcane:
+    Description: The Arcane trade deals with any form of magic, weather it be Alchemy, or Enchanting.

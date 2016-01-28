@@ -2,6 +2,11 @@
 Thumbs.db
 ehthumbs.db
 
+#Eclipse Stuff
+/.classpath
+/.project
+/.settings
+
 # Folder config file
 Desktop.ini
 

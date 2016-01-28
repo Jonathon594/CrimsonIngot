@@ -1,0 +1,37 @@
+DayNames:
+- Mayark
+- Tosalias
+- Judios
+- Amara
+- Kaias
+- Oast
+- Ras
+Months:
+  Aeon:
+    Days: 31
+  Asana:
+    Days: 30
+  Eliana:
+    Days: 28
+  Selina:
+    Days: 31
+  Amelia:
+    Days: 30
+  Kasai:
+    Days: 30
+  Melinias:
+    Days: 31
+  Lilasia:
+    Days: 30
+  Akari:
+    Days: 31
+  Naisa:
+    Days: 30
+  Umaria:
+    Days: 31
+  Felixia:
+    Days: 31
+Current:
+  Date: 1
+  
+

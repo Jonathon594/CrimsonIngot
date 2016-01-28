@@ -1,0 +1,18 @@
+Classes:
+  Warrior:
+    Skills:
+    - Swords
+    - Axes
+    - Unarmed
+    Description: Warriors are fierce and mighty opponents who utilize Swords, Axes, and even Unarmed.
+  Archer:
+    Skills:
+    - Archery
+    Description: Archers are deadly with a bow, and you typically are dead before you see one coming.
+  Bender:
+    Skills:
+    - Unarmed
+    - Acrobatics
+    Permissions:
+    - Bending.Player
+    Description: Benders can harness the power of the elements and bend them to their will.

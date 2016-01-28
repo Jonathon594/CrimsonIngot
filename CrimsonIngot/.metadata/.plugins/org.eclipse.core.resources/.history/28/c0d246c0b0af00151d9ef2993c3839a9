@@ -1,0 +1,26 @@
+package me.Jonathon594.Mythria.Util;
+
+public class MythriaUtil {
+	public static boolean canParse(final String input) {
+		boolean parsable = true;
+		try {
+			Integer.parseInt(input);
+		} catch (final NumberFormatException e) {
+			parsable = false;
+		}
+		return parsable;
+	}
+
+	public static int WrapInt(int kX, final int kLowerBound, final int kUpperBound) {
+		final int range_size = kUpperBound - kLowerBound + 1;
+
+		if (kX < kLowerBound)
+			kX += range_size * ((kLowerBound - kX) / range_size + 1);
+
+		return kLowerBound + (kX - kLowerBound) % range_size;
+	}
+	
+	public int RountToMultiple(double i, int v){
+	    return (int) (Math.round(i/v) * v);
+	}
+}

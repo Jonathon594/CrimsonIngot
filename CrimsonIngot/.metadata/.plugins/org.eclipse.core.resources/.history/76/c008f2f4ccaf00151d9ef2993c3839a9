@@ -1,0 +1,15 @@
+package me.Jonathon594.Mythria.DataTypes;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.Managers.ConfigAccessor;
+
+public class Deity extends PlayerAttribute {
+
+	public Deity(final String n) {
+		super(n);
+	}
+
+	public void LoadBlessing(final Main plugin, final ConfigAccessor ca) {
+		loadData(plugin, "Deity", ca);
+	}
+}

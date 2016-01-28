@@ -1,0 +1,21 @@
+Classes:
+  Warrior:
+    MenuIcon: DIAMOND_SWORD
+    Skills:
+    - Swords
+    - Axes
+    - Unarmed
+    Description: Fierce and Mighty.
+  Archer:
+    MenuIcon: BOW
+    Skills:
+    - Archery
+    Description: Deadly Accurate.
+  Bender:
+    MenuIcon: STONE
+    Skills:
+    - Unarmed
+    - Acrobatics
+    Permissions:
+    - Bending.Player
+    Description: One with the elements.

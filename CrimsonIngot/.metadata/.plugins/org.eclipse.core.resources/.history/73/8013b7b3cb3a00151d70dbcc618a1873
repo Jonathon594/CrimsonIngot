@@ -1,0 +1,36 @@
+package me.Jonathon594.Mythria.Managers;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Logger;
+
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+
+public class MythriaPlayerManager {
+	public List<MythriaPlayer>	mythriaPlayerList	= new ArrayList<MythriaPlayer>();
+	public Logger				log;
+
+	public MythriaPlayerManager(final Logger log) {
+		this.log = log;
+	}
+
+	public void AddPlayer(final MythriaPlayer mp) {
+		mythriaPlayerList.add(mp);
+	}
+
+	public MythriaPlayer getPlayerByUUID(final UUID uuid) {
+		if (uuid != null) {
+			for (final MythriaPlayer mp : mythriaPlayerList) {
+				if (mp != null) {
+					if (mp.getPlayer().getUniqueId().toString().equalsIgnoreCase(uuid.toString())) { return mp; }
+				} else {
+					log.warning("Could not find MythriaPlayer - " + uuid);
+				}
+			}
+		} else {
+			log.warning("UUID is Null in getPlayerByName(UUID);");
+		}
+		return null;
+	}
+}

@@ -1,0 +1,204 @@
+package me.Jonathon594.Mythria.Commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.DataTypes.IconMenu;
+import me.Jonathon594.Mythria.DataTypes.IconMenu.OptionClickEvent;
+import me.Jonathon594.Mythria.DataTypes.IconMenu.OptionClickEventHandler;
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+import me.Jonathon594.Mythria.DataTypes.Race;
+import me.Jonathon594.Mythria.Util.MessageSender;
+import me.Jonathon594.Mythria.Util.MythriaConstants;
+import net.milkbowl.vault.permission.Permission;
+
+public class RaceCommandExecutor implements CommandExecutor {
+	private final Main			plugin;
+	private final Permission	permission;
+
+	private final ChatColor		mainColor	= ChatColor.DARK_PURPLE;
+	private final ChatColor		contColor	= ChatColor.AQUA;
+	
+	private final IconMenu raceIconMenu;
+
+	public RaceCommandExecutor(final Main plugin, final Permission permission) {
+		this.plugin = plugin;
+		this.permission = permission;
+		raceIconMenu = new IconMenu("RaceIconMenu", 9, new IconMenu.OptionClickEventHandler() {
+            @Override
+            public void onOptionClick(OptionClickEvent event) {
+                onOptionClick(event);
+            }
+        }, plugin);
+	}
+
+	public void onOptionClick(OptionClickEvent event){
+		event.getPlayer().sendMessage("You have chosen " + event.getName());
+        event.setWillClose(true);
+	}
+	
+	private void AddPlayerRace(final CommandSender sender, final String[] args) {
+		final Player target = Bukkit.getPlayer(args[1]);
+		if (sender.isOp() || sender.hasPermission("mythria.race.set")) {
+			if (target != null) {
+				final Race Race = plugin.GetRace(args[2]);
+				if (Race != null) {
+					final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(target.getUniqueId());
+					if (mp != null)
+						mp.AddPlayerRace(Race, permission);
+				}
+			} else sender.sendMessage(mainColor + MythriaConstants.noPlayer);
+		} else sender.sendMessage(mainColor + MythriaConstants.noPerm);
+	}
+
+	private void CheckPlayerRace(final CommandSender sender, final String[] args) {
+		final Player target = Bukkit.getPlayer(args[1]);
+		if (target != null)
+			if (sender instanceof Player) {
+				final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(target.getUniqueId());
+				sendInfo(sender, mp.getPlayerRace());
+			}
+	}
+
+	private void ChoosePlayerRace(final CommandSender sender, final String[] args) {
+		if (sender instanceof Player) {
+			final Race Race = plugin.GetRace(args[1]);
+			if (Race != null)
+				if (!Race.isHidden()) {
+					final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(((Player) sender).getUniqueId());
+					if (mp != null)
+						if (mp.getPlayerRace().size() == 0) {
+							mp.setPlayerRace(Race, permission);
+							sender.sendMessage(mainColor + "You have chosen the race, " + contColor + Race.getName());
+						} else sender.sendMessage(mainColor + MythriaConstants.alreadyRace);
+				}
+		}
+	}
+
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
+		switch (args.length) {
+			case 0:
+				SendDefaultInfo(sender);
+				return true;
+			case 1:
+				if (args[0].equalsIgnoreCase("list")) {
+					SendRaceList(sender, args);
+					return true;
+				}
+				if (args[0].equalsIgnoreCase("info")) {
+					SendPlayerInfo(sender, args);
+					return true;
+				}
+				SendDefaultInfo(sender);
+				break;
+			case 2:
+				if (args[0].equalsIgnoreCase("check")) {
+					CheckPlayerRace(sender, args);
+					return true;
+				}
+				if (args[0].equalsIgnoreCase("choose")) {
+					ChoosePlayerRace(sender, args);
+					return true;
+				}
+				if (args[0].equalsIgnoreCase("info")) {
+					SendRaceInfo(sender, args);
+					return true;
+				}
+				SendDefaultInfo(sender);
+				break;
+			case 3:
+				if (args[0].equalsIgnoreCase("set")) {
+					SetPlayerRace(sender, args);
+					return true;
+				}
+				if (args[0].equalsIgnoreCase("add")) {
+					AddPlayerRace(sender, args);
+					return true;
+				}
+				SendDefaultInfo(sender);
+				break;
+
+		}
+		return false;
+	}
+
+	private void SendDefaultInfo(final CommandSender sender) {
+		final List<String> Lines = new ArrayList<String>();
+		Lines.add(mainColor + "------[]" + contColor + "Race Menu" + mainColor + "[]------");
+		Lines.add(contColor + "/race list" + mainColor + " - See a list of all availible races.");
+		Lines.add(contColor + "/race info" + mainColor + " - See information on your current race.");
+		Lines.add(contColor + "/race info [race]" + mainColor + " - See information on another race.");
+		Lines.add(contColor + "/race check [player]" + mainColor + " - Check the race of another player.");
+		Lines.add(contColor + "/race choose [race]" + mainColor + " - Choose your race, can only be done once.");
+		Lines.add(contColor + "/race set [player] [race]" + mainColor + " - Set the race of another player.");
+		MessageSender.Send((Player) sender, Lines);
+	}
+
+	private void sendInfo(final CommandSender sender, final List<Race> list) {
+		final List<String> Lines = new ArrayList<String>();
+		Lines.add(mainColor + "------[]" + contColor + "Race Info" + mainColor + "[]------");
+		if (list.size() > 0)
+			for (final Race l : list) {
+				Lines.add(mainColor + "Race Name: " + contColor + l.getName());
+				Lines.add(mainColor + "Race Health: " + contColor + l.getRaceHealth());
+				if (l.getEffects().size() > 0) {
+					Lines.add(mainColor + "Race Effects:");
+					for (final PotionEffect pe : l.getEffects())
+						Lines.add(contColor + pe.getType().getName());
+				} else Lines.add(mainColor + "Race Effects: " + contColor + "None");
+				Lines.add(mainColor + "Description:");
+				Lines.add(contColor + l.getDescription());
+			}
+		else Lines.add(mainColor + MythriaConstants.noRace);
+		MessageSender.Send((Player) sender, Lines);
+	}
+
+	private void SendPlayerInfo(final CommandSender sender, final String[] args) {
+		if (sender instanceof Player) {
+			final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(((Player) sender).getUniqueId());
+			sendInfo(sender, mp.getPlayerRace());
+		}
+	}
+
+	public void SendRaceInfo(final CommandSender sender, final String[] args) {
+		final List<Race> race = new ArrayList<Race>();
+		final Race r = plugin.GetRace(args[1]);
+		if (r != null)
+			race.add(r);
+		sendInfo(sender, race);
+	}
+
+	private void SendRaceList(final CommandSender sender, final String[] args) {
+		if (sender instanceof Player) {
+			final List<String> Lines = new ArrayList<String>();
+			for (final Race cla : plugin.getMythriaRaces())
+				if (!cla.isHidden())
+					Lines.add(contColor + cla.getName());
+			MessageSender.SendList((Player) sender, Lines);
+		}
+	}
+
+	private void SetPlayerRace(final CommandSender sender, final String[] args) {
+		final Player target = Bukkit.getPlayer(args[1]);
+		if (sender.isOp() || sender.hasPermission("mythria.race.set")) {
+			if (target != null) {
+				final Race Race = plugin.GetRace(args[2]);
+				if (Race != null) {
+					final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(target.getUniqueId());
+					if (mp != null)
+						mp.setPlayerRace(Race, permission);
+				}
+			} else sender.sendMessage(mainColor + MythriaConstants.noPlayer);
+		} else sender.sendMessage(mainColor + MythriaConstants.noPerm);
+	}
+}

@@ -1,0 +1,72 @@
+package me.Jonathon594.Mythria.Commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.DataTypes.Class;
+import me.Jonathon594.Mythria.DataTypes.MythriaPlayer;
+import me.Jonathon594.Mythria.Util.MessageSender;
+import me.Jonathon594.Mythria.Util.MythriaConstants;
+import net.milkbowl.vault.permission.Permission;
+
+public class ClassCommandExecutor implements CommandExecutor {
+	private final Main			plugin;
+	private final Permission	permission;
+
+	private final ChatColor		mainColor	= ChatColor.DARK_PURPLE;
+	private final ChatColor		contColor	= ChatColor.AQUA;
+
+	public ClassCommandExecutor(final Main plugin, final Permission permission) {
+		this.plugin = plugin;
+		this.permission = permission;
+	}
+	
+	private void ChoosePlayerClass(final CommandSender sender, final String[] args) {
+		if (sender instanceof Player == false)
+			return;
+		
+		final Class Class = plugin.GetClass(args[1]);
+		if (Class == null)
+			return;
+		final MythriaPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(((Player) sender).getUniqueId());
+		if (mp == null)
+			return;
+		
+		if (mp.getPlayerClass().size() > 0) {
+			sender.sendMessage(mainColor + MythriaConstants.alreadyClass); return; }
+		
+		mp.setPlayerClass(Class, permission);
+		sender.sendMessage(mainColor + "You have chosen the class, " + contColor + Class.getName());	
+	}
+
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
+		return false;
+	}
+
+	private void sendInfo(final CommandSender sender, final List<Class> list) {
+		final List<String> Lines = new ArrayList<String>();
+		Lines.add(mainColor + "------[]" + contColor + "Class Info" + mainColor + "[]------");
+		if (list.size() > 0)
+			for (final Class l : list) {
+				Lines.add(mainColor + "Class Name: " + contColor + l.getName());
+				if (l.getAbilityList().size() > 0) {
+					Lines.add(mainColor + "Class Skills:");
+					for (final String pe : l.getAbilityList())
+						Lines.add(contColor + pe);
+				} else Lines.add(mainColor + "Class Skills: " + contColor + "None");
+				Lines.add(mainColor + "Description:");
+				Lines.add(contColor + l.getDescription());
+			}
+		else Lines.add(mainColor + MythriaConstants.noClass);
+		MessageSender.Send((Player) sender, Lines);
+	}
+}

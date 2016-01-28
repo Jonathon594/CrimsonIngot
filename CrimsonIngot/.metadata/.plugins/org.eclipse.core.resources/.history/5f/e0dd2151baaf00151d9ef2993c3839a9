@@ -1,0 +1,16 @@
+Blessings:
+  Hikari:
+    Permissions:
+    - -modifyworld.damage.take.fire
+    - -modifyworld.damage.take.firetick
+    PotionEffects:
+    - Regeneration 2
+  Lilasia:
+    Permissions:
+    - -modifyworld.mobtarget.monster.zombie
+    - -modifyworld.mobtarget.monster.skeleton
+    - -modifyworld.mobtarget.monster.spider
+    - -modifyworld.mobtarget.monster.creeper
+    - mcmmo.bypass.arcanebypass
+    PotionEffects:
+    - Resistance 2

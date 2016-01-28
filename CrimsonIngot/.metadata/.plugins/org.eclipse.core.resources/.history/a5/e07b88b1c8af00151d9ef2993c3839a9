@@ -1,0 +1,26 @@
+package me.Jonathon594.Mythria.DataTypes;
+
+import org.bukkit.Material;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.Managers.ConfigAccessor;
+
+public class Race extends PlayerAttribute {
+
+	private int health;
+
+	public Race(final String n) {
+		super(n);
+		health = 20;
+	}
+
+	public double getRaceHealth() {
+		// TODO Auto-generated method stub
+		return health;
+	}
+
+	public void loadRace(final Main plugin, final ConfigAccessor ca) {
+		loadData(plugin, "Races", ca);
+		health = ca.getConfig().getInt("Races." + getName() + ".Health");
+	}
+}

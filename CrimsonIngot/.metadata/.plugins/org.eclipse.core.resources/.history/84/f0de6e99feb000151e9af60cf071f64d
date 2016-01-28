@@ -1,0 +1,7 @@
+Skills:
+  Swordsmanship:
+    Cost: 20
+    MenuIcon: DIAMOND_SWORD
+    Abilities:
+    - Swords
+    Description: On Guard!

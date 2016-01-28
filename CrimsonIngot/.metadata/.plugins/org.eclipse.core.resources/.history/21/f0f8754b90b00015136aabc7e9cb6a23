@@ -1,0 +1,50 @@
+package me.Jonathon594.Mythria.Managers;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class ConfigManager {
+	ConfigAccessor	raceConfig;
+	ConfigAccessor	classConfig;
+	ConfigAccessor	tradeConfig;
+	ConfigAccessor	perkConfig;
+	ConfigAccessor	playerConfig;
+	ConfigAccessor	timeConfig;
+
+	public ConfigManager(final JavaPlugin plugin) {
+		raceConfig = new ConfigAccessor(plugin, "race.yml");
+		perkConfig = new ConfigAccessor(plugin, "knowledge.yml");
+		playerConfig = new ConfigAccessor(plugin, "players.yml");
+		timeConfig = new ConfigAccessor(plugin, "time.yml");
+
+		raceConfig.saveDefaultConfig();
+		classConfig.saveDefaultConfig();
+		tradeConfig.saveDefaultConfig();
+		perkConfig.saveDefaultConfig();
+		playerConfig.saveDefaultConfig();
+		timeConfig.saveDefaultConfig();
+	}
+
+	public ConfigAccessor getClassConfig() {
+		return classConfig;
+	}
+
+	public ConfigAccessor getPerkConfig() {
+		return perkConfig;
+	}
+
+	public ConfigAccessor getPlayerConfig() {
+		return playerConfig;
+	}
+
+	public ConfigAccessor getRaceConfig() {
+		return raceConfig;
+	}
+
+	public ConfigAccessor getTimeConfig() {
+		return timeConfig;
+	}
+
+	public ConfigAccessor getTradeConfig() {
+		return tradeConfig;
+	}
+}

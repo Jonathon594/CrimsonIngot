@@ -1,0 +1,88 @@
+package me.Jonathon594.Mythria.DataTypes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+
+import me.Jonathon594.Mythria.Main;
+import me.Jonathon594.Mythria.Managers.ConfigAccessor;
+
+public class TradePerk extends PlayerAttribute {
+	private final ArrayList<Material>	craftable	= new ArrayList<Material>();
+	private final ArrayList<Material>	breakable	= new ArrayList<Material>();
+	private final ArrayList<Material>	placeable	= new ArrayList<Material>();
+
+	private int							Cost;
+
+	private final List<String>			flags		= new ArrayList<String>();
+	private String						requiredPerk;
+
+	public TradePerk(final String n) {
+		super(n);
+	}
+
+	public int getCost() {
+		return Cost;
+	}
+
+	public ArrayList<Material> getCraftable() {
+		return craftable;
+	}
+
+	public List<String> getFlags() {
+		return flags;
+	}
+
+	public ArrayList<Material> getMinable() {
+		return breakable;
+	}
+
+	public ArrayList<Material> getPlaceable() {
+		return placeable;
+	}
+
+	public String getRequiredPerk() {
+		return requiredPerk;
+	}
+
+	public void loadPerk(final Main plugin, final ConfigAccessor ca) {
+		loadData(plugin, "Perks", ca);
+
+		Cost = ca.getConfig().getInt("Perks." + getName() + ".Cost");
+
+		requiredPerk = ca.getConfig().getString("Perks." + getName() + ".RequiredPerk");
+		
+		final List<?> fls = ca.getConfig().getList("Perks." + getName() + ".Flags");
+		if (fls != null)
+			for (final Object f : fls) {
+				final String flag = (String) f;
+				flags.add(flag);
+			}
+
+		final List<String> crafts = ca.getConfig().getStringList("Perks." + getName() + ".Craftable");
+		for (final Object c : crafts) {
+			final String craft = (String) c;
+			craftable.add(Material.getMaterial(craft));
+			if(Material.getMaterial(craft)==null){
+				Bukkit.broadcastMessage("NULL! "+craft);
+			}
+		}
+		final List<String> breaks = ca.getConfig().getStringList("Perks." + getName() + ".Breakable");
+		for (final Object c : breaks) {
+			final String br = (String) c;
+			breakable.add(Material.getMaterial(br));
+		}
+		final List<String> places = ca.getConfig().getStringList("Perks." + getName() + ".Placeable");
+		for (final Object p : places) {
+			final String pl = (String) p;
+			placeable.add(Material.getMaterial(pl));
+		}
+
+		Cost = ca.getConfig().getInt("Perks." + getName() + ".Cost");
+		plugin.getMythriaPerkMaterials().addAll(craftable);
+		plugin.getMythriaBreakablePerkMaterials().addAll(breakable);
+		plugin.getMythriaPlaceablePerkMaterials().addAll(placeable);
+	}
+}
