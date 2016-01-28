@@ -32,11 +32,11 @@ public class PlayerListener implements Listener {
 		final Material blockType = event.getBlock().getType();
 		final Player p = event.getPlayer();
 		if (p == null) return;
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 		if (mp == null) return;
 		for (final Knowledge tp : mp.getPlayerKnowledge())
 			if (tp.getMinable().contains(blockType)) return;
-		if (!plugin.getObjectManager().getMythriaBreakableKnowledgeMaterials().contains(blockType)) return;
+		if (!plugin.getObjectManager().getCrimsonBreakableKnowledgeMaterials().contains(blockType)) return;
 		event.setCancelled(true);
 		p.sendMessage(CrimsonIngotConstants.mainColor + CrimsonIngotConstants.cantBreak);
 	}
@@ -47,11 +47,11 @@ public class PlayerListener implements Listener {
 		for (final HumanEntity he : event.getViewers()) {
 			if (he instanceof Player == false) return;
 			final Player p = (Player) he;
-			final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+			final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 			if (mp == null) return;
 			for (final Knowledge tp : mp.getPlayerKnowledge())
 				if (tp.getCraftable().contains(itemType)) return;
-			if (!plugin.getObjectManager().getMythriaKnowledgeMaterials().contains(itemType)) return;
+			if (!plugin.getObjectManager().getCrimsonKnowledgeMaterials().contains(itemType)) return;
 			event.setCancelled(true);
 			p.sendMessage(CrimsonIngotConstants.mainColor + CrimsonIngotConstants.cantCraft);
 		}
@@ -61,11 +61,11 @@ public class PlayerListener implements Listener {
 		final Material blockType = event.getBlockPlaced().getType();
 		final Player p = event.getPlayer();
 		if (p == null) return;
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 		if (mp == null) return;
 		for (final Knowledge tp : mp.getPlayerKnowledge())
 			if (tp.getPlaceable().contains(blockType)) return;
-		if (!plugin.getObjectManager().getMythriaPlaceableKnowledgeMaterials().contains(blockType)) return;
+		if (!plugin.getObjectManager().getCrimsonPlaceableKnowledgeMaterials().contains(blockType)) return;
 		event.setCancelled(true);
 		p.sendMessage(CrimsonIngotConstants.mainColor + CrimsonIngotConstants.cantPlace);
 	}
@@ -90,8 +90,10 @@ public class PlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onDisconnect(final PlayerQuitEvent event) {
 		final Player p = event.getPlayer();
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
-		mp.removeAllPermissions();
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
+		if(mp==null)
+			return;
+		mp.removeAllEffects();
 		mp.SaveData();
 	}
 
@@ -100,7 +102,7 @@ public class PlayerListener implements Listener {
 		for (final HumanEntity he : event.getViewers())
 			if (he instanceof Player) {
 				final Player p = (Player) he;
-				final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+				final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 				if (mp != null) {
 					for (final Knowledge tp : mp.getPlayerKnowledge())
 						if (tp.getFlags().contains("Enchanting")) return;
@@ -113,9 +115,10 @@ public class PlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onLogin(final PlayerLoginEvent event) {
 		final Player p = event.getPlayer();
-		CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 		if (mp == null) {
-			mp = plugin.getMythriaPlayerManager().addPlayer(plugin, p.getUniqueId(), p);
+			mp = plugin.getCrimsonPlayerManager().addPlayer(plugin, p.getUniqueId(), p);
+			mp.LoadData();
 			mp.SaveData();
 		}
 
@@ -127,7 +130,7 @@ public class PlayerListener implements Listener {
 	public void onPlayerConsume(final PlayerItemConsumeEvent event) {
 		if (event.getItem().getType() == Material.MILK_BUCKET) event.setCancelled(true);
 
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(event.getPlayer().getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(event.getPlayer().getUniqueId());
 		if (mp == null) return;
 		mp.applyAllEffects();
 	}
@@ -135,7 +138,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerRespawn(final PlayerRespawnEvent event) {
 		final Player player = event.getPlayer();
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(player.getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(player.getUniqueId());
 		if (mp == null) return;
 
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

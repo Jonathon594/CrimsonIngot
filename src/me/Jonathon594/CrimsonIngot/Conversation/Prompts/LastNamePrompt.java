@@ -17,7 +17,7 @@ public class LastNamePrompt extends StringPrompt {
 		final CrimsonIngot plugin = (CrimsonIngot) context.getPlugin();
 		if (context.getForWhom() instanceof Player) {
 			final Player p = (Player) context.getForWhom();
-			final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+			final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 			final String fullName = context.getSessionData("FirstName") + " " + context.getSessionData("MiddleName")
 					+ " " + context.getSessionData("LastName");
 

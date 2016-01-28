@@ -20,13 +20,13 @@ public class CrimsonIngotUtil {
 		return (int) (Math.ceil(i / v) * v);
 	}
 
+	public static void sendCrimsonMessage(final Player p, final String s) {
+		p.sendMessage(CrimsonIngotConstants.messagePrefix + s);
+	}
+
 	public static void sendListAsPluginMessage(final ArrayList<String> lines, final CommandSender sender) {
 		for (final String s : lines)
 			sender.sendMessage(CrimsonIngotConstants.messagePrefix + s);
-	}
-
-	public static void sendMythriaMessage(final Player p, final String s) {
-		p.sendMessage(CrimsonIngotConstants.messagePrefix + s);
 	}
 
 	public static int WrapInt(int kX, final int kLowerBound, final int kUpperBound) {

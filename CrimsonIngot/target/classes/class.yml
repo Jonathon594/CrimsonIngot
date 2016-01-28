@@ -1,0 +1,7 @@
+Classes:
+  Mage:
+    SpellSets:
+      Netharna:
+        Spells:
+        - leap
+        Requires: Netharna

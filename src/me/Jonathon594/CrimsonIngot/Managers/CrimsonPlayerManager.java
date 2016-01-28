@@ -38,9 +38,9 @@ public class CrimsonPlayerManager {
 		return null;
 	}
 
-	public void removeAllPlayerPermissions() {
+	public void removeAllEffects() {
 		for (final CrimsonPlayer mp : mythriaPlayerList)
-			mp.removeAllPermissions();
+			mp.removeAllEffects();
 	}
 
 	public void removePlayer(final CrimsonPlayer mp) {

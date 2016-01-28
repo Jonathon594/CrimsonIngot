@@ -44,7 +44,7 @@ public class CrimsonIngotConstants {
 	public static final String	noProfile		= "You have not made a profile yet, Please do /profile set";
 	public static final String	noGenetic		= "You have not chosen a Primary Genetic Trait yet, Please do /genetic";
 	public static final String	DeathMessage	= "You have died. Your profile is reset; Attributes Refunded. You retain half of your previous investments.";
-	public static final String	messagePrefix	= mainColor + "[" + contColor + "Mythria" + mainColor + "] ";
+	public static final String	messagePrefix	= mainColor + "[" + contColor + "Crimson" + mainColor + "] ";
 	public static final String	nameInUse		= "This full name has already been used, please try another.";
 	public static final String	soulReform		= "Your body has died. Your soul has reformed into a new one. You keep all your investments, but lose half your Mythicality";
 }

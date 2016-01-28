@@ -2,8 +2,10 @@ package me.Jonathon594.CrimsonIngot.DataTypes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -15,6 +17,7 @@ public class PlayerAttribute {
 	private final List<PotionEffect>	potionEffects			= new ArrayList<PotionEffect>();
 	private String						attributeDescription	= "";
 	private final List<String>			attributePermissions	= new ArrayList<String>();
+
 	private Material					menuIcon				= Material.AIR;
 
 	private int							menuX					= 0;
@@ -25,6 +28,8 @@ public class PlayerAttribute {
 	private int							cost;
 
 	private String						requiredAttribute;
+
+	private final ArrayList<SpellSet>	spellSets				= new ArrayList<SpellSet>();
 
 	public PlayerAttribute(final String n) {
 		name = n;
@@ -66,6 +71,10 @@ public class PlayerAttribute {
 		return requiredAttribute;
 	}
 
+	public ArrayList<SpellSet> getSpellSets() {
+		return spellSets;
+	}
+
 	public boolean isHidden() {
 		return hidden;
 	}
@@ -75,6 +84,16 @@ public class PlayerAttribute {
 		cost = config.getConfig().getInt(key + "." + name + ".Cost");
 
 		requiredAttribute = config.getConfig().getString(key + "." + name + ".Requires");
+
+		ConfigurationSection cs = config.getConfig().getConfigurationSection(key + "." + name + ".SpellSets");
+		Set<String> spse = null;
+		if (cs != null) spse = cs.getKeys(false);
+		
+		if (spse != null) for (final String sskey : spse) {
+			final SpellSet ss = new SpellSet(sskey);
+			ss.loadData(key + "." + name + ".SpellSets", config, plugin);
+			spellSets.add(ss);
+		}
 
 		final List<String> effs = config.getConfig().getStringList(key + "." + name + ".PotionEffects");
 		for (final Object e : effs) {
@@ -102,8 +121,6 @@ public class PlayerAttribute {
 		if (perms != null) for (final String p : perms) {
 			final String perm = p;
 			attributePermissions.add(perm);
-
-			plugin.getObjectManager().addBlockedPermissions(perm);
 		}
 
 		hidden = plugin.getConfig().getBoolean(key + "." + name + ".Hidden");

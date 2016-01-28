@@ -5,11 +5,11 @@ import me.Jonathon594.CrimsonIngot.Managers.ConfigAccessor;
 
 public class Creed extends PlayerAttribute {
 
-	public Creed(String n) {
+	public Creed(final String n) {
 		super(n);
 	}
-	
-	public void LoadClass(CrimsonIngot plugin, ConfigAccessor ca){
+
+	public void loadCreed(final CrimsonIngot plugin, final ConfigAccessor ca) {
 		loadData(plugin, "Creeds", ca);
 	}
 }

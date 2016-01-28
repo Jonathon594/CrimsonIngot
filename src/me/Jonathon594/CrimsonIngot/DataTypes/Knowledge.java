@@ -61,8 +61,8 @@ public class Knowledge extends PlayerAttribute {
 			final String pl = (String) p;
 			placeable.add(Material.getMaterial(pl));
 		}
-		plugin.getObjectManager().getMythriaKnowledgeMaterials().addAll(craftable);
-		plugin.getObjectManager().getMythriaBreakableKnowledgeMaterials().addAll(breakable);
-		plugin.getObjectManager().getMythriaPlaceableKnowledgeMaterials().addAll(placeable);
+		plugin.getObjectManager().getCrimsonKnowledgeMaterials().addAll(craftable);
+		plugin.getObjectManager().getCrimsonBreakableKnowledgeMaterials().addAll(breakable);
+		plugin.getObjectManager().getCrimsonPlaceableKnowledgeMaterials().addAll(placeable);
 	}
 }

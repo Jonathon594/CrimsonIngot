@@ -25,7 +25,7 @@ public class KnowledgeCommand {
 
 	private static void InitPerkMenu(final CrimsonIngot plugin) {
 		int size = 0;
-		for (final Knowledge kn : plugin.getObjectManager().getMythriaKnowledge())
+		for (final Knowledge kn : plugin.getObjectManager().getCrimsonKnowledge())
 			size = Math.max(kn.getMenuY(), size);
 
 		perkIconMenu = new IconMenu("Knowledge List", size * 9, new IconMenu.OptionClickEventHandler() {
@@ -45,7 +45,7 @@ public class KnowledgeCommand {
 	private static void LearnPerk(final Knowledge tp, final Player player, final CrimsonIngot plugin) {
 		if (tp == null) return;
 
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(player.getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(player.getUniqueId());
 		if (mp == null) return;
 
 		if (mp.getPlayerKnowledge().contains(tp)) {
@@ -62,21 +62,19 @@ public class KnowledgeCommand {
 			return;
 		}
 
-		final int pl = mp.getMythicality();
 		final int cost = tp.getCost();
 
-		if (mp.getMythicality() < cost) {
+		if (mp.getPlayer().getLevel() < cost) {
 			player.sendMessage(mc + CrimsonIngotConstants.noMythicality);
 			return;
 		}
 
-		mp.setMythicality(pl - cost);
-		mp.addKnowledge(tp);
+		mp.addAttribute(tp);
 		mp.applyAllEffects();
-		player.sendMessage(mc + "You have learned a new perk! (" + cc + tp.getName() + mc + ")");
+		player.sendMessage(mc + "You have learned a new Knowledge! (" + cc + tp.getName() + mc + ")");
 	}
 
-	public static boolean Perform(final CommandSender sender, final Command cmd, final String label,
+	public static boolean perform(final CommandSender sender, final Command cmd, final String label,
 			final String[] args, final CrimsonIngot plugin) {
 		if (sender instanceof Player) {
 			ShowPerkMenu((Player) sender, plugin);
@@ -86,13 +84,13 @@ public class KnowledgeCommand {
 	}
 
 	private static void ShowPerkMenu(final Player player, final CrimsonIngot plugin) {
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(player.getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(player.getUniqueId());
 		if (mp == null) return;
 
 		InitPerkMenu(plugin);
 
-		for (int i = 0; i < plugin.getObjectManager().getMythriaKnowledge().size(); i++) {
-			final Knowledge tp = plugin.getObjectManager().getMythriaKnowledge().get(i);
+		for (int i = 0; i < plugin.getObjectManager().getCrimsonKnowledge().size(); i++) {
+			final Knowledge tp = plugin.getObjectManager().getCrimsonKnowledge().get(i);
 			final Knowledge rp = plugin.getObjectManager().getKnowledge(tp.getRequiredAttribute());
 
 			ChatColor itemColor = ChatColor.WHITE;
@@ -129,11 +127,5 @@ public class KnowledgeCommand {
 
 			perkIconMenu.setOption(position, menuIcon, itemColor + tp.getName(), lore);
 		}
-
-		final ArrayList<String> lore = new ArrayList<String>();
-		lore.add(cc + "" + mp.getMythicality());
-		perkIconMenu.setOption(perkIconMenu.getSize() - 1, new ItemStack(Material.EXP_BOTTLE), mc + "Mythicality",
-				lore);
-		perkIconMenu.open(player);
 	}
 }

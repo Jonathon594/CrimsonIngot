@@ -20,16 +20,16 @@ public class ConfigManager {
 		creedConfig.saveDefaultConfig();
 	}
 
+	public ConfigAccessor getClassConfig() {
+		return classConfig;
+	}
+
 	public ConfigAccessor getCreedConfig() {
 		return creedConfig;
 	}
 
 	public ConfigAccessor getKnowledgeConfig() {
 		return knowledgeConfig;
-	}
-
-	public ConfigAccessor getClassConfig() {
-		return classConfig;
 	}
 
 	public ConfigAccessor getTimeConfig() {

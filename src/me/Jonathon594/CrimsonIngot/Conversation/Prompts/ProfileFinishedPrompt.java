@@ -17,7 +17,7 @@ public class ProfileFinishedPrompt extends MessagePrompt {
 			if (context.getForWhom() instanceof Player) {
 				final Player p = (Player) context.getForWhom();
 
-				final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+				final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 				mp.getProfile().setFirstName((String) context.getSessionData("FirstName"));
 				mp.getProfile().setMiddleName((String) context.getSessionData("MiddleName"));
 				mp.getProfile().setLastName((String) context.getSessionData("LastName"));

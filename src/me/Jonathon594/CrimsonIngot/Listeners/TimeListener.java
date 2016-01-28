@@ -18,9 +18,9 @@ public class TimeListener {
 				if (Bukkit.getWorld("world").getTime() >= 199) return;
 				timeManager.NewDay();
 				for (final Player p : Bukkit.getOnlinePlayers()) {
-					final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+					final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 					if (mp == null) return;
-					CrimsonIngotUtil.sendMythriaMessage(p, timeManager.getCurrentDate().GetDateString());
+					CrimsonIngotUtil.sendCrimsonMessage(p, timeManager.getCurrentDate().GetDateString());
 				}
 			}
 		}, 0, 200);

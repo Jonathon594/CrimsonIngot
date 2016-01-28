@@ -18,7 +18,7 @@ import me.Jonathon594.CrimsonIngot.Managers.TimeManager;
 public class CrimsonIngot extends JavaPlugin implements Listener {
 
 	private final Logger			log	= Logger.getLogger("Minecraft");
-	private CrimsonPlayerManager	mythriaPlayerManager;
+	private CrimsonPlayerManager	crimsonPlayerManager;
 	private ConfigManager			configManager;
 	private TimeManager				timeManager;
 	private TimeListener			timeListener;
@@ -33,8 +33,8 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 		return conversationManager;
 	}
 
-	public CrimsonPlayerManager getMythriaPlayerManager() {
-		return mythriaPlayerManager;
+	public CrimsonPlayerManager getCrimsonPlayerManager() {
+		return crimsonPlayerManager;
 	}
 
 	public ObjectManager getObjectManager() {
@@ -52,7 +52,7 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 		timeListener = new TimeListener();
 		timeListener.run(this, timeManager);
 		conversationManager = new ConversationManager(this);
-		mythriaPlayerManager = new CrimsonPlayerManager(log);
+		crimsonPlayerManager = new CrimsonPlayerManager(log);
 		objectManager = new ObjectManager();
 		objectManager.Initialize(configManager, this);
 	}
@@ -61,8 +61,8 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 	public void onDisable() {
 		final PluginDescriptionFile pdfFile = getDescription();
 		log.info(pdfFile.getName() + " Version: " + pdfFile.getVersion() + " is now disabled!");
-		mythriaPlayerManager.removeAllPlayerPermissions();
-		mythriaPlayerManager.SavePlayers(this);
+		crimsonPlayerManager.removeAllEffects();
+		crimsonPlayerManager.SavePlayers(this);
 	}
 
 	@Override

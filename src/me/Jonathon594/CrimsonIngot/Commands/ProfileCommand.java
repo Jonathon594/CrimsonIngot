@@ -18,12 +18,12 @@ public class ProfileCommand {
 	private static ChatColor	mc	= CrimsonIngotConstants.mainColor;
 	private static ChatColor	cc	= CrimsonIngotConstants.contColor;
 
-	public static boolean Perform(final CommandSender sender, final Command cmd, final String label,
+	public static boolean perform(final CommandSender sender, final Command cmd, final String label,
 			final String[] args, final CrimsonIngot plugin) {
 		if (sender instanceof Player) if (args.length > 0) {
 			final Player p = (Player) sender;
 			if (args[1].equalsIgnoreCase("set")) {
-				final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+				final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 				if (mp.getProfile().isMade()) return false;
 				plugin.getConversationManager().getProfileFactory().buildConversation((Conversable) sender).begin();
 				return true;
@@ -34,7 +34,7 @@ public class ProfileCommand {
 	}
 
 	public static void ShowProfile(final Player p, final CrimsonIngot plugin) {
-		final CrimsonPlayer mp = plugin.getMythriaPlayerManager().getPlayerByUUID(p.getUniqueId());
+		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 		final String fullName = mp.getProfile().getFullName();
 		final ArrayList<String> lines = new ArrayList<String>();
 		lines.add(mc + "Name: " + cc + fullName);

@@ -8,10 +8,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
+import com.nisovin.magicspells.MagicSpells;
+import com.nisovin.magicspells.Spell;
+import com.nisovin.magicspells.Spellbook;
+
 import me.Jonathon594.CrimsonIngot.CrimsonIngot;
 import me.Jonathon594.CrimsonIngot.Managers.ConfigAccessor;
-import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotConstants;
-import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotUtil;
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
@@ -22,7 +24,6 @@ public class CrimsonPlayer {
 	private ArrayList<PlayerAttribute>	playerAttributes	= new ArrayList<PlayerAttribute>();
 	private final ConfigAccessor		playerConfig;
 	private RoleplayProfile				profile;
-	private int							playerMythicality;
 
 	public CrimsonPlayer(final CrimsonIngot plugin, final UUID uuid, final Player player) {
 		this.uuid = uuid;
@@ -32,16 +33,16 @@ public class CrimsonPlayer {
 		playerConfig = new ConfigAccessor(plugin, "/players/" + uuid + ".yml");
 	}
 
-	public void addKnowledge(final Knowledge p) {
+	public void addAttribute(final PlayerAttribute p) {
 		if (!playerAttributes.contains(p)) playerAttributes.add(p);
+	}
+	
+	public void removeAttribute(final PlayerAttribute p) {
+		if (playerAttributes.contains(p)) playerAttributes.remove(p);
 	}
 
 	public void applyAllEffects() {
 		final PermissionUser pu = PermissionsEx.getUser(player);
-		for (final String p : plugin.getObjectManager().getBlockedPermissions()) {
-			pu.removePermission(p);
-			pu.addPermission("-" + p);
-		}
 		for (final PotionEffect effect : player.getActivePotionEffects())
 			player.removePotionEffect(effect.getType());
 
@@ -52,17 +53,18 @@ public class CrimsonPlayer {
 				player.removePotionEffect(pe.getType());
 				player.addPotionEffect(pe);
 			}
-			for (final String pm : pa.getPermissions()) {
-				pu.removePermission("-" + pm);
+			for (final String pm : pa.getPermissions())
 				pu.addPermission(pm);
-			}
+			for (final SpellSet ss : pa.getSpellSets())
+				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
+					for (final Spell sp : ss.getSpellList()) {
+					final Spellbook sb = MagicSpells.getSpellbook(player);
+					sb.addSpell(sp);
+					sb.save();
+				}
 		}
 
 		player.setMaxHealth(health);
-	}
-
-	public int getMythicality() {
-		return playerMythicality;
 	}
 
 	public Player getPlayer() {
@@ -80,6 +82,20 @@ public class CrimsonPlayer {
 			if (pa instanceof Knowledge) knowledge.add((Knowledge) pa);
 		return knowledge;
 	}
+	
+	public List<Creed> getPlayerCreeds() {
+		final ArrayList<Creed> creed = new ArrayList<Creed>();
+		for (final PlayerAttribute pa : playerAttributes)
+			if (pa instanceof Creed) creed.add((Creed) pa);
+		return creed;
+	}
+	
+	public List<CrimsonClass> getPlayerClasses() {
+		final ArrayList<CrimsonClass> crimsonClass = new ArrayList<CrimsonClass>();
+		for (final PlayerAttribute pa : playerAttributes)
+			if (pa instanceof CrimsonClass) crimsonClass.add((CrimsonClass) pa);
+		return crimsonClass;
+	}
 
 	public RoleplayProfile getProfile() {
 		return profile;
@@ -87,8 +103,6 @@ public class CrimsonPlayer {
 
 	public void LoadData() {
 		final List<String> attributeNames = playerConfig.getConfig().getStringList("Attributes");
-
-		playerMythicality = playerConfig.getConfig().getInt("Mythicality");
 
 		UpdateLists(attributeNames);
 
@@ -107,11 +121,20 @@ public class CrimsonPlayer {
 		profile.setMade(made);
 	}
 
-	public void removeAllPermissions() {
+	public void removeAllEffects() {
 		final PermissionUser pu = PermissionsEx.getUser(player);
-		for (final String p : plugin.getObjectManager().getBlockedPermissions()) {
-			pu.removePermission(p);
-			pu.removePermission("-" + p);
+		for (final PlayerAttribute pa : playerAttributes) {
+			for (final PotionEffect pe : pa.getEffects())
+				player.removePotionEffect(pe.getType());
+			for (final String pm : pa.getPermissions())
+				pu.removePermission(pm);
+			for (final SpellSet ss : pa.getSpellSets())
+				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
+					for (final Spell sp : ss.getSpellList()) {
+					final Spellbook sb = MagicSpells.getSpellbook(player);
+					sb.removeSpell(sp);
+					sb.save();
+				}
 		}
 	}
 
@@ -121,8 +144,6 @@ public class CrimsonPlayer {
 			attributeNames.add(pa.getName());
 
 		playerConfig.getConfig().set("Attributes", attributeNames);
-
-		playerConfig.getConfig().set("Mythicality", playerMythicality);
 
 		String fName = "None";
 		String mName = "None";
@@ -145,23 +166,16 @@ public class CrimsonPlayer {
 		playerConfig.saveConfig();
 	}
 
-	public void setMythicality(final int i) {
-		playerMythicality = i;
-	}
-
-	public void soulReform() {
-		playerMythicality /= 2;
-		applyAllEffects();
-		SaveData();
-		CrimsonIngotUtil.sendMythriaMessage(player, CrimsonIngotConstants.mainColor + CrimsonIngotConstants.soulReform);
-	}
-
 	private void UpdateLists(final List<String> attributeNames) {
 		playerAttributes = new ArrayList<PlayerAttribute>();
 		if (attributeNames != null) for (final String pa : attributeNames) {
 			final Knowledge knowledge = plugin.getObjectManager().getKnowledge(pa);
+			final Creed creed = plugin.getObjectManager().getCreed(pa);
+			final CrimsonClass crimsonClass = plugin.getObjectManager().getCrimsonClass(pa);
 
 			if (knowledge != null) if (!playerAttributes.contains(knowledge)) playerAttributes.add(knowledge);
+			if (creed != null) if (!playerAttributes.contains(creed)) playerAttributes.add(creed);
+			if (crimsonClass != null) if (!playerAttributes.contains(crimsonClass)) playerAttributes.add(crimsonClass);
 		}
 	}
 }
