@@ -1,7 +1,0 @@
-name: Mythria
-main: me.Jonathon594.Mythria.Mythria
-version: 0.9.0.0
-commands:
-  mythria:
-    description: Mythria Plugin Main Command.
-    aliases: m

@@ -11,7 +11,7 @@ public class ConfigManager {
 	public ConfigManager(final JavaPlugin plugin) {
 		knowledgeConfig = new ConfigAccessor(plugin, "knowledge.yml");
 		timeConfig = new ConfigAccessor(plugin, "time.yml");
-		classConfig = new ConfigAccessor(plugin, "classs.yml");
+		classConfig = new ConfigAccessor(plugin, "class.yml");
 		creedConfig = new ConfigAccessor(plugin, "creed.yml");
 
 		knowledgeConfig.saveDefaultConfig();

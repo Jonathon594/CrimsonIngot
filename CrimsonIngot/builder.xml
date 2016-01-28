@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!-- Configuration of the Ant build system to generate a Jar file -->
-<project name="Mythria" default="CreateJar">
+<project name="CrimsonIngot" default="CreateJar">
   <target name="CreateJar" description="Create Jar file">
-        <jar jarfile="C:\Users\jonat\OneDrive\Documents\SpigotTest\Plugins\Mythria.jar" basedir="./target/classes/" includes="**/*" />
+        <jar jarfile="C:\Users\jonat\OneDrive\Documents\SpigotTest\Plugins\CrimsonIngot.jar" basedir="./target/classes/" includes="**/*" />
   </target>
 </project>

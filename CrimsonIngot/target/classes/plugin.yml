@@ -1,7 +1,7 @@
-name: Mythria
-main: me.Jonathon594.Mythria.Mythria
+name: CrimsonIngot
+main: me.Jonathon594.CrimsonIngot.CrimsonIngot
 version: 0.9.0.0
 commands:
-  mythria:
-    description: Mythria Plugin Main Command.
-    aliases: m
+  crimson:
+    description: CrimsonIngot main command.
+    aliases: cm

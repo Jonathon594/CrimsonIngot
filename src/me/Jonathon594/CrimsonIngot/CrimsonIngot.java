@@ -82,7 +82,7 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 		// getCommand("skill").setExecutor(new SkillCommandExecutor(this));
 		// getCommand("profile").setExecutor(new ProfileCommandExecutor(this));
 		// getCommand("genetic").setExecutor(new GeneticCommandExecutor(this));
-		getCommand("mythria").setExecutor(new CrimsonIngotCommandExecutor(this));
+		getCommand("crimson").setExecutor(new CrimsonIngotCommandExecutor(this));
 	}
 
 	public void onReload() {
