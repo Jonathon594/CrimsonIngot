@@ -91,8 +91,7 @@ public class PlayerListener implements Listener {
 	public void onDisconnect(final PlayerQuitEvent event) {
 		final Player p = event.getPlayer();
 		final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
-		if(mp==null)
-			return;
+		if (mp == null) return;
 		mp.removeAllEffects();
 		mp.SaveData();
 	}

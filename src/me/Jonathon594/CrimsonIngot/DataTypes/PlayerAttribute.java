@@ -9,6 +9,9 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.nisovin.magicspells.MagicSpells;
+import com.nisovin.magicspells.Spell;
+
 import me.Jonathon594.CrimsonIngot.CrimsonIngot;
 import me.Jonathon594.CrimsonIngot.Managers.ConfigAccessor;
 
@@ -17,22 +20,24 @@ public class PlayerAttribute {
 	private final List<PotionEffect>	potionEffects			= new ArrayList<PotionEffect>();
 	private String						attributeDescription	= "";
 	private final List<String>			attributePermissions	= new ArrayList<String>();
-
 	private Material					menuIcon				= Material.AIR;
-
 	private int							menuX					= 0;
 	private int							menuY					= 0;
-
 	private boolean						hidden					= false;
-
 	private int							cost;
-
 	private String						requiredAttribute;
+	private final ArrayList<Spell>		attributeSpells			= new ArrayList<Spell>();
+
+	private int							attributeHealth;
 
 	private final ArrayList<SpellSet>	spellSets				= new ArrayList<SpellSet>();
 
 	public PlayerAttribute(final String n) {
 		name = n;
+	}
+
+	public int getAttributeHealth() {
+		return attributeHealth;
 	}
 
 	public int getCost() {
@@ -82,13 +87,21 @@ public class PlayerAttribute {
 	protected void loadData(final CrimsonIngot plugin, final String key, final ConfigAccessor config) {
 		attributeDescription = config.getConfig().getString(key + "." + name + ".Description");
 		cost = config.getConfig().getInt(key + "." + name + ".Cost");
+		attributeHealth = config.getConfig().getInt(key + "." + name + ".Health");
 
 		requiredAttribute = config.getConfig().getString(key + "." + name + ".Requires");
 
-		ConfigurationSection cs = config.getConfig().getConfigurationSection(key + "." + name + ".SpellSets");
+		final List<String> spellNames = config.getConfig().getStringList(key + "." + name + ".Spells");
+		for (final String s : spellNames) {
+			final Spell sp = MagicSpells.getSpellByInternalName(s);
+			if (sp == null) break;
+			attributeSpells.add(sp);
+		}
+
+		final ConfigurationSection cs = config.getConfig().getConfigurationSection(key + "." + name + ".SpellSets");
 		Set<String> spse = null;
 		if (cs != null) spse = cs.getKeys(false);
-		
+
 		if (spse != null) for (final String sskey : spse) {
 			final SpellSet ss = new SpellSet(sskey);
 			ss.loadData(key + "." + name + ".SpellSets", config, plugin);

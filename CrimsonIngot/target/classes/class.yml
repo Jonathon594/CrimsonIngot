@@ -1,5 +1,20 @@
 Classes:
+  King:
+    Description: Kings are the only Class that can Create and Disband Factions
+    Menu:
+      Icon: GOLD_HELMET
+      X: 1
+      Y: 2
+    Spells:
+    - summon
+    Permissions:
+    - factions.player
+    - mcmmo.ability.axes.*
   Mage:
+    Menu:
+      Icon: STICK
+      X: 2
+      Y: 2
     SpellSets:
       Netharna:
         Spells:

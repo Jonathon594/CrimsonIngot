@@ -32,8 +32,6 @@ public class CrimsonIngotConstants {
 	public static String		noClass			= "You have not chosen a class yet.";
 	public static String		noTrade			= "You have not chosen a trade yet.";
 	public static String		alreadyClass	= "You have already chosen your class, you cannot change it.";
-	public static String		alreadyRace		= "You have already chosen your race, you cannot change it.";
-	public static String		alreadyTrade	= "You have already chosen your trade, you cannot change it.";
 	public static String		console			= "I'm sorry but you are not a player.";
 	public static String		noLevels		= "You have not learned enough to attempt this yet.";
 	public static String		alreadyPerk		= "You have already learned this perk.";
@@ -47,4 +45,5 @@ public class CrimsonIngotConstants {
 	public static final String	messagePrefix	= mainColor + "[" + contColor + "Crimson" + mainColor + "] ";
 	public static final String	nameInUse		= "This full name has already been used, please try another.";
 	public static final String	soulReform		= "Your body has died. Your soul has reformed into a new one. You keep all your investments, but lose half your Mythicality";
+	public static final String alreadyCreed = "You have already chosen your Creed, you cannot change it.";
 }

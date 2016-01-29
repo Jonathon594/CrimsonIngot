@@ -1,7 +1,42 @@
 Classes:
+  King:
+    Description: Kings are the only Class that can Create and Disband Factions
+    Health: 40
+    Menu:
+      Icon: GOLD_HELMET
+      X: 1
+      Y: 2
+    Spells:
+    - summon
+    Permissions:
+    - factions.player
+    - mcmmo.ability.axes.*
   Mage:
+    Description: The Mages of Templehelm have refined the power of their deities into powerful tools of life and death.
+    Health: 45
+    Menu:
+      Icon: STICK
+      X: 2
+      Y: 2
     SpellSets:
+      Akwal:
+        Spells:
+        - Geyser
+        - Drown
+        - Osmosis
+        - Fissures
+        - Artesian
+        - Drain
+        - Downpour
+        Requires: Akwal
       Netharna:
         Spells:
-        - leap
+        - Firebolt
+        - Nether Rage
+        - Seeking Flame
+        - Fireball
+        - Rupture
+        - Flamewalk
+        - Darkfire
+        - Combust
         Requires: Netharna

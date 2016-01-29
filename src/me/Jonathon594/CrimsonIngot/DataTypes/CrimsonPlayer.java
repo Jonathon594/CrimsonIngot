@@ -14,8 +14,6 @@ import com.nisovin.magicspells.Spellbook;
 
 import me.Jonathon594.CrimsonIngot.CrimsonIngot;
 import me.Jonathon594.CrimsonIngot.Managers.ConfigAccessor;
-import ru.tehkode.permissions.PermissionUser;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class CrimsonPlayer {
 	private final CrimsonIngot			plugin;
@@ -36,25 +34,21 @@ public class CrimsonPlayer {
 	public void addAttribute(final PlayerAttribute p) {
 		if (!playerAttributes.contains(p)) playerAttributes.add(p);
 	}
-	
-	public void removeAttribute(final PlayerAttribute p) {
-		if (playerAttributes.contains(p)) playerAttributes.remove(p);
-	}
 
 	public void applyAllEffects() {
-		final PermissionUser pu = PermissionsEx.getUser(player);
 		for (final PotionEffect effect : player.getActivePotionEffects())
 			player.removePotionEffect(effect.getType());
 
-		final int health = 20;
+		int health = 20;
 
 		for (final PlayerAttribute pa : playerAttributes) {
+			health = Math.max(pa.getAttributeHealth(), health);
 			for (final PotionEffect pe : pa.getEffects()) {
 				player.removePotionEffect(pe.getType());
 				player.addPotionEffect(pe);
 			}
 			for (final String pm : pa.getPermissions())
-				pu.addPermission(pm);
+				CrimsonIngot.perms.playerAdd(null, player, pm);
 			for (final SpellSet ss : pa.getSpellSets())
 				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
 					for (final Spell sp : ss.getSpellList()) {
@@ -72,8 +66,26 @@ public class CrimsonPlayer {
 		return player;
 	}
 
+	public ArrayList<PlayerAttribute> getPlayerAttributes() {
+		return playerAttributes;
+	}
+
+	public List<CrimsonClass> getPlayerClasses() {
+		final ArrayList<CrimsonClass> crimsonClass = new ArrayList<CrimsonClass>();
+		for (final PlayerAttribute pa : playerAttributes)
+			if (pa instanceof CrimsonClass) crimsonClass.add((CrimsonClass) pa);
+		return crimsonClass;
+	}
+
 	public ConfigAccessor getPlayerConfig() {
 		return playerConfig;
+	}
+
+	public List<Creed> getPlayerCreeds() {
+		final ArrayList<Creed> creed = new ArrayList<Creed>();
+		for (final PlayerAttribute pa : playerAttributes)
+			if (pa instanceof Creed) creed.add((Creed) pa);
+		return creed;
 	}
 
 	public List<Knowledge> getPlayerKnowledge() {
@@ -82,23 +94,21 @@ public class CrimsonPlayer {
 			if (pa instanceof Knowledge) knowledge.add((Knowledge) pa);
 		return knowledge;
 	}
-	
-	public List<Creed> getPlayerCreeds() {
-		final ArrayList<Creed> creed = new ArrayList<Creed>();
-		for (final PlayerAttribute pa : playerAttributes)
-			if (pa instanceof Creed) creed.add((Creed) pa);
-		return creed;
-	}
-	
-	public List<CrimsonClass> getPlayerClasses() {
-		final ArrayList<CrimsonClass> crimsonClass = new ArrayList<CrimsonClass>();
-		for (final PlayerAttribute pa : playerAttributes)
-			if (pa instanceof CrimsonClass) crimsonClass.add((CrimsonClass) pa);
-		return crimsonClass;
-	}
 
 	public RoleplayProfile getProfile() {
 		return profile;
+	}
+
+	public boolean hasClass() {
+		for (final PlayerAttribute pa : playerAttributes)
+			if (pa instanceof CrimsonClass) return true;
+		return false;
+	}
+
+	public boolean hasCreed() {
+		for (final PlayerAttribute pa : playerAttributes)
+			if (pa instanceof Creed) return true;
+		return false;
 	}
 
 	public void LoadData() {
@@ -122,12 +132,11 @@ public class CrimsonPlayer {
 	}
 
 	public void removeAllEffects() {
-		final PermissionUser pu = PermissionsEx.getUser(player);
 		for (final PlayerAttribute pa : playerAttributes) {
 			for (final PotionEffect pe : pa.getEffects())
 				player.removePotionEffect(pe.getType());
 			for (final String pm : pa.getPermissions())
-				pu.removePermission(pm);
+				CrimsonIngot.perms.playerRemove(null, player, pm);
 			for (final SpellSet ss : pa.getSpellSets())
 				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
 					for (final Spell sp : ss.getSpellList()) {
@@ -136,6 +145,10 @@ public class CrimsonPlayer {
 					sb.save();
 				}
 		}
+	}
+
+	public void removeAttribute(final PlayerAttribute p) {
+		if (playerAttributes.contains(p)) playerAttributes.remove(p);
 	}
 
 	public void SaveData() {

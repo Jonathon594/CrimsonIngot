@@ -28,8 +28,10 @@ public class CrimsonIngotCommandExecutor implements CommandExecutor {
 
 		if (args.length > 0) {
 			if (args[0].equalsIgnoreCase("profile")) return ProfileCommand.perform(sender, cmd, label, args, plugin);
-			if (args[0].equalsIgnoreCase("knowledge")) return KnowledgeCommand.perform(sender, cmd, label, args, plugin);
-			if (args[0].equalsIgnoreCase("add")) return SetCommand.performAdd(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("knowledge"))
+				return KnowledgeCommand.perform(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("player")) return PlayerCommand.perform(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("choose")) return ChooseCommand.perform(sender, cmd, label, args, plugin);
 		}
 		return false;
 	}

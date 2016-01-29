@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.Jonathon594.CrimsonIngot.Commands.CrimsonIngotCommandExecutor;
@@ -14,10 +15,12 @@ import me.Jonathon594.CrimsonIngot.Managers.ConfigManager;
 import me.Jonathon594.CrimsonIngot.Managers.CrimsonPlayerManager;
 import me.Jonathon594.CrimsonIngot.Managers.ObjectManager;
 import me.Jonathon594.CrimsonIngot.Managers.TimeManager;
+import net.milkbowl.vault.permission.Permission;
 
 public class CrimsonIngot extends JavaPlugin implements Listener {
 
-	private final Logger			log	= Logger.getLogger("Minecraft");
+	public static Permission		perms	= null;
+	private final Logger			log		= Logger.getLogger("Minecraft");
 	private CrimsonPlayerManager	crimsonPlayerManager;
 	private ConfigManager			configManager;
 	private TimeManager				timeManager;
@@ -72,6 +75,7 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 
 		saveDefaultConfig();
 		reloadConfig();
+		setupPermissions();
 
 		Initialize();
 
@@ -88,5 +92,12 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 	public void onReload() {
 		onDisable();
 		onEnable();
+	}
+
+	private boolean setupPermissions() {
+		final RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager()
+				.getRegistration(Permission.class);
+		perms = rsp.getProvider();
+		return perms != null;
 	}
 }

@@ -28,6 +28,12 @@ public class ObjectManager {
 		return null;
 	}
 
+	public Creed getCreed(final String name) {
+		for (final Creed tp : crimsonCreeds)
+			if (tp.getName().equalsIgnoreCase(name)) return tp;
+		return null;
+	}
+
 	public ArrayList<PlayerAttribute> getCrimsonAttributes() {
 		final ArrayList<PlayerAttribute> attributes = new ArrayList<PlayerAttribute>();
 		attributes.addAll(crimsonKnowledge);
@@ -38,6 +44,12 @@ public class ObjectManager {
 
 	public ArrayList<Material> getCrimsonBreakableKnowledgeMaterials() {
 		return crimsonBreakableKnowledgeMaterials;
+	}
+
+	public CrimsonClass getCrimsonClass(final String name) {
+		for (final CrimsonClass tp : crimsonClasses)
+			if (tp.getName().equalsIgnoreCase(name)) return tp;
+		return null;
 	}
 
 	public ArrayList<CrimsonClass> getCrimsonClasses() {
@@ -62,18 +74,6 @@ public class ObjectManager {
 
 	public Knowledge getKnowledge(final String name) {
 		for (final Knowledge tp : crimsonKnowledge)
-			if (tp.getName().equalsIgnoreCase(name)) return tp;
-		return null;
-	}
-	
-	public Creed getCreed(final String name) {
-		for (final Creed tp : crimsonCreeds)
-			if (tp.getName().equalsIgnoreCase(name)) return tp;
-		return null;
-	}
-	
-	public CrimsonClass getCrimsonClass(final String name) {
-		for (final CrimsonClass tp : crimsonClasses)
 			if (tp.getName().equalsIgnoreCase(name)) return tp;
 		return null;
 	}
