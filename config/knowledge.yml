@@ -292,8 +292,8 @@ Knowledge:
     Cost: 1000
     Menu:
       Icon: DIODE
-      X: 3
-      Y: 7
+      X: 4
+      Y: 1
     Placeable:
     - ACTIVATOR_RAIL
     - DETECTOR_RAIL
@@ -320,12 +320,12 @@ Knowledge:
     - RAILS
     Description: This looks really complicated.
     Requires: Forging
-  ## Farming X = 4
+  ## Farming X = 5
   Yardwork:
     Cost: 50
     Menu:
       Icon: HAY_BLOCK
-      X: 4
+      X: 5
       Y: 1
     Craftable:
     - HAY_BLOCK
@@ -338,7 +338,7 @@ Knowledge:
     Cost: 250
     Menu:
       Icon: LEATHER
-      X: 4
+      X: 5
       Y: 3
     Craftable:
     - LEATHER_BOOTS
@@ -346,12 +346,12 @@ Knowledge:
     - LEATHER_HELMET
     - LEATHER_LEGGINGS
     Description: Animal hides are useful now.
-  ## Arcanery X = 5
+  ## Arcanery X = 6
   Alchemy:
     Cost: 500
     Menu:
       Icon: BREWING_STAND_ITEM
-      X: 5
+      X: 6
       Y: 1
     Craftable:
     - BLAZE_POWDER
@@ -363,7 +363,7 @@ Knowledge:
     Cost: 1000
     Menu:
       Icon: EXP_BOTTLE
-      X: 5
+      X: 6
       Y: 2
     Craftable:
     - BEACON
@@ -379,7 +379,7 @@ Knowledge:
     Cost: 2000
     Menu:
       Icon: ENCHANTMENT_TABLE
-      X: 5
+      X: 6
       Y: 3
     Description: The myterious ability of Enchanting.
     Craftable:

@@ -87,10 +87,12 @@ public class ChooseCommand {
 		for (int i = 0; i < getAttributes(plugin).size(); i++) {
 			final PlayerAttribute tp = getAttributes(plugin).get(i);
 
-			ChatColor itemColor = ChatColor.BLUE;
-			if (mp.getPlayerKnowledge().contains(tp)) itemColor = ChatColor.GREEN;
-			else
+			ChatColor itemColor = ChatColor.WHITE;
+			if (mp.getPlayerAttributes().contains(tp)) itemColor = ChatColor.GREEN;
+			else if (tp instanceof CrimsonClass && mp.hasClass() || tp instanceof Creed && mp.hasCreed())
 				itemColor = ChatColor.RED;
+			else
+				itemColor = ChatColor.BLUE;
 
 			final ItemStack menuIcon = new ItemStack(tp.getMenuIcon());
 

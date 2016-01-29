@@ -30,7 +30,7 @@ public class SpellSet {
 	public void loadData(final String key, final ConfigAccessor ca, final CrimsonIngot plugin) {
 		final List<String> spellNames = ca.getConfig().getStringList(key + "." + name + ".Spells");
 		for (final String s : spellNames) {
-			final Spell sp = MagicSpells.getSpellByInternalName(s);
+			final Spell sp = MagicSpells.getSpellByInGameName(s);
 			if (sp == null) break;
 			spellList.add(sp);
 		}

@@ -93,7 +93,7 @@ public class PlayerAttribute {
 
 		final List<String> spellNames = config.getConfig().getStringList(key + "." + name + ".Spells");
 		for (final String s : spellNames) {
-			final Spell sp = MagicSpells.getSpellByInternalName(s);
+			final Spell sp = MagicSpells.getSpellByInGameName(s);
 			if (sp == null) break;
 			attributeSpells.add(sp);
 		}

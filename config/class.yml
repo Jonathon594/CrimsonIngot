@@ -1,6 +1,6 @@
 Classes:
   King:
-    Description: Kings are the only Class that can Create and Disband Factions
+    Description: Kings are the only Class that can Create and Disband Factions.
     Health: 40
     Menu:
       Icon: GOLD_HELMET
@@ -11,6 +11,36 @@ Classes:
     Permissions:
     - factions.player
     - mcmmo.ability.axes.*
+  Oracle:
+    Description: Oracles are the Healers and Clairvoyants. They are in communication with the Deities.
+    Health: 40
+    Menu:
+      Icon: GLASS
+      X: 2
+      Y: 2
+    Spells:
+    - Telekinesis
+    - Heal
+    - Prayer
+    - Disarm
+    - Invulnerability
+    - Reflect
+    - Rejuvenate
+    - Peacemonger
+  Paladin:
+    Description: The Paladins of Templehelm are warriors who specialize in Swords. They differ from the warrior classes in their additional divine powers.
+    Health: 65
+    Menu:
+      Icon: IRON_SWORD
+      X: 3
+      Y: 2
+    Spells:
+    - Convalescence
+    - Cleanse
+    - Restore
+    - Mend
+    - Radiance
+    - Sacred Shield
   Mage:
     Description: The Mages of Templehelm have refined the power of their deities into powerful tools of life and death.
     Health: 45
@@ -29,6 +59,28 @@ Classes:
         - Drain
         - Downpour
         Requires: Akwal
+      Cavilon:
+        Spells:
+        - Phase
+        - Confusion
+        - Cave Spit
+        - Biolith
+        - Cave Minion
+        - Spider Web
+        - Stone Vision
+        - Corrode 
+        Requires: Cavilon
+      Deserma:
+        Spells:
+        - Haze
+        - Sun Walk
+        - Heatstroke
+        - Dune
+        - Sand Tomb
+        - Dessicate
+        - Sand Storm
+        - Sandblast
+        Requires: Deserma
       Netharna:
         Spells:
         - Firebolt
@@ -40,3 +92,37 @@ Classes:
         - Darkfire
         - Combust
         Requires: Netharna
+      Wildaven:
+        Spells:
+        - Blink
+        - Leaf Tomb
+        - Stake
+        - Log Tomb
+        - Log Wall
+        - Fertilise
+        - Wood Wisp
+        - Food 
+        Requires: Wildaven
+      Wintival:
+        Spells:
+        - Frost Walk
+        - Ice Tomb
+        - Ice Wall
+        - Snow Shield
+        - Ice Spike
+        - Undead
+        - Freeze
+        - Night Helper
+        - Blizzard 
+        Requires: Wintival
+      Zelphair:
+        Spells:
+        - Grounded
+        - Wingblast
+        - Zephyr
+        - Gust
+        - Cloud Tomb
+        - Switch
+        - Tempest
+        - Updraft
+      

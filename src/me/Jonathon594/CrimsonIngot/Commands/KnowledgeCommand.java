@@ -58,14 +58,14 @@ public class KnowledgeCommand {
 			perkNames.add(perk.getName());
 
 		if (tp.getRequiredAttribute() != null && !perkNames.contains(tp.getRequiredAttribute())) {
-			player.sendMessage(mc + CrimsonIngotConstants.noReqPerk);
+			player.sendMessage(mc + CrimsonIngotConstants.noReqKnowledge);
 			return;
 		}
 
 		final int cost = tp.getCost();
 
 		if (mp.getPlayer().getLevel() < cost) {
-			player.sendMessage(mc + CrimsonIngotConstants.noMythicality);
+			player.sendMessage(mc + CrimsonIngotConstants.noLevels);
 			return;
 		}
 

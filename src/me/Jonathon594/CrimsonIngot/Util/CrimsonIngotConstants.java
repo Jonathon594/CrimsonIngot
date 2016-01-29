@@ -4,21 +4,8 @@ import org.bukkit.ChatColor;
 
 public class CrimsonIngotConstants {
 	public static final String	cantEnchant		= "You have no idea what you are doing.";
-	public static final String	noReqPerk		= "You do not know the required perk to learn this perk.";
 	public static final String	alreadyProfile	= "You have alreay made your profile, you cannot change it!";
-	public static final String	alreadyElement	= "You have already chosen your element, you cannot change it.";
-	public static final int		baseElementCost	= 75;
-	public static final String	noElement		= "You have not chosen an element yet.";
-	public static final String	noReqSpell		= "You do not know the required spell to learn this spell.";
-	public static final String	alreadySpell	= "You have already learned this spell.";
-	public static final String	noSpell			= "That is not a valid spell.";
 	public static final String	cantPlace		= "You don't know how to place that.";
-	public static final String	noReqSkill		= "You do not know the required skill to learn this.";
-	public static final String	alreadySkill	= "You have already learned this skill.";
-	public static final String	alreadyGenetic	= "You have already obtatined this genetic ability.";
-	public static final String	primaryGenetic	= "You can only have one Primary Genetic.";
-	public static final String	noReqGenetic	= "You are not ready to evolve to this level.";
-	public static final String	noMythicality	= "You do not have enough Mythicality to unlock this.";
 	public static String[]		Expression		= { "curses", "wants to smite", "hates", "doesn't like",
 			"isn't too fond of", "is neutral to", "likes", "cares about", "protects", "loves", "blesses" };
 
@@ -45,5 +32,6 @@ public class CrimsonIngotConstants {
 	public static final String	messagePrefix	= mainColor + "[" + contColor + "Crimson" + mainColor + "] ";
 	public static final String	nameInUse		= "This full name has already been used, please try another.";
 	public static final String	soulReform		= "Your body has died. Your soul has reformed into a new one. You keep all your investments, but lose half your Mythicality";
-	public static final String alreadyCreed = "You have already chosen your Creed, you cannot change it.";
+	public static final String	alreadyCreed	= "You have already chosen your Creed, you cannot change it.";
+	public static final String	noReqKnowledge	= "You do not know the required Knowledge to learn this Knowledge";
 }
