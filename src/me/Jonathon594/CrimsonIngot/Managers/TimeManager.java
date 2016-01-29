@@ -11,14 +11,11 @@ import me.Jonathon594.CrimsonIngot.DataTypes.Month;
 public class TimeManager {
 	public List<String>				DayNames	= new ArrayList<String>();
 	public List<Month>				Months		= new ArrayList<Month>();
-
 	public CrimsonIngot				main;
-
 	private final Date				currentDate;
-
 	private final ConfigAccessor	timeConfig;
-
 	private int						daysPerYear	= 0;
+	private List<String>			yearNames	= new ArrayList<String>();
 
 	public TimeManager(final CrimsonIngot plugin, final ConfigAccessor timeConfig) {
 		main = plugin;
@@ -42,8 +39,13 @@ public class TimeManager {
 		return Months;
 	}
 
+	public List<String> getYearNames() {
+		return yearNames;
+	}
+
 	public void LoadData() {
 		DayNames = timeConfig.getConfig().getStringList("DayNames");
+		yearNames = timeConfig.getConfig().getStringList("YearNames");
 
 		final Set<String> mks = timeConfig.getConfig().getConfigurationSection("Months").getKeys(false);
 		for (final String k : mks) {

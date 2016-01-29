@@ -15,6 +15,7 @@ import me.Jonathon594.CrimsonIngot.DataTypes.CrimsonPlayer;
 import me.Jonathon594.CrimsonIngot.DataTypes.IconMenu;
 import me.Jonathon594.CrimsonIngot.DataTypes.PlayerAttribute;
 import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotConstants;
+import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotUtil;
 
 public class ChooseCommand {
 
@@ -97,7 +98,8 @@ public class ChooseCommand {
 			final ItemStack menuIcon = new ItemStack(tp.getMenuIcon());
 
 			final ArrayList<String> lore = new ArrayList<String>();
-			lore.add(mc + tp.getDescription());
+			for (final String s : CrimsonIngotUtil.wordWrap(tp.getDescription()))
+				lore.add(mc + s);
 
 			final int position = (tp.getMenuY() - 1) * 9 + tp.getMenuX() - 1;
 

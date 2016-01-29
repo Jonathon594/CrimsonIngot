@@ -7,7 +7,7 @@ import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotConstants;
 import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotUtil;
 
 public class Date {
-	private static ChatColor	mc	= CrimsonIngotConstants.mainColor;
+	// private static ChatColor mc = CrimsonIngotConstants.mainColor;
 	private static ChatColor	cc	= CrimsonIngotConstants.contColor;
 	private int					MGD	= 1;
 	private final TimeManager	timeManager;
@@ -17,16 +17,14 @@ public class Date {
 	}
 
 	public String GetDateString() {
-		final int Year = getYear();
-		String yearString;
-		if (Year >= 0) yearString = Year + " C.E";
-		else
-			yearString = Math.abs(Year) + "B.C.E";
+		final int year = getYear();
+		final String yearMonthString = getYearMonthString();
 		final int month = getMonth();
-		final String monthName = timeManager.getMonths().get(month).getName();
 		final int monthDay = getDayInMonth();
 		final String dayName = getDayName();
-		return cc + dayName + mc + ", " + cc + monthDay + mc + "-" + cc + monthName + mc + "-" + cc + yearString;
+		final String mdString = CrimsonIngotUtil.makeNumberString(Integer.toString(getNThWeekDayInMonth()));
+		return cc + mdString + " " + dayName + " of the " + yearMonthString + " (" + monthDay + "-" + (month + 1) + "-"
+				+ year + ")";
 	}
 
 	public int getDayInMonth() {
@@ -59,12 +57,43 @@ public class Date {
 		return monthIndex;
 	}
 
+	public int getNThWeekDayInMonth() {
+		final int dim = getDayInMonth();
+		final int r = Math.floorDiv(dim, timeManager.getDayNames().size()) + 1;
+
+		return r;
+	}
+
 	public int getYear() {
 		return Math.floorDiv(MGD, timeManager.getDaysPerYear());
 	}
 
 	private int getYearDay() {
 		return CrimsonIngotUtil.WrapInt(MGD, 1, timeManager.getDaysPerYear());
+	}
+
+	public String getYearMonthString() {
+		final int year = Math.abs(getYear());
+		final String yearText = Integer.toString(year);
+		final char[] chars = yearText.toCharArray();
+		final int ones = Integer.parseInt(Character.toString(chars[chars.length - 1]));
+		int tens = 0;
+		int r = 0;
+		if (year > 9) tens = Integer.parseInt(Character.toString(chars[chars.length - 2]));
+		if (year > 99) r = Integer.parseInt(yearText.substring(0, yearText.length() - 2));
+		final String onesText = getYearName(ones);
+		final String tensText = getYearName(tens);
+		final String rText = CrimsonIngotUtil.makeNumberString(Integer.toString(r + 1));
+		String negString = "";
+		if (getYear() < 0) negString = "B.S.D";
+		final String monthName = timeManager.getMonths().get(getMonth()).getName();
+		return rText + " " + monthName + " " + tensText + "-" + onesText + negString;
+	}
+
+	private String getYearName(final int index) {
+		// index = CrimsonIngotUtil.WrapInt(index, 1,
+		// timeManager.getYearNames().size());
+		return timeManager.getYearNames().get(index);
 	}
 
 	public void IncDay() {

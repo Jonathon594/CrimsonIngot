@@ -14,6 +14,8 @@ import com.nisovin.magicspells.Spellbook;
 
 import me.Jonathon594.CrimsonIngot.CrimsonIngot;
 import me.Jonathon594.CrimsonIngot.Managers.ConfigAccessor;
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class CrimsonPlayer {
 	private final CrimsonIngot			plugin;
@@ -36,6 +38,8 @@ public class CrimsonPlayer {
 	}
 
 	public void applyAllEffects() {
+		final PermissionUser pu = PermissionsEx.getUser(player);
+
 		for (final PotionEffect effect : player.getActivePotionEffects())
 			player.removePotionEffect(effect.getType());
 
@@ -48,7 +52,8 @@ public class CrimsonPlayer {
 				player.addPotionEffect(pe);
 			}
 			for (final String pm : pa.getPermissions())
-				CrimsonIngot.perms.playerAdd(null, player, pm);
+				pu.addPermission(pm);
+			pu.save();
 			for (final SpellSet ss : pa.getSpellSets())
 				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
 					for (final Spell sp : ss.getSpellList()) {
@@ -132,11 +137,10 @@ public class CrimsonPlayer {
 	}
 
 	public void removeAllEffects() {
+		final PermissionUser pu = PermissionsEx.getUser(player);
 		for (final PlayerAttribute pa : playerAttributes) {
 			for (final PotionEffect pe : pa.getEffects())
 				player.removePotionEffect(pe.getType());
-			for (final String pm : pa.getPermissions())
-				CrimsonIngot.perms.playerRemove(null, player, pm);
 			for (final SpellSet ss : pa.getSpellSets())
 				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
 					for (final Spell sp : ss.getSpellList()) {
@@ -145,6 +149,12 @@ public class CrimsonPlayer {
 					sb.save();
 				}
 		}
+
+		for (final PlayerAttribute pa : plugin.getObjectManager().getCrimsonAttributes())
+			for (final String perm : pa.getPermissions()) {
+				pu.removePermission(perm);
+				pu.save();
+			}
 	}
 
 	public void removeAttribute(final PlayerAttribute p) {

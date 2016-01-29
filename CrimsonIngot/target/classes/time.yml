@@ -1,35 +1,46 @@
 DayNames:
-- Mayark
-- Tosalias
-- Judios
-- Amara
-- Kaias
-- Oast
-- Ras
+- Planu
+- Akwal
+- Cavilon
+- Wintival
+- Netharna
+- Wildaven
+- Deserma
+YearNames:
+- Sheep
+- Spider
+- Wolf
+- Dragon
+- Bat
+- Slime
+- Cow
+- Pig
+- Ocelot
+- Chicken 
 Months:
-  Aeon:
+  Coal:
     Days: 31
-  Asana:
-    Days: 30
-  Eliana:
+  Diamond:
     Days: 28
-  Selina:
+  Grass:
     Days: 31
-  Amelia:
+  Gold:
     Days: 30
-  Kasai:
-    Days: 30
-  Melinias:
+  Iron:
     Days: 31
-  Lilasia:
+  Lapis:
     Days: 30
-  Akari:
+  Redstone:
     Days: 31
-  Naisa:
+  Stone:
+    Days: 31
+  Flint:
     Days: 30
-  Umaria:
+  Dirt:
     Days: 31
-  Felixia:
+  Clay:
+    Days: 30
+  Emerald:
     Days: 31
 Current:
   Date: 1

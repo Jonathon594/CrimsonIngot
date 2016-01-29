@@ -1,7 +1,7 @@
 Knowledge:
   ## Wood X = 1
   Forestry:
-    Cost: 50
+    Cost: 5
     Menu:
       Icon: WOOD
       X: 1
@@ -10,7 +10,7 @@ Knowledge:
     - WOOD
     Description: The art of turning a forest into usable wood.
   Fletching:
-    Cost: 200
+    Cost: 20
     Menu:
       Icon: ARROW
       X: 1
@@ -21,7 +21,7 @@ Knowledge:
     Description: Maybe now I'll be able to catch supper.
     Requires: Forestry
   Carpentry:
-    Cost: 200
+    Cost: 20
     Menu:
       Icon: BIRCH_WOOD_STAIRS
       X: 1
@@ -35,7 +35,7 @@ Knowledge:
     Description: Buildin' stuff.
     Requires: Forestry
   Craftsmanship:
-    Cost: 500
+    Cost: 50
     Menu:
       Icon: LADDER
       X: 1
@@ -52,7 +52,7 @@ Knowledge:
     Description: Somebody has to make all the little things in life.
     Requires: Carpentry
   Furniture:
-    Cost: 750
+    Cost: 75
     Menu:
       Icon: BED
       X: 1
@@ -83,7 +83,7 @@ Knowledge:
     Requires: Craftsmanship
   ## Mining X = 2
   Masonry:
-    Cost: 100
+    Cost: 10
     Menu:
       Icon: SMOOTH_BRICK
       X: 2
@@ -108,7 +108,7 @@ Knowledge:
     - NETHER_FENCE
     Description: Brick making at its finest.
   Pottery:
-    Cost: 100
+    Cost: 10
     Menu:
       Icon: CLAY_BRICK
       X: 2
@@ -120,7 +120,7 @@ Knowledge:
     - STAINED_CLAY
     Description: What?
   IronMiner:
-    Cost: 250
+    Cost: 25
     Menu:
       Icon: IRON_ORE
       X: 2
@@ -129,7 +129,7 @@ Knowledge:
     - IRON_ORE
     Description: Iron sharpens iron.
   GoldMiner:
-    Cost: 500
+    Cost: 50
     Menu:
       Icon: GOLD_ORE
       X: 2
@@ -139,7 +139,7 @@ Knowledge:
     Description: GOLD!
     Requires: IronMiner
   RedstoneMiner:
-    Cost: 750
+    Cost: 75
     Menu:
       Icon: REDSTONE_ORE
       X: 2
@@ -150,7 +150,7 @@ Knowledge:
     Description: What am I supposed to use this for?
     Requires: IronMiner
   DiamondMiner:
-    Cost: 1000
+    Cost: 100
     Menu:
       Icon: DIAMOND_ORE
       X: 2
@@ -161,7 +161,7 @@ Knowledge:
     Requires: GoldMiner
   ## Smithing X = 3
   Forging:
-    Cost: 500
+    Cost: 50
     Menu:
       Icon: ANVIL
       X: 3
@@ -189,7 +189,7 @@ Knowledge:
     - DIAMOND_BLOCK
     Description: I hope I don't burn myself.
   Glasswork:
-    Cost: 750
+    Cost: 75
     Menu:
       Icon: GLASS_BOTTLE
       X: 3
@@ -201,7 +201,7 @@ Knowledge:
     Description: I wonder what I can make with this stuff.
     Requires: Forging
   Armorsmith:
-    Cost: 750
+    Cost: 75
     Menu:
       Icon: IRON_CHESTPLATE
       X: 3
@@ -222,7 +222,7 @@ Knowledge:
     Description: Remember to wear protection.
     Requires: Forging
   Diamondsmith:
-    Cost: 1500
+    Cost: 150
     Menu:
       Icon: DIAMOND_CHESTPLATE
       X: 3
@@ -243,7 +243,7 @@ Knowledge:
     Description: Shiny!
     Requires: Forging
   Pyrotechnic:
-    Cost: 1500
+    Cost: 150
     Menu:
       Icon: TNT
       X: 3
@@ -257,7 +257,7 @@ Knowledge:
     Placeable:
     - TNT
   Designing:
-    Cost: 1000
+    Cost: 100
     Menu:
       Icon: DIODE
       X: 3
@@ -289,7 +289,7 @@ Knowledge:
     Description: This looks really complicated.
     Requires: Forging
   Engineering:
-    Cost: 1000
+    Cost: 100
     Menu:
       Icon: DIODE
       X: 4
@@ -322,7 +322,7 @@ Knowledge:
     Requires: Forging
   ## Farming X = 5
   Yardwork:
-    Cost: 50
+    Cost: 5
     Menu:
       Icon: HAY_BLOCK
       X: 5
@@ -335,11 +335,11 @@ Knowledge:
     - HAY_BLOCK
     Description: Finally something to do with all that wheat.
   Taning:
-    Cost: 250
+    Cost: 25
     Menu:
       Icon: LEATHER
       X: 5
-      Y: 3
+      Y: 2
     Craftable:
     - LEATHER_BOOTS
     - LEATHER_CHESTPLATE
@@ -348,7 +348,7 @@ Knowledge:
     Description: Animal hides are useful now.
   ## Arcanery X = 6
   Alchemy:
-    Cost: 500
+    Cost: 50
     Menu:
       Icon: BREWING_STAND_ITEM
       X: 6
@@ -360,7 +360,7 @@ Knowledge:
     Placeable:
     - BREWING_STAND
   Arcanery:
-    Cost: 1000
+    Cost: 100
     Menu:
       Icon: EXP_BOTTLE
       X: 6
@@ -376,7 +376,7 @@ Knowledge:
     - SPECKLED_MELON
     Description: Construction with magical artifacts.
   Enchanting:
-    Cost: 2000
+    Cost: 200
     Menu:
       Icon: ENCHANTMENT_TABLE
       X: 6

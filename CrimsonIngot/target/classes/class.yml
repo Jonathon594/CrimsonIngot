@@ -10,7 +10,27 @@ Classes:
     - summon
     Permissions:
     - factions.player
-    - mcmmo.ability.axes.*
+    - equipcontrol.weapon.WOOD_SWORD
+    - equipcontrol.weapon.STONE_SWORD
+    - equipcontrol.weapon.IRON_SWORD
+    - equipcontrol.weapon.GOLD_SWORD
+    - equipcontrol.weapon.WOOD_SWORD
+    - equipcontrol.weapon.STONE_SWORD
+    - equipcontrol.weapon.IRON_SWORD
+    - equipcontrol.weapon.GOLD_SWORD
+    - equipcontrol.weapon.DIAMOND_SWORD
+    - equipcontrol.armor.LEATHER_HELMET
+    - equipcontrol.armor.LEATHER_CHESTPLATE
+    - equipcontrol.armor.LEATHER_LEGGINGS
+    - equipcontrol.armor.LEATHER_BOOTS
+    - equipcontrol.armor.CHAINMAIL_HELMET
+    - equipcontrol.armor.CHAINMAIL_CHESTPLATE
+    - equipcontrol.armor.CHAINMAIL_LEGGINGS
+    - equipcontrol.armor.CHAINMAIL_BOOTS
+    - equipcontrol.armor.GOLD_HELMET
+    - equipcontrol.armor.GOLD_CHESTPLATE
+    - equipcontrol.armor.GOLD_LEGGINGS
+    - equipcontrol.armor.GOLD_BOOTS
   Oracle:
     Description: Oracles are the Healers and Clairvoyants. They are in communication with the Deities.
     Health: 40
@@ -27,6 +47,14 @@ Classes:
     - Reflect
     - Rejuvenate
     - Peacemonger
+    Permissions:
+    - equipcontrol.weapon.WOOD_SWORD
+    - equipcontrol.weapon.STONE_SWORD
+    - equipcontrol.weapon.IRON_SWORD
+    - equipcontrol.armor.LEATHER_HELMET
+    - equipcontrol.armor.LEATHER_CHESTPLATE
+    - equipcontrol.armor.LEATHER_LEGGINGS
+    - equipcontrol.armor.LEATHER_BOOTS
   Paladin:
     Description: The Paladins of Templehelm are warriors who specialize in Swords. They differ from the warrior classes in their additional divine powers.
     Health: 65
@@ -41,6 +69,53 @@ Classes:
     - Mend
     - Radiance
     - Sacred Shield
+    Permissions:
+    - equipcontrol.weapon.WOOD_SWORD
+    - equipcontrol.weapon.STONE_SWORD
+    - equipcontrol.weapon.IRON_SWORD
+    - equipcontrol.weapon.DIAMOND_SWORD
+    - equipcontrol.armor.LEATHER_HELMET
+    - equipcontrol.armor.LEATHER_CHESTPLATE
+    - equipcontrol.armor.LEATHER_LEGGINGS
+    - equipcontrol.armor.LEATHER_BOOTS
+    - equipcontrol.armor.CHAINMAIL_HELMET
+    - equipcontrol.armor.CHAINMAIL_CHESTPLATE
+    - equipcontrol.armor.CHAINMAIL_LEGGINGS
+    - equipcontrol.armor.CHAINMAIL_BOOTS
+  Warrior:
+    Description: Warriors are the brute-force fighters of the Land - They are experts in armed and unarmed combat and can continually train themselves to be even more effective at this art.
+    Health: 70
+    Menu:
+      Icon: DIAMOND_SWORD
+      X: 4
+      Y: 2
+    Spells:
+    - Taunt
+    - Rage
+    Permissions:
+    - equipcontrol.weapon.WOOD_SWORD
+    - equipcontrol.weapon.STONE_SWORD
+    - equipcontrol.weapon.IRON_SWORD
+    - equipcontrol.weapon.DIAMOND_SWORD
+    - equipcontrol.armor.LEATHER_HELMET
+    - equipcontrol.armor.LEATHER_CHESTPLATE
+    - equipcontrol.armor.LEATHER_LEGGINGS
+    - equipcontrol.armor.LEATHER_BOOTS
+    - equipcontrol.armor.CHAINMAIL_HELMET
+    - equipcontrol.armor.CHAINMAIL_CHESTPLATE
+    - equipcontrol.armor.CHAINMAIL_LEGGINGS
+    - equipcontrol.armor.CHAINMAIL_BOOTS
+    - equipcontrol.armor.IRON_HELMET
+    - equipcontrol.armor.IRON_CHESTPLATE
+    - equipcontrol.armor.IRON_LEGGINGS
+    - equipcontrol.armor.IRON_BOOTS
+    - equipcontrol.armor.DIAMOND_HELMET
+    - equipcontrol.armor.DIAMOND_CHESTPLATE
+    - equipcontrol.armor.DIAMOND_LEGGINGS
+    - equipcontrol.armor.DIAMOND_BOOTS
+    - mcmmo.ability.swords.*
+    - mcmmo.ability.axes.*
+    - mcmmo.ability.unarmed.*
   Mage:
     Description: The Mages of Templehelm have refined the power of their deities into powerful tools of life and death.
     Health: 45
@@ -48,6 +123,18 @@ Classes:
       Icon: STICK
       X: 2
       Y: 2
+    Permissions:
+    - equipcontrol.weapon.WOOD_SWORD
+    - equipcontrol.weapon.STONE_SWORD
+    - equipcontrol.weapon.IRON_SWORD
+    - equipcontrol.armor.LEATHER_HELMET
+    - equipcontrol.armor.LEATHER_CHESTPLATE
+    - equipcontrol.armor.LEATHER_LEGGINGS
+    - equipcontrol.armor.LEATHER_BOOTS
+    - equipcontrol.armor.CHAINMAIL_HELMET
+    - equipcontrol.armor.CHAINMAIL_CHESTPLATE
+    - equipcontrol.armor.CHAINMAIL_LEGGINGS
+    - equipcontrol.armor.CHAINMAIL_BOOTS
     SpellSets:
       Akwal:
         Spells:

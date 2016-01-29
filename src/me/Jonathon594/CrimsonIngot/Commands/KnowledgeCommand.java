@@ -15,6 +15,7 @@ import me.Jonathon594.CrimsonIngot.DataTypes.CrimsonPlayer;
 import me.Jonathon594.CrimsonIngot.DataTypes.IconMenu;
 import me.Jonathon594.CrimsonIngot.DataTypes.Knowledge;
 import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotConstants;
+import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotUtil;
 
 public class KnowledgeCommand {
 
@@ -69,6 +70,7 @@ public class KnowledgeCommand {
 			return;
 		}
 
+		player.setLevel(player.getLevel() - cost);
 		mp.addAttribute(tp);
 		mp.applyAllEffects();
 		player.sendMessage(mc + "You have learned a new Knowledge! (" + cc + tp.getName() + mc + ")");
@@ -104,8 +106,9 @@ public class KnowledgeCommand {
 			if (tp.getRequiredAttribute() != null) requiredPerk = tp.getRequiredAttribute();
 
 			final ArrayList<String> lore = new ArrayList<String>();
-			lore.add(mc + tp.getDescription());
-			lore.add(mc + "Cost: " + cc + tp.getCost());
+			for (final String s : CrimsonIngotUtil.wordWrap(tp.getDescription()))
+				lore.add(mc + s);
+			lore.add(mc + "Cost: " + cc + tp.getCost() + " Levels");
 			lore.add(mc + "Requires: " + cc + requiredPerk);
 			if (tp.getCraftable().size() > 0) {
 				lore.add(mc + "Craftable: ");
@@ -127,5 +130,7 @@ public class KnowledgeCommand {
 
 			perkIconMenu.setOption(position, menuIcon, itemColor + tp.getName(), lore);
 		}
+
+		perkIconMenu.open(player);
 	}
 }
