@@ -1,6 +1,6 @@
 name: CrimsonIngot
 main: me.Jonathon594.CrimsonIngot.CrimsonIngot
-version: 0.9.5.0
+version: 0.9.5.1
 depend: [MagicSpells]
 commands:
   crimson:

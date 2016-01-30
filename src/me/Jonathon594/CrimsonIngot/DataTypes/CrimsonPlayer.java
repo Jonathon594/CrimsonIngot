@@ -34,7 +34,17 @@ public class CrimsonPlayer {
 	}
 
 	public void addAttribute(final PlayerAttribute p) {
-		if (!playerAttributes.contains(p)) playerAttributes.add(p);
+		if (!playerAttributes.contains(p)) {
+			if(p.getOverwitenAttributes()!=null){
+				for(String s : p.getOverwitenAttributes()){
+					PlayerAttribute opa = plugin.getObjectManager().getAttribute(s);
+					if(playerAttributes.contains(opa)){
+						playerAttributes.remove(opa);
+					}
+				}
+			}
+			playerAttributes.add(p);
+		}
 	}
 
 	public void applyAllEffects() {

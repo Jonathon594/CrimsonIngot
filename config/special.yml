@@ -1,0 +1,22 @@
+Specials:
+  ManaBooster:
+    Hidden: true
+    Mana: 350
+  ChoiceSpell:
+    Spells:
+    - Leap
+    Overwrites:
+    - ChoiceSpell2
+    - ChoiceSpell3
+  ChoiceSpell2:
+    Spells:
+    - Combust
+    Overwrites:
+    - ChoiceSpell
+    - ChoiceSpell3
+  ChoiceSpell3:
+    Spells:
+    - Firenova
+    Overwrites:
+    - ChoiceSpell
+    - ChoiceSpell2

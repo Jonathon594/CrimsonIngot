@@ -42,11 +42,11 @@ public class CrimsonIngotCommandExecutor implements CommandExecutor {
 		lines.add("The current date is: " + cc + plugin.getTimeManager().getCurrentDate().getLongDateString());
 		lines.add(cc + plugin.getTimeManager().getCurrentDate().getSimpleDateString());
 		lines.add(mc + "Commands:");
-		if (sender.isOp()) lines.add(mc + "/cm player [add,remove] [pusername] [attribute]");
-		else {
-			lines.add(mc + "/cm profile " + cc + "[set, show [username]");
-			lines.add(mc + "/cm knowledge");
+		if (sender.isOp()) {
+			lines.add(mc + "/cm player [add,remove] [pusername] [attribute]");
 		}
+		lines.add(mc + "/cm profile " + cc + "[set, show [username]");
+		lines.add(mc + "/cm knowledge");
 
 		CrimsonIngotUtil.sendListAsPluginMessage(lines, sender);
 	}

@@ -26,6 +26,11 @@ public class PlayerAttribute {
 	private boolean						hidden					= false;
 	private int							cost;
 	private String						requiredAttribute;
+	private List<String>						overwitenAttribute = new ArrayList<String>();
+	public List<String> getOverwitenAttributes() {
+		return overwitenAttribute;
+	}
+
 	private final ArrayList<Spell>		attributeSpells			= new ArrayList<Spell>();
 	private int							mana;
 	private int							attributeHealth;
@@ -88,12 +93,13 @@ public class PlayerAttribute {
 		return hidden;
 	}
 
-	protected void loadData(final CrimsonIngot plugin, final String key, final ConfigAccessor config) {
+	public void loadData(final CrimsonIngot plugin, final String key, final ConfigAccessor config) {
 		attributeDescription = config.getConfig().getString(key + "." + name + ".Description");
 		cost = config.getConfig().getInt(key + "." + name + ".Cost");
 		attributeHealth = config.getConfig().getInt(key + "." + name + ".Health");
 		mana = config.getConfig().getInt(key + "." + name + ".Mana");
 		requiredAttribute = config.getConfig().getString(key + "." + name + ".Requires");
+		overwitenAttribute = config.getConfig().getStringList(key + "." + name + ".Overwrites");
 
 		final List<String> spellNames = config.getConfig().getStringList(key + "." + name + ".Spells");
 		for (final String s : spellNames) {

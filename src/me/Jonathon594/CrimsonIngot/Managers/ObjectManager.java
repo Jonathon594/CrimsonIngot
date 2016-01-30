@@ -15,6 +15,11 @@ public class ObjectManager {
 	private ArrayList<Knowledge>	crimsonKnowledge;
 	private ArrayList<Creed>		crimsonCreeds;
 	private ArrayList<CrimsonClass>	crimsonClasses;
+	private ArrayList<PlayerAttribute> crimsonSpecials;
+
+	public ArrayList<PlayerAttribute> getCrimsonSpecials() {
+		return crimsonSpecials;
+	}
 
 	private ArrayList<Material>		crimsonKnowledgeMaterials;
 	private ArrayList<Material>		crimsonBreakableKnowledgeMaterials;
@@ -43,6 +48,7 @@ public class ObjectManager {
 		attributes.addAll(crimsonKnowledge);
 		attributes.addAll(crimsonCreeds);
 		attributes.addAll(crimsonClasses);
+		attributes.addAll(crimsonSpecials);
 		return attributes;
 	}
 
@@ -77,11 +83,18 @@ public class ObjectManager {
 			if (tp.getName().equalsIgnoreCase(name)) return tp;
 		return null;
 	}
+	
+	public PlayerAttribute getSpecial(final String name) {
+		for (final PlayerAttribute tp : crimsonSpecials)
+			if (tp.getName().equalsIgnoreCase(name)) return tp;
+		return null;
+	}
 
 	public void Initialize(final ConfigManager configManager, final CrimsonIngot plugin) {
 		crimsonKnowledge = new ArrayList<Knowledge>();
 		crimsonCreeds = new ArrayList<Creed>();
 		crimsonClasses = new ArrayList<CrimsonClass>();
+		crimsonSpecials = new ArrayList<PlayerAttribute>();
 		crimsonKnowledgeMaterials = new ArrayList<Material>();
 		crimsonBreakableKnowledgeMaterials = new ArrayList<Material>();
 		crimsonPlaceableKnowledgeMaterials = new ArrayList<Material>();
@@ -108,6 +121,14 @@ public class ObjectManager {
 			final CrimsonClass ntp = new CrimsonClass(cl);
 			crimsonClasses.add(ntp);
 			ntp.loadClass(plugin, configManager.getClassConfig());
+		}
+		
+		final Set<String> spks = configManager.getSpecialConfig().getConfig().getConfigurationSection("Specials")
+				.getKeys(false);
+		for (final String sp : spks) {
+			final PlayerAttribute ntp = new PlayerAttribute(sp);
+			crimsonSpecials.add(ntp);
+			ntp.loadData(plugin, "Specials", configManager.getSpecialConfig());
 		}
 	}
 }
