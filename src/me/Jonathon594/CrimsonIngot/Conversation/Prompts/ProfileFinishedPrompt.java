@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import me.Jonathon594.CrimsonIngot.CrimsonIngot;
 import me.Jonathon594.CrimsonIngot.DataTypes.CrimsonPlayer;
+import me.Jonathon594.CrimsonIngot.Managers.ProfileArchiveManager;
 
 public class ProfileFinishedPrompt extends MessagePrompt {
 
@@ -25,6 +26,7 @@ public class ProfileFinishedPrompt extends MessagePrompt {
 						(int) context.getSessionData("BirthMonth") - 1, (int) context.getSessionData("BirthDay"));
 				mp.getProfile().setMade(true);
 				mp.SaveData();
+				ProfileArchiveManager.archiveProfile(plugin, mp.getProfile());
 			}
 		}
 		return Prompt.END_OF_CONVERSATION;

@@ -37,14 +37,20 @@ public class ChooseCommand {
 		if (mp == null) return;
 
 		if (mp.getPlayerAttributes().contains(tp)) {
-			if (tp instanceof CrimsonClass) player.sendMessage(mc + CrimsonIngotConstants.alreadyClass);
-			if (tp instanceof CrimsonClass) player.sendMessage(mc + CrimsonIngotConstants.alreadyCreed);
+			if (tp instanceof CrimsonClass)
+				CrimsonIngotUtil.sendCrimsonMessage(player, mc + CrimsonIngotConstants.alreadyClass);
+			if (tp instanceof CrimsonClass)
+				CrimsonIngotUtil.sendCrimsonMessage(player, mc + CrimsonIngotConstants.alreadyCreed);
 			return;
 		}
 
 		if (tp instanceof CrimsonClass && mp.hasClass()) return;
 
 		if (tp instanceof Creed && mp.hasCreed()) return;
+
+		if (tp instanceof CrimsonClass)
+			CrimsonIngotUtil.sendCrimsonMessage(player, mc + CrimsonIngotConstants.chooseClass);
+		if (tp instanceof Creed) CrimsonIngotUtil.sendCrimsonMessage(player, mc + CrimsonIngotConstants.chooseCreed);
 
 		mp.addAttribute(tp);
 		mp.applyAllEffects();

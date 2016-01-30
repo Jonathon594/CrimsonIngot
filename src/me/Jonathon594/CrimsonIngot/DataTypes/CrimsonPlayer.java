@@ -44,9 +44,11 @@ public class CrimsonPlayer {
 			player.removePotionEffect(effect.getType());
 
 		int health = 20;
+		int mana = 0;
 
 		for (final PlayerAttribute pa : playerAttributes) {
 			health = Math.max(pa.getAttributeHealth(), health);
+			mana = Math.max(pa.getMana(), mana);
 			for (final PotionEffect pe : pa.getEffects()) {
 				player.removePotionEffect(pe.getType());
 				player.addPotionEffect(pe);
@@ -64,6 +66,7 @@ public class CrimsonPlayer {
 		}
 
 		player.setMaxHealth(health);
+		MagicSpells.getManaHandler().setMaxMana(player, mana);
 	}
 
 	public Player getPlayer() {
@@ -124,6 +127,7 @@ public class CrimsonPlayer {
 		final String fName = playerConfig.getConfig().getString("Profile.FirstName");
 		final String mName = playerConfig.getConfig().getString("Profile.MiddleName");
 		final String lName = playerConfig.getConfig().getString("Profile.LastName");
+		final String title = playerConfig.getConfig().getString("Profile.Title");
 		final Date birthDay = new Date(plugin.getTimeManager());
 		birthDay.setMGD(playerConfig.getConfig().getInt("Profile.Birthday"));
 		final boolean made = playerConfig.getConfig().getBoolean("Profile.Made");
@@ -132,6 +136,7 @@ public class CrimsonPlayer {
 		profile.setFirstName(fName);
 		profile.setMiddleName(mName);
 		profile.setLastName(lName);
+		profile.setTitle(title);
 		profile.setProfileBirthday(birthDay);
 		profile.setMade(made);
 	}
@@ -185,6 +190,7 @@ public class CrimsonPlayer {
 		playerConfig.getConfig().set("Profile.LastName", lName);
 		playerConfig.getConfig().set("Profile.Birthday", birthDay.getMGD());
 		playerConfig.getConfig().set("Profile.Made", profile.isMade());
+		playerConfig.getConfig().set("Profile.Title", profile.getTitle());
 
 		playerConfig.saveConfig();
 	}

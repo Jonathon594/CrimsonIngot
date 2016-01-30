@@ -27,29 +27,25 @@ public class CrimsonIngotCommandExecutor implements CommandExecutor {
 		if (args.length == 0) sendDefaultInfo(sender);
 
 		if (args.length > 0) {
-			// if (args[0].equalsIgnoreCase("profile")) return
-			// ProfileCommand.perform(sender, cmd, label, args, plugin);
-			if (args[0].equalsIgnoreCase("knowledge"))
-				return KnowledgeCommand.perform(sender, cmd, label, args, plugin);
-			if (args[0].equalsIgnoreCase("player")) return PlayerCommand.perform(sender, cmd, label, args, plugin);
-			if (args[0].equalsIgnoreCase("choose")) return ChooseCommand.perform(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("profile")) ProfileCommand.perform(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("knowledge")) KnowledgeCommand.perform(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("player")) PlayerCommand.perform(sender, cmd, label, args, plugin);
+			if (args[0].equalsIgnoreCase("choose")) ChooseCommand.perform(sender, cmd, label, args, plugin);
 		}
-		return false;
+		return true;
 	}
 
 	private void sendDefaultInfo(final CommandSender sender) {
 		final ArrayList<String> lines = new ArrayList<String>();
 		lines.add(mc + "------[" + cc + "CrimsonIngot" + mc + "]------");
 		lines.add(mc + "Welcome to CrimsonIngot");
-		lines.add("The current date is: " + cc + plugin.getTimeManager().getCurrentDate().GetDateString());
+		lines.add("The current date is: " + cc + plugin.getTimeManager().getCurrentDate().getLongDateString());
+		lines.add(cc + plugin.getTimeManager().getCurrentDate().getSimpleDateString());
 		lines.add(mc + "Commands:");
-		if (sender.isOp()) {
-
-		} else {
-			lines.add(mc + "/cm profile " + cc + "[set, show]");
+		if (sender.isOp()) lines.add(mc + "/cm player [add,remove] [pusername] [attribute]");
+		else {
+			lines.add(mc + "/cm profile " + cc + "[set, show [username]");
 			lines.add(mc + "/cm knowledge");
-			lines.add(mc + "/cm skill");
-			lines.add(mc + "/cm genetic");
 		}
 
 		CrimsonIngotUtil.sendListAsPluginMessage(lines, sender);

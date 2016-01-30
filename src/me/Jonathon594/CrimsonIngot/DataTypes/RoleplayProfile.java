@@ -15,6 +15,7 @@ public class RoleplayProfile {
 	private Date				birthDay;
 	private final CrimsonIngot	plugin;
 	private final UUID			roleplayer;
+	private String				title;
 
 	public RoleplayProfile(final CrimsonIngot plugin, final UUID uuid) {
 		this.plugin = plugin;
@@ -43,9 +44,13 @@ public class RoleplayProfile {
 	}
 
 	public String getFullName() {
-		if (middleName != "") return firstName + " " + middleName + " " + lastName;
+		String name;
+		if (middleName != "") name =  firstName + " " + middleName + " " + lastName;
+		else name =  firstName + " " + lastName;
+		
+		if(title!="") name = title + " " + name;
 
-		return firstName + " " + lastName;
+		return name;
 	}
 
 	public String getLastName() {
@@ -58,6 +63,10 @@ public class RoleplayProfile {
 
 	public UUID getRoleplayer() {
 		return roleplayer;
+	}
+
+	public String getTitle() {
+		return title;
 	}
 
 	public boolean isMade() {
@@ -100,5 +109,9 @@ public class RoleplayProfile {
 		if (currentDate.getMonth() >= birthDay.getMonth())
 			if (currentDate.getDayInMonth() >= birthDay.getDayInMonth()) age -= 1;
 		birthDay.setMGD(birthDay.getMGD() - age * plugin.getTimeManager().getDaysPerYear());
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
 	}
 }

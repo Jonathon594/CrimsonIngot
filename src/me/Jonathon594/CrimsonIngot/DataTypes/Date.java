@@ -7,24 +7,13 @@ import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotConstants;
 import me.Jonathon594.CrimsonIngot.Util.CrimsonIngotUtil;
 
 public class Date {
-	// private static ChatColor mc = CrimsonIngotConstants.mainColor;
+	private static ChatColor	mc	= CrimsonIngotConstants.mainColor;
 	private static ChatColor	cc	= CrimsonIngotConstants.contColor;
 	private int					MGD	= 1;
 	private final TimeManager	timeManager;
 
 	public Date(final TimeManager timeManager) {
 		this.timeManager = timeManager;
-	}
-
-	public String GetDateString() {
-		final int year = getYear();
-		final String yearMonthString = getYearMonthString();
-		final int month = getMonth();
-		final int monthDay = getDayInMonth();
-		final String dayName = getDayName();
-		final String mdString = CrimsonIngotUtil.makeNumberString(Integer.toString(getNThWeekDayInMonth()));
-		return cc + mdString + " " + dayName + " of the " + yearMonthString + " (" + monthDay + "-" + (month + 1) + "-"
-				+ year + ")";
 	}
 
 	public int getDayInMonth() {
@@ -42,6 +31,13 @@ public class Date {
 			daysToMonthX += timeManager.getMonths().get(i).getLength();
 
 		return daysToMonthX;
+	}
+
+	public String getLongDateString() {
+		final String yearMonthString = getYearMonthString();
+		final String dayName = getDayName();
+		final String mdString = CrimsonIngotUtil.makeNumberString(Integer.toString(getNThWeekDayInMonth()));
+		return cc + mdString + " " + dayName + " of the " + yearMonthString;
 	}
 
 	public int getMGD() {
@@ -64,6 +60,20 @@ public class Date {
 		return r;
 	}
 
+	public String getSimpleDateString() {
+		final String yearString = getSimpleYearString();
+		final String monthName = timeManager.getMonths().get(getMonth()).getName();
+		final int monthDay = getDayInMonth();
+		final String dayName = getDayName();
+		return cc + dayName + mc + ", " + cc + monthDay + mc + "-" + cc + monthName + mc + "-" + cc + yearString;
+	}
+
+	private String getSimpleYearString() {
+		final int year = getYear();
+		if (year < 0) return Math.abs(year) + " B.S.D";
+		return Integer.toString(year);
+	}
+
 	public int getYear() {
 		return Math.floorDiv(MGD, timeManager.getDaysPerYear());
 	}
@@ -82,11 +92,13 @@ public class Date {
 		if (year > 9) tens = Integer.parseInt(Character.toString(chars[chars.length - 2]));
 		if (year > 99) r = Integer.parseInt(yearText.substring(0, yearText.length() - 2));
 		final String onesText = getYearName(ones);
-		final String tensText = getYearName(tens);
+		String tensText = getYearName(tens);
+		if (tensText == onesText) tensText = "Crimson";
 		final String rText = CrimsonIngotUtil.makeNumberString(Integer.toString(r + 1));
 		String negString = "";
-		if (getYear() < 0) negString = "B.S.D";
+		if (getYear() < 0) negString = " B.S.D";
 		final String monthName = timeManager.getMonths().get(getMonth()).getName();
+		if (Math.abs(getYear()) < 10) return rText + " " + monthName + " " + onesText + negString;
 		return rText + " " + monthName + " " + tensText + "-" + onesText + negString;
 	}
 

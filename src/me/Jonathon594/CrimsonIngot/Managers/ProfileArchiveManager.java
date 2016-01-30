@@ -13,6 +13,7 @@ public class ProfileArchiveManager {
 		ca.getConfig().set("FirstName", profile.getFirstName());
 		ca.getConfig().set("MiddleName", profile.getMiddleName());
 		ca.getConfig().set("LastName", profile.getLastName());
+		ca.getConfig().set("Title", profile.getTitle());
 		ca.getConfig().set("Birthday", profile.getBirthDay().getMGD());
 		ca.getConfig().set("Roleplayer", profile.getRoleplayer());
 		ca.getConfig().set("DeathDate", plugin.getTimeManager().getCurrentDate().getMGD());
@@ -25,6 +26,7 @@ public class ProfileArchiveManager {
 		final String fName = ca.getConfig().getString("FirstName");
 		final String mName = ca.getConfig().getString("MiddleName");
 		final String lName = ca.getConfig().getString("LastName");
+		final String title = ca.getConfig().getString("Title");
 		if (fName != null && mName != null && lName != null) {
 			final Date birthDay = new Date(plugin.getTimeManager());
 			birthDay.setMGD(ca.getConfig().getInt("Birthday"));
@@ -37,6 +39,7 @@ public class ProfileArchiveManager {
 			profile.setLastName(lName);
 			profile.setProfileBirthday(birthDay);
 			profile.setMade(made);
+			profile.setTitle(title);
 
 			return profile;
 		}

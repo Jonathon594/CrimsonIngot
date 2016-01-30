@@ -2,6 +2,7 @@ Classes:
   King:
     Description: Kings are the only Class that can Create and Disband Factions.
     Health: 40
+    Mana: 100
     Menu:
       Icon: GOLD_HELMET
       X: 1
@@ -34,6 +35,7 @@ Classes:
   Oracle:
     Description: Oracles are the Healers and Clairvoyants. They are in communication with the Deities.
     Health: 40
+    Mana: 200
     Menu:
       Icon: GLASS
       X: 2
@@ -58,6 +60,7 @@ Classes:
   Paladin:
     Description: The Paladins of Templehelm are warriors who specialize in Swords. They differ from the warrior classes in their additional divine powers.
     Health: 65
+    Mana: 250
     Menu:
       Icon: IRON_SWORD
       X: 3
@@ -85,6 +88,7 @@ Classes:
   Warrior:
     Description: Warriors are the brute-force fighters of the Land - They are experts in armed and unarmed combat and can continually train themselves to be even more effective at this art.
     Health: 70
+    Mana: 100
     Menu:
       Icon: DIAMOND_SWORD
       X: 4
@@ -119,6 +123,7 @@ Classes:
   Mage:
     Description: The Mages of Templehelm have refined the power of their deities into powerful tools of life and death.
     Health: 45
+    Mana: 200
     Menu:
       Icon: STICK
       X: 2

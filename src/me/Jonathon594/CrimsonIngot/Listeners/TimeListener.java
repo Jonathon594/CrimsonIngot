@@ -20,7 +20,7 @@ public class TimeListener {
 				for (final Player p : Bukkit.getOnlinePlayers()) {
 					final CrimsonPlayer mp = plugin.getCrimsonPlayerManager().getPlayerByUUID(p.getUniqueId());
 					if (mp == null) return;
-					CrimsonIngotUtil.sendCrimsonMessage(p, timeManager.getCurrentDate().GetDateString());
+					CrimsonIngotUtil.sendCrimsonMessage(p, timeManager.getCurrentDate().getLongDateString());
 				}
 			}
 		}, 0, 200);

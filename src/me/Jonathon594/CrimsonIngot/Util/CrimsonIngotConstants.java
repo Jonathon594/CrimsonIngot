@@ -23,15 +23,15 @@ public class CrimsonIngotConstants {
 	public static String		noLevels		= "You have not learned enough to attempt this yet.";
 	public static String		alreadyPerk		= "You have already learned this perk.";
 	public static String		noPerk			= "I can't find the perk you are looking for.";
-	public static ChatColor		mainColor		= ChatColor.DARK_PURPLE;
-	public static ChatColor		contColor		= ChatColor.AQUA;
+	public static ChatColor		mainColor		= ChatColor.DARK_GRAY;
+	public static ChatColor		contColor		= ChatColor.RED;
 	public static String		cantBreak		= "I don't know how to safely break this block.";
 	public static final String	noProfile		= "You have not made a profile yet, Please do /profile set";
-	public static final String	noGenetic		= "You have not chosen a Primary Genetic Trait yet, Please do /genetic";
-	public static final String	DeathMessage	= "You have died. Your profile is reset; Attributes Refunded. You retain half of your previous investments.";
 	public static final String	messagePrefix	= mainColor + "[" + contColor + "Crimson" + mainColor + "] ";
 	public static final String	nameInUse		= "This full name has already been used, please try another.";
 	public static final String	soulReform		= "Your body has died. Your soul has reformed into a new one. You keep all your investments, but lose half your Mythicality";
 	public static final String	alreadyCreed	= "You have already chosen your Creed, you cannot change it.";
 	public static final String	noReqKnowledge	= "You do not know the required Knowledge to learn this Knowledge";
+	public static final String	chooseClass		= "You have chosen your class.";
+	public static final String	chooseCreed		= "You have chosen your creed.";
 }

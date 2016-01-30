@@ -3,7 +3,6 @@ package me.Jonathon594.CrimsonIngot.Util;
 import java.util.ArrayList;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class CrimsonIngotUtil {
 	public static boolean canParse(final String input) {
@@ -62,8 +61,8 @@ public class CrimsonIngotUtil {
 		return (int) (Math.ceil(i / v) * v);
 	}
 
-	public static void sendCrimsonMessage(final Player p, final String s) {
-		p.sendMessage(CrimsonIngotConstants.messagePrefix + s);
+	public static void sendCrimsonMessage(final CommandSender sender, final String s) {
+		sender.sendMessage(CrimsonIngotConstants.messagePrefix + s);
 	}
 
 	public static void sendListAsPluginMessage(final ArrayList<String> lines, final CommandSender sender) {

@@ -27,7 +27,7 @@ public class PlayerAttribute {
 	private int							cost;
 	private String						requiredAttribute;
 	private final ArrayList<Spell>		attributeSpells			= new ArrayList<Spell>();
-
+	private int							mana;
 	private int							attributeHealth;
 
 	private final ArrayList<SpellSet>	spellSets				= new ArrayList<SpellSet>();
@@ -50,6 +50,10 @@ public class PlayerAttribute {
 
 	public List<PotionEffect> getEffects() {
 		return potionEffects;
+	}
+
+	public int getMana() {
+		return mana;
 	}
 
 	public Material getMenuIcon() {
@@ -88,7 +92,7 @@ public class PlayerAttribute {
 		attributeDescription = config.getConfig().getString(key + "." + name + ".Description");
 		cost = config.getConfig().getInt(key + "." + name + ".Cost");
 		attributeHealth = config.getConfig().getInt(key + "." + name + ".Health");
-
+		mana = config.getConfig().getInt(key + "." + name + ".Mana");
 		requiredAttribute = config.getConfig().getString(key + "." + name + ".Requires");
 
 		final List<String> spellNames = config.getConfig().getStringList(key + "." + name + ".Spells");

@@ -34,6 +34,10 @@ public class ObjectManager {
 		return null;
 	}
 
+	public ArrayList<Material> getCrimsonAttributeMaterials() {
+		return crimsonKnowledgeMaterials;
+	}
+
 	public ArrayList<PlayerAttribute> getCrimsonAttributes() {
 		final ArrayList<PlayerAttribute> attributes = new ArrayList<PlayerAttribute>();
 		attributes.addAll(crimsonKnowledge);
@@ -62,10 +66,6 @@ public class ObjectManager {
 
 	public ArrayList<Knowledge> getCrimsonKnowledge() {
 		return crimsonKnowledge;
-	}
-
-	public ArrayList<Material> getCrimsonKnowledgeMaterials() {
-		return crimsonKnowledgeMaterials;
 	}
 
 	public ArrayList<Material> getCrimsonPlaceableKnowledgeMaterials() {

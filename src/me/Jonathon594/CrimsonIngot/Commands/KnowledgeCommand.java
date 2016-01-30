@@ -50,7 +50,7 @@ public class KnowledgeCommand {
 		if (mp == null) return;
 
 		if (mp.getPlayerKnowledge().contains(tp)) {
-			player.sendMessage(mc + CrimsonIngotConstants.alreadyPerk);
+			CrimsonIngotUtil.sendCrimsonMessage(player, mc + CrimsonIngotConstants.alreadyPerk);
 			return;
 		}
 
@@ -59,7 +59,7 @@ public class KnowledgeCommand {
 			perkNames.add(perk.getName());
 
 		if (tp.getRequiredAttribute() != null && !perkNames.contains(tp.getRequiredAttribute())) {
-			player.sendMessage(mc + CrimsonIngotConstants.noReqKnowledge);
+			CrimsonIngotUtil.sendCrimsonMessage(player, mc + CrimsonIngotConstants.noReqKnowledge);
 			return;
 		}
 
@@ -73,7 +73,8 @@ public class KnowledgeCommand {
 		player.setLevel(player.getLevel() - cost);
 		mp.addAttribute(tp);
 		mp.applyAllEffects();
-		player.sendMessage(mc + "You have learned a new Knowledge! (" + cc + tp.getName() + mc + ")");
+		CrimsonIngotUtil.sendCrimsonMessage(player,
+				mc + "You have learned a new Knowledge! (" + cc + tp.getName() + mc + ")");
 	}
 
 	public static boolean perform(final CommandSender sender, final Command cmd, final String label,

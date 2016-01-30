@@ -61,7 +61,7 @@ public class Knowledge extends PlayerAttribute {
 			final String pl = (String) p;
 			placeable.add(Material.getMaterial(pl));
 		}
-		plugin.getObjectManager().getCrimsonKnowledgeMaterials().addAll(craftable);
+		plugin.getObjectManager().getCrimsonAttributeMaterials().addAll(craftable);
 		plugin.getObjectManager().getCrimsonBreakableKnowledgeMaterials().addAll(breakable);
 		plugin.getObjectManager().getCrimsonPlaceableKnowledgeMaterials().addAll(placeable);
 	}

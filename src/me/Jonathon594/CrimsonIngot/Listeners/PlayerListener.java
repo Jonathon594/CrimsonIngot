@@ -43,6 +43,7 @@ public class PlayerListener implements Listener {
 
 	public void HandlePerkCrafting(final CraftItemEvent event) {
 		final Material itemType = event.getRecipe().getResult().getType();
+		if (!plugin.getObjectManager().getCrimsonAttributeMaterials().contains(itemType)) return;
 
 		for (final HumanEntity he : event.getViewers()) {
 			if (he instanceof Player == false) return;
@@ -51,7 +52,6 @@ public class PlayerListener implements Listener {
 			if (mp == null) return;
 			for (final Knowledge tp : mp.getPlayerKnowledge())
 				if (tp.getCraftable().contains(itemType)) return;
-			if (!plugin.getObjectManager().getCrimsonKnowledgeMaterials().contains(itemType)) return;
 			event.setCancelled(true);
 			p.sendMessage(CrimsonIngotConstants.mainColor + CrimsonIngotConstants.cantCraft);
 		}

@@ -13,6 +13,7 @@ import me.Jonathon594.CrimsonIngot.Listeners.TimeListener;
 import me.Jonathon594.CrimsonIngot.Managers.ConfigManager;
 import me.Jonathon594.CrimsonIngot.Managers.CrimsonPlayerManager;
 import me.Jonathon594.CrimsonIngot.Managers.ObjectManager;
+import me.Jonathon594.CrimsonIngot.Managers.RecipeManager;
 import me.Jonathon594.CrimsonIngot.Managers.TimeManager;
 
 public class CrimsonIngot extends JavaPlugin implements Listener {
@@ -73,6 +74,7 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 		reloadConfig();
 
 		Initialize();
+		RecipeManager.setupRecipes(this);
 
 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 
