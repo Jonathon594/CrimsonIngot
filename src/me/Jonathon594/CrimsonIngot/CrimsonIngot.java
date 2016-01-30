@@ -15,6 +15,7 @@ import me.Jonathon594.CrimsonIngot.Managers.CrimsonPlayerManager;
 import me.Jonathon594.CrimsonIngot.Managers.ObjectManager;
 import me.Jonathon594.CrimsonIngot.Managers.RecipeManager;
 import me.Jonathon594.CrimsonIngot.Managers.TimeManager;
+import me.Jonathon594.CrimsonIngot.Util.Migration.PEXUserMigrator;
 
 public class CrimsonIngot extends JavaPlugin implements Listener {
 	private final Logger			log	= Logger.getLogger("Minecraft");
@@ -84,6 +85,10 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 		// getCommand("profile").setExecutor(new ProfileCommandExecutor(this));
 		// getCommand("genetic").setExecutor(new GeneticCommandExecutor(this));
 		getCommand("crimson").setExecutor(new CrimsonIngotCommandExecutor(this));
+		
+		if(getConfig().getBoolean("Migrate")){
+			PEXUserMigrator.MigrateFromPEX(this, log);
+		}
 	}
 
 	public void onReload() {

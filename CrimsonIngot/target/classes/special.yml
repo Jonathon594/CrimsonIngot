@@ -5,8 +5,18 @@ Specials:
   ChoiceSpell:
     Spells:
     - Leap
-    Overwrites: ChoiceSpell2
+    Overwrites:
+    - ChoiceSpell2
+    - ChoiceSpell3
   ChoiceSpell2:
     Spells:
     - Combust
-    Overwrites: ChoiceSpell
+    Overwrites:
+    - ChoiceSpell
+    - ChoiceSpell3
+  ChoiceSpell3:
+    Spells:
+    - Firenova
+    Overwrites:
+    - ChoiceSpell
+    - ChoiceSpell2
