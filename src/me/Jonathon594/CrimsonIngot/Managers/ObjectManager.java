@@ -12,19 +12,15 @@ import me.Jonathon594.CrimsonIngot.DataTypes.Knowledge;
 import me.Jonathon594.CrimsonIngot.DataTypes.PlayerAttribute;
 
 public class ObjectManager {
-	private ArrayList<Knowledge>	crimsonKnowledge;
-	private ArrayList<Creed>		crimsonCreeds;
-	private ArrayList<CrimsonClass>	crimsonClasses;
-	private ArrayList<PlayerAttribute> crimsonSpecials;
+	private ArrayList<Knowledge>		crimsonKnowledge;
+	private ArrayList<Creed>			crimsonCreeds;
+	private ArrayList<CrimsonClass>		crimsonClasses;
+	private ArrayList<PlayerAttribute>	crimsonSpecials;
 
-	public ArrayList<PlayerAttribute> getCrimsonSpecials() {
-		return crimsonSpecials;
-	}
+	private ArrayList<Material>			crimsonKnowledgeMaterials;
 
-	private ArrayList<Material>		crimsonKnowledgeMaterials;
-	private ArrayList<Material>		crimsonBreakableKnowledgeMaterials;
-
-	private ArrayList<Material>		crimsonPlaceableKnowledgeMaterials;
+	private ArrayList<Material>			crimsonBreakableKnowledgeMaterials;
+	private ArrayList<Material>			crimsonPlaceableKnowledgeMaterials;
 
 	public PlayerAttribute getAttribute(final String name) {
 		for (final PlayerAttribute pa : getCrimsonAttributes())
@@ -78,12 +74,16 @@ public class ObjectManager {
 		return crimsonPlaceableKnowledgeMaterials;
 	}
 
+	public ArrayList<PlayerAttribute> getCrimsonSpecials() {
+		return crimsonSpecials;
+	}
+
 	public Knowledge getKnowledge(final String name) {
 		for (final Knowledge tp : crimsonKnowledge)
 			if (tp.getName().equalsIgnoreCase(name)) return tp;
 		return null;
 	}
-	
+
 	public PlayerAttribute getSpecial(final String name) {
 		for (final PlayerAttribute tp : crimsonSpecials)
 			if (tp.getName().equalsIgnoreCase(name)) return tp;
@@ -122,7 +122,7 @@ public class ObjectManager {
 			crimsonClasses.add(ntp);
 			ntp.loadClass(plugin, configManager.getClassConfig());
 		}
-		
+
 		final Set<String> spks = configManager.getSpecialConfig().getConfig().getConfigurationSection("Specials")
 				.getKeys(false);
 		for (final String sp : spks) {

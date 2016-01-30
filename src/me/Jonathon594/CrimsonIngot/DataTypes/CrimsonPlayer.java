@@ -35,13 +35,9 @@ public class CrimsonPlayer {
 
 	public void addAttribute(final PlayerAttribute p) {
 		if (!playerAttributes.contains(p)) {
-			if(p.getOverwitenAttributes()!=null){
-				for(String s : p.getOverwitenAttributes()){
-					PlayerAttribute opa = plugin.getObjectManager().getAttribute(s);
-					if(playerAttributes.contains(opa)){
-						playerAttributes.remove(opa);
-					}
-				}
+			if (p.getOverwitenAttributes() != null) for (final String s : p.getOverwitenAttributes()) {
+				final PlayerAttribute opa = plugin.getObjectManager().getAttribute(s);
+				if (playerAttributes.contains(opa)) playerAttributes.remove(opa);
 			}
 			playerAttributes.add(p);
 		}
@@ -66,13 +62,12 @@ public class CrimsonPlayer {
 			for (final String pm : pa.getPermissions())
 				pu.addPermission(pm);
 			pu.save();
+			final Spellbook sb = MagicSpells.getSpellbook(player);
 			for (final SpellSet ss : pa.getSpellSets())
 				if (playerAttributes.contains(ss.getRequiredAttribute()) || ss.getRequiredAttribute() == null)
-					for (final Spell sp : ss.getSpellList()) {
-					final Spellbook sb = MagicSpells.getSpellbook(player);
+					for (final Spell sp : ss.getSpellList())
 					sb.addSpell(sp);
-					sb.save();
-				}
+			sb.save();
 		}
 
 		player.setMaxHealth(health);

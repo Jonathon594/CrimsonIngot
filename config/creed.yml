@@ -26,3 +26,11 @@ Creeds:
     Description: Goddess of Fire and Lava
     Permissions:
     - -modifyworld.damage.take.(fire|firetick|lava)
+  Deserma:
+    Menu:
+      Icon: SAND
+      X: 4
+      Y: 1
+    Description: Goddess of Sand
+    Permissions:
+    - -modifyworld.damage.take.(fire|firetick|lava)

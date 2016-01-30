@@ -79,16 +79,9 @@ public class CrimsonIngot extends JavaPlugin implements Listener {
 
 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 
-		// getCommand("knowledge").setExecutor(new
-		// KnowledgeCommandExecutor(this));
-		// getCommand("skill").setExecutor(new SkillCommandExecutor(this));
-		// getCommand("profile").setExecutor(new ProfileCommandExecutor(this));
-		// getCommand("genetic").setExecutor(new GeneticCommandExecutor(this));
 		getCommand("crimson").setExecutor(new CrimsonIngotCommandExecutor(this));
-		
-		if(getConfig().getBoolean("Migrate")){
-			PEXUserMigrator.MigrateFromPEX(this, log);
-		}
+
+		if (getConfig().getBoolean("Migrate")) PEXUserMigrator.MigrateFromPEX(this, log);
 	}
 
 	public void onReload() {

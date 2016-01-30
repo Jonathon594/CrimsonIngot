@@ -7,7 +7,7 @@ public class ConfigManager {
 	ConfigAccessor	timeConfig;
 	ConfigAccessor	classConfig;
 	ConfigAccessor	creedConfig;
-	ConfigAccessor  specialConfig;
+	ConfigAccessor	specialConfig;
 
 	public ConfigManager(final JavaPlugin plugin) {
 		knowledgeConfig = new ConfigAccessor(plugin, "knowledge.yml");
@@ -23,10 +23,6 @@ public class ConfigManager {
 		specialConfig.saveDefaultConfig();
 	}
 
-	public ConfigAccessor getSpecialConfig() {
-		return specialConfig;
-	}
-
 	public ConfigAccessor getClassConfig() {
 		return classConfig;
 	}
@@ -37,6 +33,10 @@ public class ConfigManager {
 
 	public ConfigAccessor getKnowledgeConfig() {
 		return knowledgeConfig;
+	}
+
+	public ConfigAccessor getSpecialConfig() {
+		return specialConfig;
 	}
 
 	public ConfigAccessor getTimeConfig() {

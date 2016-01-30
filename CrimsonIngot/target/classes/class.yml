@@ -182,7 +182,7 @@ Classes:
         - Rupture
         - Flamewalk
         - Darkfire
-        - Combust
+        - combust
         Requires: Netharna
       Wildaven:
         Spells:

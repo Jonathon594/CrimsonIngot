@@ -3,7 +3,6 @@ package me.Jonathon594.CrimsonIngot.Util;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class CrimsonIngotUtil {
@@ -15,6 +14,10 @@ public class CrimsonIngotUtil {
 			parsable = false;
 		}
 		return parsable;
+	}
+
+	public static void logMessage(final String s, final Logger log) {
+		log.info(CrimsonIngotConstants.messagePrefix + s);
 	}
 
 	public static String makeNumberString(final String number) {
@@ -83,9 +86,5 @@ public class CrimsonIngotUtil {
 		if (kX < kLowerBound) kX += range_size * ((kLowerBound - kX) / range_size + 1);
 
 		return kLowerBound + (kX - kLowerBound) % range_size;
-	}
-
-	public static void logMessage(String s, Logger log) {
-		log.info(CrimsonIngotConstants.messagePrefix + s);
 	}
 }

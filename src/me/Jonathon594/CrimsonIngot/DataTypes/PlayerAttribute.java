@@ -26,15 +26,11 @@ public class PlayerAttribute {
 	private boolean						hidden					= false;
 	private int							cost;
 	private String						requiredAttribute;
-	private List<String>						overwitenAttribute = new ArrayList<String>();
-	public List<String> getOverwitenAttributes() {
-		return overwitenAttribute;
-	}
-
+	private List<String>				overwitenAttribute		= new ArrayList<String>();
 	private final ArrayList<Spell>		attributeSpells			= new ArrayList<Spell>();
+
 	private int							mana;
 	private int							attributeHealth;
-
 	private final ArrayList<SpellSet>	spellSets				= new ArrayList<SpellSet>();
 
 	public PlayerAttribute(final String n) {
@@ -75,6 +71,10 @@ public class PlayerAttribute {
 
 	public String getName() {
 		return name;
+	}
+
+	public List<String> getOverwitenAttributes() {
+		return overwitenAttribute;
 	}
 
 	public List<String> getPermissions() {
