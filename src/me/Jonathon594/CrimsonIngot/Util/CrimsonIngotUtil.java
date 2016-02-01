@@ -20,43 +20,35 @@ public class CrimsonIngotUtil {
 		log.info(CrimsonIngotConstants.messagePrefix + s);
 	}
 
-	public static String makeNumberString(final String number) {
-		final char[] chars = number.toCharArray();
-		String num = Character.toString(chars[chars.length - 1]);
+	public static String makeNumberString(int number) {
+		String numtext = Integer.toString(number);
+		String num = "";
+		final char[] chars = numtext.toCharArray();
 		String leading = "";
-		if (chars.length > 1) leading = number.substring(0, number.length() - 1);
+		if(number>19){
+			if (chars.length > 1) leading = numtext.substring(0, numtext.length() - 1);
+		}
 
-		switch (num) {
-			case "0":
-				num = "0th";
-				break;
-			case "1":
-				num = "1st";
-				break;
-			case "2":
-				num = "2nd";
-				break;
-			case "3":
-				num = "3rd";
-				break;
-			case "4":
-				num = "4th";
-				break;
-			case "5":
-				num = "5th";
-				break;
-			case "6":
-				num = "6th";
-				break;
-			case "7":
-				num = "7th";
-				break;
-			case "8":
-				num = "8th";
-				break;
-			case "9":
-				num = "9th";
-				break;
+		switch (numtext) {
+			case "0": num = "0th";break;
+			case "1": num = "1st";break;
+			case "2": num = "2nd";break;
+			case "3": num = "3rd";break;
+			case "4": num = "4th";break;
+			case "5": num = "5th";break;
+			case "6": num = "6th";break;
+			case "7": num = "7th";break;
+			case "8": num = "8th";break;
+			case "10": num = "10th";break;
+			case "11": num = "11th";break;
+			case "12": num = "12th";break;
+			case "13": num = "13th";break;
+			case "14": num = "14th";break;
+			case "15": num = "15th";break;
+			case "16": num = "16th";break;
+			case "17": num = "17th";break;
+			case "18": num = "18th";break;
+			case "19": num = "19th";break;
 		}
 
 		return leading + num;

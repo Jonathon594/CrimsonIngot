@@ -1,8 +1,8 @@
 name: CrimsonIngot
 main: me.Jonathon594.CrimsonIngot.CrimsonIngot
-version: 0.9.5.3
+version: 0.9.5.4
 depend: [MagicSpells]
 commands:
   crimson:
     description: CrimsonIngot main command.
-    aliases: cm
+    aliases: [cm, crim, crm]

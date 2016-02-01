@@ -217,4 +217,23 @@ Classes:
         - Switch
         - Tempest
         - Updraft
+    Rogue:
+      Description: Rogues are capable of sneaky combat and nimble tricks. They are also very capable assassins and highly skilled at stealthy combat. Rogues are also masters thieves that can steal from the pockets of others. 
+      Health: 60
+      Mana: 200
+      Menu:
+        Icon: LEATHER_BOOTS
+        X: 5
+        Y: 2
+      Spells:
+      - Leap
+      Permissions:
+      - equipcontrol.weapon.WOOD_SWORD
+      - equipcontrol.weapon.STONE_SWORD
+      - equipcontrol.weapon.IRON_SWORD
+      - equipcontrol.armor.LEATHER_HELMET
+      - equipcontrol.armor.LEATHER_CHESTPLATE
+      - equipcontrol.armor.LEATHER_LEGGINGS
+      - equipcontrol.armor.LEATHER_BOOTS
+      - mcmmo.ability.acrobatics.*
       

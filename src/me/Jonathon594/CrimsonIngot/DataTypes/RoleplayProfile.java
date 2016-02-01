@@ -45,11 +45,11 @@ public class RoleplayProfile {
 
 	public String getFullName() {
 		String name;
-		if (middleName != "") name = firstName + " " + middleName + " " + lastName;
+		if (middleName != "" && middleName != null) name = firstName + " " + middleName + " " + lastName;
 		else
 			name = firstName + " " + lastName;
 
-		if (title != "") name = title + " " + name;
+		if (title != "" && title != null) name = title + " " + name;
 
 		return name;
 	}

@@ -36,7 +36,7 @@ public class Date {
 	public String getLongDateString() {
 		final String yearMonthString = getYearMonthString();
 		final String dayName = getDayName();
-		final String mdString = CrimsonIngotUtil.makeNumberString(Integer.toString(getNThWeekDayInMonth()));
+		final String mdString = CrimsonIngotUtil.makeNumberString(getNThWeekDayInMonth());
 		return cc + mdString + " " + dayName + " of the " + yearMonthString;
 	}
 
@@ -94,7 +94,7 @@ public class Date {
 		final String onesText = getYearName(ones);
 		String tensText = getYearName(tens);
 		if (tensText == onesText) tensText = "Crimson";
-		final String rText = CrimsonIngotUtil.makeNumberString(Integer.toString(r + 1));
+		final String rText = CrimsonIngotUtil.makeNumberString(r + 1);
 		String negString = "";
 		if (getYear() < 0) negString = " B.S.D";
 		final String monthName = timeManager.getMonths().get(getMonth()).getName();
